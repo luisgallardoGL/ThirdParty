@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Bundle Name="My Product Suite" UpgradeCode="6f330b47-2577-43ad-9095-1861bb25889c" Version="1.0.0.0" >
+    <BootstrapperApplicationRef Id="ManagedBootstrapperApplicationHost">
+      <Payload SourceFile="..\..\..\WixSharp.UI.dll" />
+      <Payload SourceFile="BootstrapperCore.config" />
+      <Payload SourceFile="..\..\..\Wix_bin\SDK\Microsoft.Deployment.WindowsInstaller.dll" />
+    </BootstrapperApplicationRef>
+
+    <Variable Name="_WixSharp.Bootstrapper.SilentManagedBA.PrimaryPackageId" Value="MyProductPackageId" Persisted="yes" Type="string" />
+
+    <Chain>
+      <PackageGroupRef Id="NetFx40Web" />
+
+      <MsiPackage Id="MyProductPackageId" DisplayInternalUI="yes" SourceFile="My Product.msi">
+        <MsiProperty Name="WIXBUNDLEORIGINALSOURCE" Value="[WixBundleOriginalSource]" />
+      </MsiPackage>
+    </Chain>
+  </Bundle>
+</Wix>
+

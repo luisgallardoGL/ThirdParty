@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="C:\Users\osh\AppData\Roaming\DocPreview\1.0.0.0\css/Contents.css" />
+    <title>Member</title>
+</head>
+<body>
+    <div id="Header">
+        <div id="ProjectTitle">Documentation Preview</div>
+        <div id="PageTitle">Member</div>
+        <div id="Contents" />
+
+        
+ Defines Major Upgrade behavior. By default it is <span class="Code">null</span> thus upgrade is not supported.
+ <p>If you need to implement Major Upgrade define this member to appropriate
+ <a href="" >MajorUpgradeStrategy</a> instance.</p><p><span class="Code">Note</span>: <a href="" >MajorUpgradeStrategy</a> yields WiX UpgradeVersion element, which is arguably the most comprehensive
+ upgrade definition. However in the later versions of WiX a simplified upgrade definition has been introduced. It relies
+ on MajorUpgrade WiX element. For most of the upgrade scenarios you will find MajorUpgrade allows achieve the same result with
+ much less effort. Wix# supports MajorUpgrade element via  <a href="" >MajorUpgrade</a> member.</p>
+            <div id='SectionHeader0' class='SectionHeader'>
+        <img id='SectionExpanderImg0' src='C:\Users\osh\AppData\Roaming\DocPreview\1.0.0.0\css/BigSquareExpanded.gif' alt='Collapse/Expand' >
+        <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            Syntax
+            </span>
+        </span>
+    </div>
+
+    <div id='SectionContainerDiv0' class='SectionContainer'>
+    <table class='CodeTable'>
+    <colgroup><col width='100%'></colgroup>
+    <tbody><tr class='CodeTable'><th class='CodeTable'>C#</th></tr><tr class='CodeTable'><td class='CodeTable'><pre style='margin-left: 2px;'>
+public MajorUpgradeStrategy MajorUpgradeStrategy</pre></td></tr></tbody></table>
+        
+        
+        
+        
+        
+<div id='SectionHeader1' class='SectionHeader'>
+   <img id='SectionExpanderImg1' src='C:\Users\osh\AppData\Roaming\DocPreview\1.0.0.0\css/BigSquareExpanded.gif' alt='Collapse/Expand' /> 
+   <span class='SectionHeader'>
+       <span class='ArrowCursor'>
+       Examples
+       </span>
+   </span>
+</div>
+<div id='SectionContainerDiv1' class='SectionContainer'>
+The following is an example of building product MSI with auto uninstalling any older version of the product
+and preventing downgrading.
+<table class="ExampleCodeTable"><col width="100%" /><tr class="CodeTable"><th class="CodeTable">C#</th></tr><tr class="CodeTable"><td class="CodeTable"><pre>
+var project = new Project("My Product",
+                  ...
+
+project.MajorUpgradeStrategy =  new MajorUpgradeStrategy
+                                {
+                                    UpgradeVersions = VersionRange.OlderThanThis,
+                                    PreventDowngradingVersions = VersionRange.NewerThanThis,
+                                    NewerProductInstalledErrorMessage = "Newer version already installed",
+                                };
+Compiler.BuildMsi(project);
+</pre></td></tr></table>
+ or the same scenario but using predefined <span class="Code">MajorUpgradeStrategy.Default</span> strategy.
+<table class="ExampleCodeTable"><col width="100%" /><tr class="CodeTable"><th class="CodeTable">C#</th></tr><tr class="CodeTable"><td class="CodeTable"><pre>
+project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
+</pre></td></tr></table>
+ You can also specify custom range of versions:
+<table class="ExampleCodeTable"><col width="100%" /><tr class="CodeTable"><th class="CodeTable">C#</th></tr><tr class="CodeTable"><td class="CodeTable"><pre>
+project.MajorUpgradeStrategy =  new MajorUpgradeStrategy
+                                {
+                                    UpgradeVersions = new VersionRange
+                                                          {
+                                                             Minimum = "2.0.5.0", IncludeMaximum = true,
+                                                             Maximum = "%this%", IncludeMaximum = false
+                                                          },
+                                    PreventDowngradingVersions = new VersionRange
+                                                          {
+                                                             Minimum = "%this%", IncludeMinimum = false
+                                                          },
+                                    NewerProductInstalledErrorMessage = "Newer version already installed",
+                                };
+</pre></td></tr></table>
+ Note that %this% will be replaced by Wix# compiler with <span class="Code">project.Version.ToString()</span> during the MSI building.
+ However you can use explicit values (e.g. 1.0.0) if you prefer.
+ 
+</div>
+
+
+    </div>
+</body>
+</html>

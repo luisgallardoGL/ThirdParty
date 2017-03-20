@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="4fa6d2d0-9e34-45ed-98d0-6734da0e8c6a" Name="Setup" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="4fa6d2d0-9e34-45ed-98d0-6734ca0e8c69" Manufacturer="OSH">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Media Id="1" Cabinet="Setup.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
+        <Directory Id="ProgramFilesFolder.My_Company" Name="My Company">
+          <Directory Id="INSTALLDIR" Name="My Product">
+
+            <Component Id="Component.MyApp.exe" Guid="4fa6d2d0-9e34-45ed-98d0-673409a22c3b">
+              <File Id="MyApp.exe" Source="Files\MyApp.exe" />
+            </Component>
+
+            <Component Id="Component.DotNET_2.0_Manual.txt" Guid="4fa6d2d0-9e34-45ed-98d0-673482c723f9">
+              <Condition>NETFRAMEWORK20="#1"</Condition>
+              <File Id="DotNET_2.0_Manual.txt" Source="Files\DotNET 2.0 Manual.txt" />
+            </Component>
+
+            <Component Id="Component.DotNET_3.0_Manual.txt" Guid="4fa6d2d0-9e34-45ed-98d0-6734e5b423f8">
+              <Condition>NETFRAMEWORK30="#1"</Condition>
+              <File Id="DotNET_3.0_Manual.txt" Source="Files\DotNET 3.0 Manual.txt" />
+            </Component>
+
+            <Component Id="Component.DotNET_3.5_Manual.txt" Guid="4fa6d2d0-9e34-45ed-98d0-67347dc65db2">
+              <Condition>NETFRAMEWORK35="#1"</Condition>
+              <File Id="DotNET_3.5_Manual.txt" Source="Files\DotNET 3.5 Manual.txt" />
+            </Component>
+
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <UIRef Id="WixUI_Minimal" />
+
+    <Property Id="NETFRAMEWORK20" Value="0">
+      <RegistrySearch Id="NETFRAMEWORK20_RegSearch" Root="HKLM" Key="Software\Microsoft\NET Framework Setup\NDP\v2.0.50727" Type="raw" Name="Install" Win64="no" />
+    </Property>
+
+    <Property Id="NETFRAMEWORK30" Value="0">
+      <RegistrySearch Id="NETFRAMEWORK30_RegSearch" Root="HKLM" Key="Software\Microsoft\NET Framework Setup\NDP\v3.0" Type="raw" Name="Install" Win64="no" />
+    </Property>
+
+    <Property Id="NETFRAMEWORK35" Value="0">
+      <RegistrySearch Id="NETFRAMEWORK35_RegSearch" Root="HKLM" Key="Software\Microsoft\NET Framework Setup\NDP\v3.5" Type="raw" Name="Install" Win64="no" />
+    </Property>
+
+    <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
+      <ComponentRef Id="Component.MyApp.exe" />
+      <ComponentRef Id="Component.DotNET_2.0_Manual.txt" />
+      <ComponentRef Id="Component.DotNET_3.0_Manual.txt" />
+      <ComponentRef Id="Component.DotNET_3.5_Manual.txt" />
+    </Feature>
+
+  </Product>
+</Wix>
+

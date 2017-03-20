@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="6f330b47-2577-43ad-9095-1861ca31dfd4" Name="TestProduct" Language="1033" Codepage="Windows-1252" Version="1.0.709.10040" UpgradeCode="6f330b47-2577-43ad-9095-1861ba25889b" Manufacturer="OSH">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Media Id="1" Cabinet="TestProduct.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
+        <Directory Id="ProgramFilesFolder.My_Company" Name="My Company">
+          <Directory Id="INSTALLDIR" Name="My Product">
+
+            <Component Id="Component.MyApp.exe" Guid="6f330b47-2577-43ad-9095-1861f9b9286d">
+              <File Id="MyApp.exe" Source="Files\1\MyApp.exe" />
+            </Component>
+
+            <Component Id="Component.MyApp.cs" Guid="6f330b47-2577-43ad-9095-1861f42adae9">
+              <File Id="MyApp.cs" Source="Files\1\MyApp.cs" />
+            </Component>
+
+            <Component Id="Component.readme.txt" Guid="6f330b47-2577-43ad-9095-18615e463af3">
+              <File Id="readme.txt" Source="Files\1\readme.txt" />
+            </Component>
+
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." Schedule="afterInstallInitialize" />
+
+    <UIRef Id="WixUI_Minimal" />
+
+    <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
+      <ComponentRef Id="Component.MyApp.exe" />
+      <ComponentRef Id="Component.MyApp.cs" />
+      <ComponentRef Id="Component.readme.txt" />
+    </Feature>
+
+  </Product>
+</Wix>
+

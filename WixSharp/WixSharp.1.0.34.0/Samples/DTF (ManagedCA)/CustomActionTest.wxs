@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="87ff70dd-20e4-4441-ba7a-269aed949ec8" Name="CustomActionTest" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="87ff70dd-20e4-4441-ba7a-269add949ec7" Manufacturer="OSH">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Media Id="1" Cabinet="CustomActionTest.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
+        <Directory Id="ProgramFilesFolder.My_Company" Name="My Company">
+          <Directory Id="INSTALLDIR" Name="My Product">
+
+            <Component Id="Component.setup.cs" Guid="87ff70dd-20e4-4441-ba7a-269afdd5c26c">
+              <File Id="setup.cs" Source="setup.cs" />
+            </Component>
+
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Return="check" Execute="immediate" />
+    <CustomAction Id="Set_ARPINSTALLLOCATION" Property="ARPINSTALLLOCATION" Value="[INSTALLDIR]" Return="check" Execute="immediate" />
+    <CustomAction Id="Set_ARPNOMODIFY" Property="ARPNOMODIFY" Value="True" Return="check" Execute="immediate" />
+
+    <Binary Id="Action1_MyAction_File" SourceFile="%this%.CA.dll" />
+
+    <UIRef Id="WixUI_Minimal" />
+
+    <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
+      <ComponentRef Id="Component.setup.cs" />
+    </Feature>
+
+    <InstallExecuteSequence>
+      <Custom Action="Action1_MyAction" After="InstallInitialize"> (NOT Installed) </Custom>
+      <Custom Action="Set_ARPINSTALLLOCATION" After="Action1_MyAction"> (NOT Installed) </Custom>
+      <Custom Action="Set_ARPNOMODIFY" After="Set_ARPINSTALLLOCATION"> (NOT Installed) </Custom>
+    </InstallExecuteSequence>
+
+  </Product>
+</Wix>
+

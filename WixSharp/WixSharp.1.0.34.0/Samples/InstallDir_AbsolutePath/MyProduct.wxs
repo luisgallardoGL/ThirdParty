@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="ad28135b-c466-4c03-8af2-a1afd03d54de" Name="MyProduct" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="ad28135b-c466-4c03-8af2-a1afc03d54dd" Manufacturer="OSH">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Media Id="1" Cabinet="MyProduct.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="INSTALLDIR" Name="ABSOLUTEPATH">
+        <Directory Id="INSTALLDIR.Doc" Name="Doc">
+
+          <Component Id="Component.manual.txt" Guid="ad28135b-c466-4c03-8af2-a1afa3395e11">
+            <File Id="manual.txt" Source="files\Doc\manual.txt" />
+          </Component>
+
+        </Directory>
+
+        <Directory Id="INSTALLDIR.Licence" Name="Licence">
+
+          <Component Id="Component.Licence.txt" Guid="ad28135b-c466-4c03-8af2-a1af0351445e">
+            <File Id="Licence.txt" Source="files\Licence\Licence.txt" />
+          </Component>
+
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <CustomAction Id="Set_INSTALLDIR_AbsolutePath" Property="INSTALLDIR" Value="D:\MyCompany\MyProduct" />
+
+    <Property Id="INSTALLDIR_ABSOLUTEPATH" Value="D:\MyCompany\MyProduct" />
+
+    <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
+      <ComponentRef Id="Component.manual.txt" />
+      <ComponentRef Id="Component.Licence.txt" />
+    </Feature>
+
+    <InstallExecuteSequence>
+      <Custom Action="Set_INSTALLDIR_AbsolutePath" Before="AppSearch">(NOT Installed) AND (UILevel &lt; 5) AND (INSTALLDIR = ABSOLUTEPATH)</Custom>
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <Custom Action="Set_INSTALLDIR_AbsolutePath" Before="AppSearch">(NOT Installed) AND (UILevel = 5) AND (INSTALLDIR = ABSOLUTEPATH)</Custom>
+    </InstallUISequence>
+
+  </Product>
+</Wix>
+

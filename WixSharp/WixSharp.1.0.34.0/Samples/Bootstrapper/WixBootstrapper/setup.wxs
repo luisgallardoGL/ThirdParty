@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Bundle Name="My Product" AboutUrl="https://wixsharp.codeplex.com/" IconSourceFile="app_icon.ico" UpgradeCode="6f330b47-2577-43ad-9095-1861bb25889b" Version="2.0.0.0" >
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+      <Payload SourceFile="licence.html" />
+
+      <WixStandardBootstrapperApplication LogoFile="logo.png" LicenseUrl="licence.html" xmlns="http://schemas.microsoft.com/wix/BalExtension" />
+    </BootstrapperApplicationRef>
+
+    <Chain>
+      <PackageGroupRef Id="NetFx40Web" />
+
+      <MsiPackage DisplayInternalUI="yes" SourceFile="CRT.msi">
+        <MsiProperty Name="WIXBUNDLEORIGINALSOURCE" Value="[WixBundleOriginalSource]" />
+      </MsiPackage>
+
+      <MsiPackage DisplayInternalUI="yes" SourceFile="EmbeddedUI_Setup.msi">
+        <MsiProperty Name="WIXBUNDLEORIGINALSOURCE" Value="[WixBundleOriginalSource]" />
+      </MsiPackage>
+    </Chain>
+  </Bundle>
+</Wix>
+

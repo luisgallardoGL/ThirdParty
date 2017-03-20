@@ -1,0 +1,84 @@
+[19C0:3D40][2016-03-17T11:46:31]i001: Burn v3.10.0.2103, Windows v10.0 (Build 10240: Service Pack 0), path: E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\setup.exe
+[19C0:3D40][2016-03-17T11:46:31]i009: Command Line: '-l burn_log.txt'
+[19C0:3D40][2016-03-17T11:46:31]i000: Setting string variable 'WixBundleLog' to value 'E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log.txt'
+[19C0:3D40][2016-03-17T11:46:31]i000: Setting string variable 'WixBundleOriginalSource' to value 'E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\setup.exe'
+[19C0:3D40][2016-03-17T11:46:31]i000: Setting string variable 'WixBundleOriginalSourceFolder' to value 'E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\'
+[19C0:3D40][2016-03-17T11:46:31]i000: Setting string variable 'WixBundleName' to value 'My Product'
+[19C0:3D40][2016-03-17T11:46:31]i000: Unsetting variable 'WixBundleManufacturer'
+[19C0:3A0C][2016-03-17T11:46:31]i000: Setting numeric variable 'WixStdBALanguageId' to value 1033
+[19C0:3A0C][2016-03-17T11:46:31]i000: Setting version variable 'WixBundleFileVersion' to value '2.0.0.0'
+[19C0:3D40][2016-03-17T11:46:31]i100: Detect begin, 3 packages
+[19C0:3D40][2016-03-17T11:46:31]i000: File search: FileSearch1, did not find path: C:\Program Files (x86)\Adobe\adobe.exe
+[19C0:3D40][2016-03-17T11:46:31]i000: Setting numeric variable 'AdobeInstalled' to value 0
+[19C0:3D40][2016-03-17T11:46:31]i000: File search: FileSearch2, did not find path: C:\Program Files (x86)\PaintNet\PaintNet.exe
+[19C0:3D40][2016-03-17T11:46:31]i000: Setting numeric variable 'PaintNet' to value 0
+[19C0:3D40][2016-03-17T11:46:31]i000: Setting string variable 'NETFRAMEWORK40' to value '1'
+[19C0:3D40][2016-03-17T11:46:31]i000: Registry key not found. Key = 'Key=SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full'
+[19C0:3D40][2016-03-17T11:46:31]i000: Setting string variable 'Netfx4x64FullVersion' to value '4.6.01055'
+[19C0:3D40][2016-03-17T11:46:31]i052: Condition 'NETFRAMEWORK40' evaluates to true.
+[19C0:3D40][2016-03-17T11:46:31]i103: Detected related package: {6F330B47-2577-43AD-9095-1861CA25889C}, scope: PerUser, version: 1.0.0.0, language: 0 operation: MajorUpgrade
+[19C0:3D40][2016-03-17T11:46:31]i101: Detected package: NetFx40Web, state: Present, cached: Complete
+[19C0:3D40][2016-03-17T11:46:31]i101: Detected package: CRT.msi, state: Absent, cached: None
+[19C0:3D40][2016-03-17T11:46:31]i101: Detected package: My_Product.msi, state: Absent, cached: None
+[19C0:3D40][2016-03-17T11:46:31]i199: Detect complete, result: 0x0
+[19C0:3A0C][2016-03-17T11:46:34]i000: Setting numeric variable 'EulaAcceptCheckbox' to value 1
+[19C0:3D40][2016-03-17T11:46:34]i200: Plan begin, 3 packages, action: Install
+[19C0:3D40][2016-03-17T11:46:34]w321: Skipping dependency registration on package with no dependency providers: NetFx40Web
+[19C0:3D40][2016-03-17T11:46:34]i000: Setting string variable 'WixBundleRollbackLog_CRT.msi' to value 'E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log_000_CRT.msi_rollback.txt'
+[19C0:3D40][2016-03-17T11:46:34]i000: Setting string variable 'WixBundleLog_CRT.msi' to value 'E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log_000_CRT.msi.txt'
+[19C0:3D40][2016-03-17T11:46:34]i000: Setting string variable 'WixBundleRollbackLog_My_Product.msi' to value 'E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log_001_My_Product.msi_rollback.txt'
+[19C0:3D40][2016-03-17T11:46:34]i000: Setting string variable 'WixBundleLog_My_Product.msi' to value 'E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log_001_My_Product.msi.txt'
+[19C0:3D40][2016-03-17T11:46:34]i201: Planned package: NetFx40Web, state: Present, default requested: Present, ba requested: Present, execute: None, rollback: None, cache: No, uncache: No, dependency: None
+[19C0:3D40][2016-03-17T11:46:34]i201: Planned package: CRT.msi, state: Absent, default requested: Present, ba requested: Present, execute: Install, rollback: Uninstall, cache: Yes, uncache: No, dependency: Register
+[19C0:3D40][2016-03-17T11:46:34]i201: Planned package: My_Product.msi, state: Absent, default requested: Present, ba requested: Present, execute: Install, rollback: Uninstall, cache: Yes, uncache: No, dependency: Register
+[19C0:3D40][2016-03-17T11:46:34]i299: Plan complete, result: 0x0
+[19C0:3D40][2016-03-17T11:46:34]i300: Apply begin
+[19C0:3D40][2016-03-17T11:46:34]i010: Launching elevated engine process.
+[19C0:3D40][2016-03-17T11:46:36]i011: Launched elevated engine process.
+[19C0:3D40][2016-03-17T11:46:36]i012: Connected to elevated engine.
+[4554:39B0][2016-03-17T11:46:36]i358: Pausing automatic updates.
+[4554:39B0][2016-03-17T11:46:36]i359: Paused automatic updates.
+[4554:39B0][2016-03-17T11:46:36]i360: Creating a system restore point.
+[4554:39B0][2016-03-17T11:46:36]i362: System restore disabled, system restore point not created.
+[4554:39B0][2016-03-17T11:46:36]i370: Session begin, registration key: SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{8e17de33-d207-471e-b30c-daa353d92e17}, options: 0x7, disable resume: No
+[4554:39B0][2016-03-17T11:46:37]i000: Caching bundle from: 'C:\Users\osh\AppData\Local\Temp\{8e17de33-d207-471e-b30c-daa353d92e17}\.be\setup.exe' to: 'C:\ProgramData\Package Cache\{8e17de33-d207-471e-b30c-daa353d92e17}\setup.exe'
+[4554:39B0][2016-03-17T11:46:37]i000: Unsetting variable 'WixBundleManufacturer'
+[4554:39B0][2016-03-17T11:46:37]i320: Registering bundle dependency provider: {8e17de33-d207-471e-b30c-daa353d92e17}, version: 2.0.0.0
+[4554:39B0][2016-03-17T11:46:37]i371: Updating session, registration key: SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{8e17de33-d207-471e-b30c-daa353d92e17}, resume: Active, restart initiated: No, disable resume: No
+[4554:2CC0][2016-03-17T11:46:37]i305: Verified acquired payload: CRT.msi at path: C:\ProgramData\Package Cache\.unverified\CRT.msi, moving to: C:\ProgramData\Package Cache\{3C9399CC-BFA2-42F7-830A-5E738ED9EB6E}v1.0.0.0\CRT.msi.
+[4554:2CC0][2016-03-17T11:46:37]i305: Verified acquired payload: My_Product.msi at path: C:\ProgramData\Package Cache\.unverified\My_Product.msi, moving to: C:\ProgramData\Package Cache\{6F330B47-2577-43AD-9095-1861DA25889C}v2.0.0.0\My Product.msi.
+[4554:39B0][2016-03-17T11:46:37]i323: Registering package dependency provider: {3C9399CC-BFA2-42F7-830A-5E738ED9EB6E}, version: 1.0.0.0, package: CRT.msi
+[4554:39B0][2016-03-17T11:46:37]i301: Applying execute package: CRT.msi, action: Install, path: C:\ProgramData\Package Cache\{3C9399CC-BFA2-42F7-830A-5E738ED9EB6E}v1.0.0.0\CRT.msi, arguments: ' ARPSYSTEMCOMPONENT="1" MSIFASTINSTALL="7" WIXBUNDLEORIGINALSOURCE="E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\setup.exe"'
+[19C0:3D40][2016-03-17T11:46:40]i319: Applied execute package: CRT.msi, result: 0x0, restart: None
+[4554:39B0][2016-03-17T11:46:40]i325: Registering dependency: {8e17de33-d207-471e-b30c-daa353d92e17} on package provider: {3C9399CC-BFA2-42F7-830A-5E738ED9EB6E}, package: CRT.msi
+[4554:39B0][2016-03-17T11:46:40]i323: Registering package dependency provider: {6F330B47-2577-43AD-9095-1861DA25889C}, version: 2.0.0.0, package: My_Product.msi
+[4554:39B0][2016-03-17T11:46:40]i301: Applying execute package: My_Product.msi, action: Install, path: C:\ProgramData\Package Cache\{6F330B47-2577-43AD-9095-1861DA25889C}v2.0.0.0\My Product.msi, arguments: ' ARPSYSTEMCOMPONENT="1" MSIFASTINSTALL="7" WIXBUNDLEORIGINALSOURCE="E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\setup.exe"'
+[19C0:3D40][2016-03-17T11:46:43]i319: Applied execute package: My_Product.msi, result: 0x0, restart: None
+[4554:39B0][2016-03-17T11:46:43]i325: Registering dependency: {8e17de33-d207-471e-b30c-daa353d92e17} on package provider: {6F330B47-2577-43AD-9095-1861DA25889C}, package: My_Product.msi
+[4554:39B0][2016-03-17T11:46:43]i372: Session end, registration key: SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{8e17de33-d207-471e-b30c-daa353d92e17}, resume: ARP, restart: None, disable resume: No
+[4554:39B0][2016-03-17T11:46:43]i371: Updating session, registration key: SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{8e17de33-d207-471e-b30c-daa353d92e17}, resume: ARP, restart initiated: No, disable resume: No
+[19C0:3D40][2016-03-17T11:46:43]i399: Apply complete, result: 0x0, restart: None, ba requested restart:  No
+[19C0:3D40][2016-03-17T11:46:44]i500: Shutting down, exit code: 0x0
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: AdobeInstalled = 0
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: EulaAcceptCheckbox = 1
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: NETFRAMEWORK40 = 1
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: Netfx4x64FullVersion = 4.6.01055
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: PaintNet = 0
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: ProgramFilesFolder = C:\Program Files (x86)\
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleAction = 5
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleElevated = 1
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleFileVersion = 2.0.0.0
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleInstalled = 0
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleLog = E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log.txt
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleLog_CRT.msi = E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log_000_CRT.msi.txt
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleLog_My_Product.msi = E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log_001_My_Product.msi.txt
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleName = My Product
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleOriginalSource = E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\setup.exe
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleOriginalSourceFolder = E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleProviderKey = {8e17de33-d207-471e-b30c-daa353d92e17}
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleRollbackLog_CRT.msi = E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log_000_CRT.msi_rollback.txt
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleRollbackLog_My_Product.msi = E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\Bootstrapper\WixBootstrapper\burn_log_001_My_Product.msi_rollback.txt
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleTag = 
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixBundleVersion = 2.0.0.0
+[19C0:3D40][2016-03-17T11:46:44]i410: Variable: WixStdBALanguageId = 1033
+[19C0:3D40][2016-03-17T11:46:44]i007: Exit code: 0x0, restarting: No
