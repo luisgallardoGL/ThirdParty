@@ -1,0 +1,163 @@
+{
+  "@progress": {
+    "friendlyName": "DropDowns"
+  },
+  "_args": [
+    [
+      {
+        "raw": "@progress/kendo-angular-dropdowns@^0.35.0",
+        "scope": "@progress",
+        "escapedName": "@progress%2fkendo-angular-dropdowns",
+        "name": "@progress/kendo-angular-dropdowns",
+        "rawSpec": "^0.35.0",
+        "spec": ">=0.35.0 <0.36.0",
+        "type": "range"
+      },
+      "C:\\GitHub\\Capella\\UI\\FireflyUI"
+    ]
+  ],
+  "_from": "@progress/kendo-angular-dropdowns@>=0.35.0 <0.36.0",
+  "_id": "@progress/kendo-angular-dropdowns@0.35.1",
+  "_inCache": true,
+  "_location": "/@progress/kendo-angular-dropdowns",
+  "_nodeVersion": "6.10.0",
+  "_npmUser": {},
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "@progress/kendo-angular-dropdowns@^0.35.0",
+    "scope": "@progress",
+    "escapedName": "@progress%2fkendo-angular-dropdowns",
+    "name": "@progress/kendo-angular-dropdowns",
+    "rawSpec": "^0.35.0",
+    "spec": ">=0.35.0 <0.36.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-dropdowns/-/kendo-angular-dropdowns-0.35.1.tgz",
+  "_shasum": "210cf664055bd6a3fc611223af97d5dc12b5ead3",
+  "_shrinkwrap": null,
+  "_spec": "@progress/kendo-angular-dropdowns@^0.35.0",
+  "_where": "C:\\GitHub\\Capella\\UI\\FireflyUI",
+  "author": {
+    "name": "Progress"
+  },
+  "bugs": {
+    "url": "https://github.com/telerik/kendo-angular-dropdowns/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100
+    }
+  },
+  "dependencies": {
+    "@progress/kendo-angular-popup": "^0.16.0",
+    "@telerik/kendo-dropdowns-common": "^0.2.0"
+  },
+  "description": "Dropdowns Package for Angular 2",
+  "devDependencies": {
+    "@angular/common": "^2.4.0",
+    "@angular/compiler": "^2.4.0",
+    "@angular/compiler-cli": "^2.4.0",
+    "@angular/core": "^2.4.0",
+    "@angular/forms": "^2.4.0",
+    "@angular/http": "^2.4.0",
+    "@angular/platform-browser": "^2.4.0",
+    "@angular/platform-browser-dynamic": "^2.4.0",
+    "@angular/platform-server": "^2.4.0",
+    "@krux/condition-jenkins": "1.0.1",
+    "@progress/kendo-angular-tasks": "^8.0.0",
+    "@progress/kendo-theme-default": "^2.0.0",
+    "codelyzer": "2.0.0-beta.4",
+    "core-js": "^2.2.2",
+    "cz-conventional-changelog": "^1.1.5",
+    "ghooks": "^1.0.3",
+    "gulp": "^3.9.0",
+    "jasmine-spec-reporter": "2.5.0",
+    "protractor": "4.0.9",
+    "rxjs": "^5.0.1",
+    "semantic-release": "^4.3.5",
+    "ts-node": "1.2.1",
+    "tslint": "~4.0.0",
+    "typescript": "~2.0.0",
+    "typings": "^1.3.0",
+    "validate-commit-msg": "^1.1.1",
+    "webdriver-manager": "10.2.5",
+    "zone.js": "^0.7.2"
+  },
+  "dist": {
+    "shasum": "210cf664055bd6a3fc611223af97d5dc12b5ead3",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-dropdowns/-/kendo-angular-dropdowns-0.35.1.tgz"
+  },
+  "gitHead": "f03510b240c2094431577772487a3ae6fa994bc2",
+  "homepage": "https://github.com/telerik/kendo-angular-dropdowns#readme",
+  "jsnext:main": "dist/es/main.js",
+  "keywords": [
+    "Kendo UI",
+    "Progress",
+    "Angular 2",
+    "DropDownList",
+    "ComboBox"
+  ],
+  "license": "SEE LICENSE in LICENSE.md",
+  "main": "dist/npm/main.js",
+  "module": "dist/es/main.js",
+  "name": "@progress/kendo-angular-dropdowns",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "@angular/common": "^2.4.0",
+    "@angular/core": "^2.4.0",
+    "@angular/forms": "^2.4.0",
+    "rxjs": "^5.0.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npm.telerik.com"
+  },
+  "readme": "ERROR: No README data found!",
+  "readmeFilename": "README.md",
+  "release": {
+    "branch": "master",
+    "debug": false,
+    "verifyConditions": {
+      "path": "./node_modules/@krux/condition-jenkins"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telerik/kendo-angular-dropdowns.git"
+  },
+  "scripts": {
+    "api-check": "gulp api-check",
+    "build-package": "gulp build-package",
+    "e2e": "gulp e2e",
+    "lint": "gulp lint",
+    "preprotractor": "webdriver-manager update",
+    "protractor": "protractor",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "gulp start",
+    "test": "gulp test",
+    "typings": "typings prune && typings install"
+  },
+  "typings": "dist/es/main.d.ts",
+  "version": "0.35.1"
+}
