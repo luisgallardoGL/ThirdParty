@@ -1,0 +1,134 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "@progress/kendo-angular-intl@^0.2.0",
+        "scope": "@progress",
+        "escapedName": "@progress%2fkendo-angular-intl",
+        "name": "@progress/kendo-angular-intl",
+        "rawSpec": "^0.2.0",
+        "spec": ">=0.2.0 <0.3.0",
+        "type": "range"
+      },
+      "C:\\GitHub\\Capella\\UI\\FireflyUI"
+    ]
+  ],
+  "_from": "@progress/kendo-angular-intl@>=0.2.0 <0.3.0",
+  "_id": "@progress/kendo-angular-intl@0.2.1",
+  "_inCache": true,
+  "_location": "/@progress/kendo-angular-intl",
+  "_nodeVersion": "4.5.0",
+  "_npmUser": {},
+  "_npmVersion": "3.10.7",
+  "_phantomChildren": {
+    "symbol-observable": "1.0.4"
+  },
+  "_requested": {
+    "raw": "@progress/kendo-angular-intl@^0.2.0",
+    "scope": "@progress",
+    "escapedName": "@progress%2fkendo-angular-intl",
+    "name": "@progress/kendo-angular-intl",
+    "rawSpec": "^0.2.0",
+    "spec": ">=0.2.0 <0.3.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-intl/-/kendo-angular-intl-0.2.1.tgz",
+  "_shasum": "846ee402d79ff7c715f0fcb21ad3992258cd81a9",
+  "_shrinkwrap": null,
+  "_spec": "@progress/kendo-angular-intl@^0.2.0",
+  "_where": "C:\\GitHub\\Capella\\UI\\FireflyUI",
+  "author": {
+    "name": "Progress"
+  },
+  "bugs": {
+    "url": "https://github.com/telerik/kendo-angular-intl/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "validate-commit-msg",
+      "pre-push": "npm run test"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100
+    }
+  },
+  "dependencies": {
+    "@angular/common": "2.0.0-rc.6",
+    "@angular/compiler": "2.0.0-rc.6",
+    "@angular/core": "2.0.0-rc.6",
+    "@angular/http": "2.0.0-rc.6",
+    "@angular/platform-browser": "2.0.0-rc.6",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
+    "@angular/platform-server": "2.0.0-rc.6",
+    "@telerik/kendo-intl": "^0.9.2",
+    "core-js": "^2.2.2",
+    "rxjs": "5.0.0-beta.11",
+    "zone.js": "^0.6.17"
+  },
+  "description": "Kendo UI Internationalization for Angular 2 components",
+  "devDependencies": {
+    "@progress/kendo-angular-tasks": "^3.2.0",
+    "@telerik/kendo-theme-default": "^1.12.0",
+    "cldr-data": "29.0.2",
+    "codelyzer": "0.0.28",
+    "cz-conventional-changelog": "^1.1.5",
+    "ghooks": "^1.0.3",
+    "gulp": "3.9.1",
+    "semantic-release": "^4.3.5",
+    "typings": "^1.3.0",
+    "validate-commit-msg": "^1.1.1"
+  },
+  "dist": {
+    "shasum": "846ee402d79ff7c715f0fcb21ad3992258cd81a9",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-intl/-/kendo-angular-intl-0.2.1.tgz"
+  },
+  "gitHead": "458f2de3a285d1a75b7e98e374efd68d572272c5",
+  "homepage": "https://github.com/telerik/kendo-angular-intl#readme",
+  "keywords": [
+    "Kendo UI",
+    "Internationalization",
+    "i18n",
+    "AngularJS 2"
+  ],
+  "main": "dist/npm/js/main.js",
+  "name": "@progress/kendo-angular-intl",
+  "optionalDependencies": {},
+  "publishConfig": {
+    "registry": "https://registry.npm.telerik.com"
+  },
+  "readme": "ERROR: No README data found!",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telerik/kendo-angular-intl.git"
+  },
+  "scripts": {
+    "api-check": "gulp api-check",
+    "build-package": "gulp build-npm-package",
+    "lint": "gulp lint",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "gulp test",
+    "typings": "typings prune && typings install"
+  },
+  "typings": "dist/npm/js/main",
+  "version": "0.2.1"
+}
