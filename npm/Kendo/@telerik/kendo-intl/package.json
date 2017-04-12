@@ -2,49 +2,49 @@
   "_args": [
     [
       {
-        "raw": "@telerik/kendo-intl@^0.9.2",
+        "raw": "@telerik/kendo-intl@^0.14.0",
         "scope": "@telerik",
         "escapedName": "@telerik%2fkendo-intl",
         "name": "@telerik/kendo-intl",
-        "rawSpec": "^0.9.2",
-        "spec": ">=0.9.2 <0.10.0",
+        "rawSpec": "^0.14.0",
+        "spec": ">=0.14.0 <0.15.0",
         "type": "range"
       },
-      "C:\\GitHub\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-intl"
+      "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-intl"
     ]
   ],
-  "_from": "@telerik/kendo-intl@>=0.9.2 <0.10.0",
-  "_id": "@telerik/kendo-intl@0.9.4",
+  "_from": "@telerik/kendo-intl@>=0.14.0 <0.15.0",
+  "_id": "@telerik/kendo-intl@0.14.5",
   "_inCache": true,
   "_location": "/@telerik/kendo-intl",
-  "_nodeVersion": "4.5.0",
+  "_nodeVersion": "6.10.2",
   "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/kendo-intl-0.9.4.tgz_1473337269477_0.6353265622165054"
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/kendo-intl-0.14.5.tgz_1491384629062_0.2340447490569204"
   },
   "_npmUser": {
     "name": "telerik",
     "email": "npm@telerik.com"
   },
-  "_npmVersion": "3.9.6",
+  "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "@telerik/kendo-intl@^0.9.2",
+    "raw": "@telerik/kendo-intl@^0.14.0",
     "scope": "@telerik",
     "escapedName": "@telerik%2fkendo-intl",
     "name": "@telerik/kendo-intl",
-    "rawSpec": "^0.9.2",
-    "spec": ">=0.9.2 <0.10.0",
+    "rawSpec": "^0.14.0",
+    "spec": ">=0.14.0 <0.15.0",
     "type": "range"
   },
   "_requiredBy": [
     "/@progress/kendo-angular-intl"
   ],
-  "_resolved": "https://registry.npmjs.org/@telerik/kendo-intl/-/kendo-intl-0.9.4.tgz",
-  "_shasum": "57aa306ab790a72055ec5a1f7e3b7b0e4d11407a",
+  "_resolved": "https://registry.npmjs.org/@telerik/kendo-intl/-/kendo-intl-0.14.5.tgz",
+  "_shasum": "cbcc37d6a7cedc079c26d3612e3d45c385dfc900",
   "_shrinkwrap": null,
-  "_spec": "@telerik/kendo-intl@^0.9.2",
-  "_where": "C:\\GitHub\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-intl",
+  "_spec": "@telerik/kendo-intl@^0.14.0",
+  "_where": "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-intl",
   "author": {
     "name": "Telerik"
   },
@@ -74,23 +74,25 @@
   },
   "directories": {},
   "dist": {
-    "shasum": "57aa306ab790a72055ec5a1f7e3b7b0e4d11407a",
-    "tarball": "https://registry.npmjs.org/@telerik/kendo-intl/-/kendo-intl-0.9.4.tgz"
+    "shasum": "cbcc37d6a7cedc079c26d3612e3d45c385dfc900",
+    "tarball": "https://registry.npmjs.org/@telerik/kendo-intl/-/kendo-intl-0.14.5.tgz"
   },
-  "gitHead": "c3f3a21df42f530aaa14674ecd936622206bb30f",
+  "gitHead": "8868db7ebf725cc721f064a8ceb9e3ef5490d787",
   "homepage": "https://github.com/telerik/kendo-intl#readme",
+  "jsnext:main": "dist/es/main.js",
   "keywords": [
     "Kendo",
     "Internationalization"
   ],
   "license": "Apache-2.0",
-  "main": "dist/npm/js/main.js",
+  "main": "dist/npm/main.js",
   "maintainers": [
     {
       "name": "telerik",
       "email": "npm@telerik.com"
     }
   ],
+  "module": "dist/es/main.js",
   "name": "@telerik/kendo-intl",
   "optionalDependencies": {},
   "readme": "ERROR: No README data found!",
@@ -99,11 +101,11 @@
     "url": "git+https://github.com/telerik/kendo-intl.git"
   },
   "scripts": {
-    "build-package": "gulp build-npm-package",
+    "build-package": "gulp build-rollup-package",
     "lint": "gulp lint",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "gulp test"
   },
-  "typings": "dist/npm/js/main",
-  "version": "0.9.4"
+  "typings": "dist/es/main",
+  "version": "0.14.5"
 }

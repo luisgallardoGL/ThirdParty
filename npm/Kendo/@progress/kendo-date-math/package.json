@@ -1,0 +1,123 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "@progress/kendo-date-math@^0.3.0",
+        "scope": "@progress",
+        "escapedName": "@progress%2fkendo-date-math",
+        "name": "@progress/kendo-date-math",
+        "rawSpec": "^0.3.0",
+        "spec": ">=0.3.0 <0.4.0",
+        "type": "range"
+      },
+      "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-dateinputs"
+    ]
+  ],
+  "_from": "@progress/kendo-date-math@>=0.3.0 <0.4.0",
+  "_id": "@progress/kendo-date-math@0.3.3",
+  "_inCache": true,
+  "_location": "/@progress/kendo-date-math",
+  "_nodeVersion": "6.10.1",
+  "_npmUser": {},
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "@progress/kendo-date-math@^0.3.0",
+    "scope": "@progress",
+    "escapedName": "@progress%2fkendo-date-math",
+    "name": "@progress/kendo-date-math",
+    "rawSpec": "^0.3.0",
+    "spec": ">=0.3.0 <0.4.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/@progress/kendo-angular-dateinputs"
+  ],
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-date-math/-/kendo-date-math-0.3.3.tgz",
+  "_shasum": "dac18e9948e0448340eae3df66a24661d063fdb0",
+  "_shrinkwrap": null,
+  "_spec": "@progress/kendo-date-math@^0.3.0",
+  "_where": "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-dateinputs",
+  "author": {
+    "name": "Progress"
+  },
+  "bugs": {
+    "url": "https://github.com/telerik/kendo-date-math/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100
+    }
+  },
+  "dependencies": {},
+  "description": "Kendo UI typescript package exporting functions for Date manipulations",
+  "devDependencies": {
+    "@progress/kendo-typescript-tasks": "^2.0.0",
+    "colors": "^1.1.2",
+    "core-js": "^2.2.2",
+    "cz-conventional-changelog": "^1.1.5",
+    "es6-promise": "^3.1.2",
+    "es6-shim": "^0.35.0",
+    "es7-reflect-metadata": "^1.6.0",
+    "ghooks": "^1.0.3",
+    "gulp": "^3.9.0",
+    "semantic-release": "^4.3.5",
+    "typescript": "~2.0.3",
+    "typings": "^1.3.0",
+    "validate-commit-msg": "^1.1.1"
+  },
+  "dist": {
+    "shasum": "dac18e9948e0448340eae3df66a24661d063fdb0",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-date-math/-/kendo-date-math-0.3.3.tgz"
+  },
+  "gitHead": "edeee2305f1df2fd5687549ce6fd090594c56dc7",
+  "homepage": "https://github.com/telerik/kendo-date-math#readme",
+  "jsnext:main": "dist/es/main.js",
+  "keywords": [
+    "Kendo UI",
+    "TypeScript"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "main": "dist/npm/main.js",
+  "module": "dist/es/main.js",
+  "name": "@progress/kendo-date-math",
+  "optionalDependencies": {},
+  "publishConfig": {
+    "registry": "https://registry.npm.telerik.com"
+  },
+  "readme": "ERROR: No README data found!",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telerik/kendo-date-math.git"
+  },
+  "scripts": {
+    "api-check": "gulp api-check",
+    "build-package": "gulp build-package",
+    "lint": "gulp lint",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "gulp start",
+    "test": "gulp test",
+    "typings": "typings prune && typings install"
+  },
+  "typings": "dist/es/main",
+  "version": "0.3.3"
+}

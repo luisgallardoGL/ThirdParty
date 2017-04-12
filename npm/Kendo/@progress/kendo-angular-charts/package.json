@@ -1,0 +1,169 @@
+{
+  "@progress": {
+    "friendlyName": "Charts"
+  },
+  "_args": [
+    [
+      {
+        "raw": "@progress/kendo-angular-charts@^0.22.0",
+        "scope": "@progress",
+        "escapedName": "@progress%2fkendo-angular-charts",
+        "name": "@progress/kendo-angular-charts",
+        "rawSpec": "^0.22.0",
+        "spec": ">=0.22.0 <0.23.0",
+        "type": "range"
+      },
+      "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI"
+    ]
+  ],
+  "_from": "@progress/kendo-angular-charts@>=0.22.0 <0.23.0",
+  "_id": "@progress/kendo-angular-charts@0.22.0",
+  "_inCache": true,
+  "_location": "/@progress/kendo-angular-charts",
+  "_nodeVersion": "6.10.1",
+  "_npmUser": {},
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {
+    "@progress/kendo-popup-common": "0.3.2"
+  },
+  "_requested": {
+    "raw": "@progress/kendo-angular-charts@^0.22.0",
+    "scope": "@progress",
+    "escapedName": "@progress%2fkendo-angular-charts",
+    "name": "@progress/kendo-angular-charts",
+    "rawSpec": "^0.22.0",
+    "spec": ">=0.22.0 <0.23.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-charts/-/kendo-angular-charts-0.22.0.tgz",
+  "_shasum": "b6c3e6ad89d2156dd7922c0f6935a2ee60c67763",
+  "_shrinkwrap": null,
+  "_spec": "@progress/kendo-angular-charts@^0.22.0",
+  "_where": "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI",
+  "author": {
+    "name": "Progress"
+  },
+  "bugs": {
+    "url": "https://github.com/telerik/kendo-angular-charts/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100
+    }
+  },
+  "dependencies": {
+    "@progress/kendo-angular-popup": "^0.17.0",
+    "@progress/kendo-angular-resize-sensor": "^0.11.0",
+    "@progress/kendo-charts": "^0.16.0"
+  },
+  "description": "Kendo UI Charts for Angular",
+  "devDependencies": {
+    "@angular/animations": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/platform-server": "^4.0.0",
+    "@krux/condition-jenkins": "1.0.1",
+    "@progress/kendo-angular-intl": "^0.12.0",
+    "@progress/kendo-angular-tasks": "^9.0.0",
+    "@progress/kendo-data-query": "^0.3.0",
+    "@progress/kendo-drawing": "^0.15.0",
+    "@progress/kendo-file-saver": "0.1.2",
+    "@progress/kendo-theme-default": "^2.0.0",
+    "@types/core-js": "0.9.35",
+    "@types/jasmine": "2.2.34",
+    "@types/zone.js": "0.0.27",
+    "codelyzer": "3.0.0-beta.4",
+    "core-js": "^2.2.2",
+    "cz-conventional-changelog": "^1.1.5",
+    "ghooks": "^1.0.3",
+    "gulp": "^3.9.0",
+    "hammerjs": "^2.0.0",
+    "rxjs": "^5.0.1",
+    "semantic-release": "^4.3.5",
+    "tslint": "^4.0.0",
+    "typescript": "^2.1.5",
+    "validate-commit-msg": "^1.1.1",
+    "zone.js": "^0.8.4"
+  },
+  "dist": {
+    "shasum": "b6c3e6ad89d2156dd7922c0f6935a2ee60c67763",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-charts/-/kendo-angular-charts-0.22.0.tgz"
+  },
+  "gitHead": "f61c86fa8e5830d57ebdbf0f6cb21aa531a65ef7",
+  "homepage": "https://github.com/telerik/kendo-angular-charts#readme",
+  "jsnext:main": "dist/es/main.js",
+  "keywords": [
+    "Kendo UI",
+    "Progress",
+    "DataViz",
+    "Angular",
+    "Data Visualization",
+    "Charts"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "main": "dist/npm/main.js",
+  "module": "dist/es/main.js",
+  "name": "@progress/kendo-angular-charts",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@progress/kendo-angular-intl": "^0.12.0",
+    "@progress/kendo-drawing": "^0.15.0",
+    "hammerjs": "^2.0.0",
+    "rxjs": "^5.0.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npm.telerik.com"
+  },
+  "readme": "ERROR: No README data found!",
+  "readmeFilename": "README.md",
+  "release": {
+    "branch": "master",
+    "debug": false,
+    "verifyConditions": {
+      "path": "./node_modules/@krux/condition-jenkins"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telerik/kendo-angular-charts.git"
+  },
+  "scripts": {
+    "api-check": "gulp api-check",
+    "build-package": "gulp build-package",
+    "e2e": "gulp e2e",
+    "lint": "gulp lint",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "gulp start",
+    "test": "gulp test"
+  },
+  "typings": "dist/es/main.d.ts",
+  "version": "0.22.0"
+}
