@@ -5,17 +5,17 @@ if not defined DevEnvDir (
 	if exist "%PROGRAMFILES(X86)%\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat" goto :SET2015
 	if exist "%PROGRAMFILES(X86)%\Microsoft Visual Studio 12.0\Common7\Tools\\VsDevCmd.bat" goto :SET2013
 
-	:SET2017 
+	:SET2017
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
 	echo Set for 2017
 	goto :RunFetchAndBuild
-	
-	:SET2015 
+
+	:SET2015
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat"
 	echo Set for 2015
 	goto :RunFetchAndBuild
-	
-	:SET2013 
+
+	:SET2013
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"
 	echo set for 2013
 	goto :RunFetchAndBuild
@@ -50,6 +50,15 @@ git rev-parse --abbrev-ref HEAD
 git pull
 if errorlevel 1 (
    echo Failure Reason Given is %errorlevel% in Capella
+   exit /b %errorlevel%
+)
+popd
+pushd Rounding
+ECHO Pulling Rounding
+git rev-parse --abbrev-ref HEAD
+git pull
+if errorlevel 1 (
+   echo Failure Reason Given is %errorlevel% in Rounding
    exit /b %errorlevel%
 )
 popd
