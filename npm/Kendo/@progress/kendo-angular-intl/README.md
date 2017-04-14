@@ -1,11 +1,11 @@
-# Kendo UI for Angular 2: Internationalization
+# Kendo UI for Angular: Internationalization
 
 * [Overview](https://github.com/telerik/kendo-angular-intl#overview)
 * [Basic Usage and Installation](https://github.com/telerik/kendo-angular-intl#basic-usage-and-installation)
 
 ## Overview
 
-This is the Kendo UI Internationalization package, part of the [Kendo UI for Angular 2](http://www.telerik.com/kendo-angular-ui/) suite.
+This is the Kendo UI Internationalization package, part of the [Kendo UI for Angular](http://www.telerik.com/kendo-angular-ui/) suite.
 
 The package includes the Internationalization component.
 
