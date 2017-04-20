@@ -2,41 +2,41 @@
   "_args": [
     [
       {
-        "raw": "@progress/kendo-angular-resize-sensor@^0.11.0",
+        "raw": "@progress/kendo-angular-resize-sensor@^0.10.0",
         "scope": "@progress",
         "escapedName": "@progress%2fkendo-angular-resize-sensor",
         "name": "@progress/kendo-angular-resize-sensor",
-        "rawSpec": "^0.11.0",
-        "spec": ">=0.11.0 <0.12.0",
+        "rawSpec": "^0.10.0",
+        "spec": ">=0.10.0 <0.11.0",
         "type": "range"
       },
       "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-charts"
     ]
   ],
-  "_from": "@progress/kendo-angular-resize-sensor@>=0.11.0 <0.12.0",
-  "_id": "@progress/kendo-angular-resize-sensor@0.11.0",
+  "_from": "@progress/kendo-angular-resize-sensor@>=0.10.0 <0.11.0",
+  "_id": "@progress/kendo-angular-resize-sensor@0.10.3",
   "_inCache": true,
   "_location": "/@progress/kendo-angular-resize-sensor",
-  "_nodeVersion": "6.10.2",
+  "_nodeVersion": "6.10.0",
   "_npmUser": {},
   "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "@progress/kendo-angular-resize-sensor@^0.11.0",
+    "raw": "@progress/kendo-angular-resize-sensor@^0.10.0",
     "scope": "@progress",
     "escapedName": "@progress%2fkendo-angular-resize-sensor",
     "name": "@progress/kendo-angular-resize-sensor",
-    "rawSpec": "^0.11.0",
-    "spec": ">=0.11.0 <0.12.0",
+    "rawSpec": "^0.10.0",
+    "spec": ">=0.10.0 <0.11.0",
     "type": "range"
   },
   "_requiredBy": [
     "/@progress/kendo-angular-charts"
   ],
-  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-resize-sensor/-/kendo-angular-resize-sensor-0.11.0.tgz",
-  "_shasum": "ade2f83d1d4e5b36fab12a61c698f4f217dac081",
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-resize-sensor/-/kendo-angular-resize-sensor-0.10.3.tgz",
+  "_shasum": "702d6363073e3ef9b35023c84b134d1a50dcd97c",
   "_shrinkwrap": null,
-  "_spec": "@progress/kendo-angular-resize-sensor@^0.11.0",
+  "_spec": "@progress/kendo-angular-resize-sensor@^0.10.0",
   "_where": "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-charts",
   "author": {
     "name": "Progress"
@@ -70,42 +70,40 @@
   "dependencies": {},
   "description": "Kendo UI Angular 2 Resize Sensor Component",
   "devDependencies": {
-    "@angular/animations": "^4.0.0",
-    "@angular/common": "^4.0.0",
-    "@angular/compiler": "^4.0.0",
-    "@angular/compiler-cli": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",
-    "@angular/platform-server": "^4.0.0",
-    "@krux/condition-jenkins": "1.0.1",
-    "@progress/kendo-angular-tasks": "^9.0.0",
+    "@angular/common": "^2.4.0",
+    "@angular/compiler": "^2.4.0",
+    "@angular/compiler-cli": "^2.4.0",
+    "@angular/core": "^2.4.0",
+    "@angular/platform-browser": "^2.4.0",
+    "@angular/platform-browser-dynamic": "^2.4.0",
+    "@angular/platform-server": "^2.4.0",
+    "@progress/kendo-angular-tasks": "^7.0.0",
     "@progress/kendo-theme-default": "^2.0.0",
     "@types/core-js": "0.9.35",
     "@types/jasmine": "2.2.34",
     "@types/zone.js": "0.0.27",
-    "codelyzer": "3.0.0-beta.4",
+    "codelyzer": "2.0.0-beta.2",
     "core-js": "^2.2.2",
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "^1.0.3",
     "gulp": "^3.9.0",
-    "rxjs": "^5.0.1",
+    "rxjs": "5.0.0-beta.12",
     "semantic-release": "^4.3.5",
-    "tslint": "^4.0.0",
-    "typescript": "^2.1.5",
+    "tslint": "~4.0.0",
+    "typescript": "~2.0.0",
     "validate-commit-msg": "^1.1.1",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.7.2"
   },
   "dist": {
-    "shasum": "ade2f83d1d4e5b36fab12a61c698f4f217dac081",
-    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-resize-sensor/-/kendo-angular-resize-sensor-0.11.0.tgz"
+    "shasum": "702d6363073e3ef9b35023c84b134d1a50dcd97c",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-resize-sensor/-/kendo-angular-resize-sensor-0.10.3.tgz"
   },
-  "gitHead": "e9bc1844699aa58f85bf389d724d671dc4dee5f1",
+  "gitHead": "dc08521cc29f6fa2a32e08cd9b459ac05c2b25c8",
   "homepage": "https://github.com/telerik/kendo-angular-resize-sensor#readme",
   "jsnext:main": "dist/es/main.js",
   "keywords": [
     "Kendo UI",
-    "Angular"
+    "AngularJS 2"
   ],
   "license": "SEE LICENSE IN LICENSE.md",
   "main": "dist/npm/main.js",
@@ -113,9 +111,9 @@
   "name": "@progress/kendo-angular-resize-sensor",
   "optionalDependencies": {},
   "peerDependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "rxjs": "^5.0.1"
+    "@angular/common": "^2.0.0",
+    "@angular/core": "^2.0.0",
+    "rxjs": "^5.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npm.telerik.com"
@@ -136,5 +134,5 @@
     "test": "gulp test"
   },
   "typings": "dist/es/main.d.ts",
-  "version": "0.11.0"
+  "version": "0.10.3"
 }

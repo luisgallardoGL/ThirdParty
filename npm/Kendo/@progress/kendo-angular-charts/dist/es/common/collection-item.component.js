@@ -3,7 +3,7 @@ import { copyChanges } from './copy-changes';
 /**
  * @hidden
  */
-var CollectionItemComponent = (function () {
+export var CollectionItemComponent = (function () {
     function CollectionItemComponent(configurationService, collectionService) {
         var _this = this;
         this.configurationService = configurationService;
@@ -27,4 +27,3 @@ var CollectionItemComponent = (function () {
     };
     return CollectionItemComponent;
 }());
-export { CollectionItemComponent };

@@ -1,19 +1,13 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var configuration_service_1 = require("./configuration.service");
-var kendo_charts_1 = require("@progress/kendo-charts");
-var font = function (style) { return style.fontSize + " " + style.fontFamily; };
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var core_1 = require('@angular/core');
+var configuration_service_1 = require('./configuration.service');
+var kendo_charts_1 = require('@progress/kendo-charts');
+var font = function (style) { return (style.fontSize + " " + style.fontFamily); };
 var letterPos = function (letter) { return letter.toLowerCase().charCodeAt(0) - "a".charCodeAt(0); };
 var seriesPos = function (name) { return letterPos(name.match(/series-([a-z])$/)[1]); };
 var template = "\n    <div class=\"k-var--accent\"></div>\n    <div class=\"k-var--base\"></div>\n    <div class=\"k-var--background\"></div>\n\n    <div class=\"k-var--normal-background\"></div>\n    <div class=\"k-var--normal-text-color\"></div>\n    <div class=\"k-var--hover-background\"></div>\n    <div class=\"k-var--hover-text-color\"></div>\n    <div class=\"k-var--selected-background\"></div>\n    <div class=\"k-var--selected-text-color\"></div>\n    <div class=\"k-var--chart-error-bars-background\"></div>\n    <div class=\"k-var--chart-notes-background\"></div>\n    <div class=\"k-var--chart-notes-border\"></div>\n    <div class=\"k-var--chart-notes-lines\"></div>\n    <div class=\"k-var--chart-crosshair-background\"></div>\n\n    <div class=\"k-var--chart-inactive\"></div>\n    <div class=\"k-var--chart-major-lines\"></div>\n    <div class=\"k-var--chart-minor-lines\"></div>\n    <div class=\"k-var--chart-area-opacity\"></div>\n\n    <div class=\"k-widget\">\n        <div class=\"k-var--chart-font\"></div>\n        <div class=\"k-var--chart-title-font\"></div>\n        <div class=\"k-var--chart-label-font\"></div>\n    </div>\n\n    <div class=\"k-var--series\">\n      <div class=\"k-var--series-a\"></div>\n      <div class=\"k-var--series-b\"></div>\n      <div class=\"k-var--series-c\"></div>\n      <div class=\"k-var--series-d\"></div>\n      <div class=\"k-var--series-e\"></div>\n      <div class=\"k-var--series-f\"></div>\n    </div>\n";
@@ -23,9 +17,8 @@ var template = "\n    <div class=\"k-var--accent\"></div>\n    <div class=\"k-va
 var ThemeService = (function (_super) {
     __extends(ThemeService, _super);
     function ThemeService() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.loaded = false;
-        return _this;
+        _super.apply(this, arguments);
+        this.loaded = false;
     }
     ThemeService.prototype.loadTheme = function () {
         if (this.loaded || typeof document === 'undefined') {
@@ -121,11 +114,11 @@ var ThemeService = (function (_super) {
         var element = this.element;
         return window.getComputedStyle(element.querySelector(".k-var--" + varName));
     };
+    ThemeService.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /** @nocollapse */
+    ThemeService.ctorParameters = function () { return []; };
     return ThemeService;
 }(configuration_service_1.ConfigurationService));
-ThemeService.decorators = [
-    { type: core_1.Injectable },
-];
-/** @nocollapse */
-ThemeService.ctorParameters = function () { return []; };
 exports.ThemeService = ThemeService;

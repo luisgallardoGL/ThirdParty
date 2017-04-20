@@ -108,7 +108,7 @@ var PieChart = (function (ChartElement) {
             dataItem: fields.dataItem,
             category: fields.category,
             percentage: fields.percentage
-        }, { defaults: series._defaults, excluded: [ "data", "content", "template", "visual", "toggle" ] });
+        }, { defaults: series._defaults, excluded: [ "data", "template", "visual", "toggle" ] });
     };
 
     PieChart.prototype.addValue = function addValue (value, sector, fields) {

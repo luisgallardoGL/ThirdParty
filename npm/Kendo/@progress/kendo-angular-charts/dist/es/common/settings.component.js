@@ -4,7 +4,7 @@ var VISIBLE_KEY = 'visible';
 /**
  * @hidden
  */
-var SettingsComponent = (function () {
+export var SettingsComponent = (function () {
     function SettingsComponent(configKey, configurationService) {
         this.configKey = configKey;
         this.configurationService = configurationService;
@@ -59,4 +59,3 @@ var SettingsComponent = (function () {
     };
     return SettingsComponent;
 }());
-export { SettingsComponent };

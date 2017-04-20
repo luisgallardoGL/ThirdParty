@@ -1,7 +1,6 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var crosshair_tooltip_component_1 = require("./crosshair-tooltip.component");
+var core_1 = require('@angular/core');
+var crosshair_tooltip_component_1 = require('./crosshair-tooltip.component');
 var AXES = ["categoryAxis", "valueAxis", "xAxis", "yAxis"];
 /**
  * @hidden
@@ -80,17 +79,17 @@ var CrosshairTooltipsContainerComponent = (function () {
         }
         return result;
     };
+    CrosshairTooltipsContainerComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'kendo-chart-crosshair-tooltips-container',
+                    template: "\n        <kendo-chart-crosshair-tooltip *ngFor=\"let key of tooltipKeys\" [key]=\"key\">\n        </kendo-chart-crosshair-tooltip>\n    "
+                },] },
+    ];
+    /** @nocollapse */
+    CrosshairTooltipsContainerComponent.ctorParameters = function () { return []; };
+    CrosshairTooltipsContainerComponent.propDecorators = {
+        'crossahirTooltipComponents': [{ type: core_1.ViewChildren, args: [crosshair_tooltip_component_1.CrosshairTooltipComponent,] },],
+    };
     return CrosshairTooltipsContainerComponent;
 }());
-CrosshairTooltipsContainerComponent.decorators = [
-    { type: core_1.Component, args: [{
-                selector: 'kendo-chart-crosshair-tooltips-container',
-                template: "\n        <kendo-chart-crosshair-tooltip *ngFor=\"let key of tooltipKeys\" [key]=\"key\">\n        </kendo-chart-crosshair-tooltip>\n    "
-            },] },
-];
-/** @nocollapse */
-CrosshairTooltipsContainerComponent.ctorParameters = function () { return []; };
-CrosshairTooltipsContainerComponent.propDecorators = {
-    'crossahirTooltipComponents': [{ type: core_1.ViewChildren, args: [crosshair_tooltip_component_1.CrosshairTooltipComponent,] },],
-};
 exports.CrosshairTooltipsContainerComponent = CrosshairTooltipsContainerComponent;

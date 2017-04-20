@@ -1,13 +1,8 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ConfigurationService } from "../common/configuration.service";
 import { CollectionService } from "../common/collection.service";
@@ -44,28 +39,26 @@ import { ValueAxisComponentGenerated } from './value-axis.component.generated';
  *
  * ```
  */
-var ValueAxisComponent = (function (_super) {
+export var ValueAxisComponent = (function (_super) {
     __extends(ValueAxisComponent, _super);
     // Place custom properties here
     function ValueAxisComponent(configurationService, collectionService) {
-        var _this = _super.call(this, configurationService, collectionService) || this;
-        _this.configurationService = configurationService;
-        _this.collectionService = collectionService;
-        return _this;
+        _super.call(this, configurationService, collectionService);
+        this.configurationService = configurationService;
+        this.collectionService = collectionService;
     }
+    ValueAxisComponent.decorators = [
+        { type: Component, args: [{
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    providers: [CollectionService],
+                    selector: 'kendo-chart-value-axis',
+                    template: ''
+                },] },
+    ];
+    /** @nocollapse */
+    ValueAxisComponent.ctorParameters = function () { return [
+        { type: ConfigurationService, },
+        { type: CollectionService, },
+    ]; };
     return ValueAxisComponent;
 }(ValueAxisComponentGenerated));
-export { ValueAxisComponent };
-ValueAxisComponent.decorators = [
-    { type: Component, args: [{
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                providers: [CollectionService],
-                selector: 'kendo-chart-value-axis',
-                template: ''
-            },] },
-];
-/** @nocollapse */
-ValueAxisComponent.ctorParameters = function () { return [
-    { type: ConfigurationService, },
-    { type: CollectionService, },
-]; };

@@ -1,13 +1,8 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 import { Component, ChangeDetectionStrategy, ContentChildren } from '@angular/core';
 import { ConfigurationService } from "../../common/configuration.service";
 import { CollectionService } from "../../common/collection.service";
@@ -49,32 +44,30 @@ import { NavigatorSeriesItemComponent } from './series-item.component';
  *
  * ```
  */
-var NavigatorSeriesComponent = (function (_super) {
+export var NavigatorSeriesComponent = (function (_super) {
     __extends(NavigatorSeriesComponent, _super);
     function NavigatorSeriesComponent(configurationService, collectionService, tooltipTemplateService) {
-        var _this = _super.call(this, configurationService, collectionService, tooltipTemplateService) || this;
-        _this.configurationService = configurationService;
-        _this.collectionService = collectionService;
-        _this.tooltipTemplateService = tooltipTemplateService;
-        return _this;
+        _super.call(this, configurationService, collectionService, tooltipTemplateService);
+        this.configurationService = configurationService;
+        this.collectionService = collectionService;
+        this.tooltipTemplateService = tooltipTemplateService;
     }
+    NavigatorSeriesComponent.decorators = [
+        { type: Component, args: [{
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    providers: [CollectionService],
+                    selector: 'kendo-chart-navigator-series',
+                    template: ''
+                },] },
+    ];
+    /** @nocollapse */
+    NavigatorSeriesComponent.ctorParameters = function () { return [
+        { type: ConfigurationService, },
+        { type: CollectionService, },
+        { type: TooltipTemplateService, },
+    ]; };
+    NavigatorSeriesComponent.propDecorators = {
+        'children': [{ type: ContentChildren, args: [NavigatorSeriesItemComponent,] },],
+    };
     return NavigatorSeriesComponent;
 }(SeriesComponent));
-export { NavigatorSeriesComponent };
-NavigatorSeriesComponent.decorators = [
-    { type: Component, args: [{
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                providers: [CollectionService],
-                selector: 'kendo-chart-navigator-series',
-                template: ''
-            },] },
-];
-/** @nocollapse */
-NavigatorSeriesComponent.ctorParameters = function () { return [
-    { type: ConfigurationService, },
-    { type: CollectionService, },
-    { type: TooltipTemplateService, },
-]; };
-NavigatorSeriesComponent.propDecorators = {
-    'children': [{ type: ContentChildren, args: [NavigatorSeriesItemComponent,] },],
-};

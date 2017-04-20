@@ -39,7 +39,7 @@ var EVENT_MAP = {
 /**
  * @hidden
  */
-var InstanceEventService = (function () {
+export var InstanceEventService = (function () {
     function InstanceEventService() {
     }
     InstanceEventService.prototype.create = function (name, args, sender) {
@@ -49,4 +49,3 @@ var InstanceEventService = (function () {
     };
     return InstanceEventService;
 }());
-export { InstanceEventService };

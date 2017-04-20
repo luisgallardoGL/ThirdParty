@@ -6,7 +6,9 @@ import ShapeElement from './shape-element';
 import Box from './box';
 
 import { CIRCLE, TOP, BOTTOM, LEFT, RIGHT, CENTER, INSIDE, OUTSIDE, NOTE_CLICK, NOTE_HOVER } from '../common/constants';
-import { alignPathToPixel, defined, deepExtend, eventElement, getTemplate, inArray, setDefaultOptions } from '../common';
+import { alignPathToPixel, defined, deepExtend, eventElement, inArray, setDefaultOptions } from '../common';
+
+import { TemplateService } from '../services';
 
 var DEFAULT_ICON_SIZE = 7;
 var DEFAULT_LABEL_COLOR = "#fff";
@@ -45,8 +47,8 @@ var Note = (function (BoxElement) {
             var width, height;
 
             if (defined(label) && label.visible) {
-                var noteTemplate = getTemplate(label);
-                if (noteTemplate) {
+                if (label.template) {
+                    var noteTemplate = TemplateService.compile(label.template);
                     text = noteTemplate(this.fields);
                 } else if (label.format) {
                     text = this.chartService.format.auto(label.format, text);

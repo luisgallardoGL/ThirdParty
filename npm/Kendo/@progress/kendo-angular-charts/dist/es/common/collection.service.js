@@ -3,18 +3,17 @@ import { Subject } from 'rxjs/Subject';
 /**
  * @hidden
  */
-var ItemChange = (function () {
+export var ItemChange = (function () {
     function ItemChange(sender, options) {
         this.sender = sender;
         this.options = options;
     }
     return ItemChange;
 }());
-export { ItemChange };
 /**
  * @hidden
  */
-var CollectionService = (function () {
+export var CollectionService = (function () {
     function CollectionService() {
         this.source = new Subject();
         this.onItemChange$ = this.source.asObservable();
@@ -22,11 +21,10 @@ var CollectionService = (function () {
     CollectionService.prototype.notify = function (change) {
         this.source.next(change);
     };
+    CollectionService.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    CollectionService.ctorParameters = function () { return []; };
     return CollectionService;
 }());
-export { CollectionService };
-CollectionService.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-CollectionService.ctorParameters = function () { return []; };

@@ -5,7 +5,6 @@ export { default as clockwise } from './common/clockwise';
 export { default as deepExtend } from './common/deep-extend';
 export { default as elementStyles } from './common/element-styles';
 export { default as getSpacing } from './common/get-spacing';
-export { default as getTemplate } from './common/get-template';
 export { default as getter } from './common/getter';
 export { default as grep } from './common/grep';
 export { default as hasClasses } from './common/has-classes';

@@ -3,7 +3,7 @@ var TOOLTIP_CLASS = "k-chart-tooltip";
 /**
  * @hidden
  */
-var BaseTooltip = (function () {
+export var BaseTooltip = (function () {
     function BaseTooltip() {
         this.active = false;
         this.offset = {};
@@ -19,7 +19,8 @@ var BaseTooltip = (function () {
         this.popupClasses = Object.assign((_a = {},
             _a[TOOLTIP_CLASS] = true,
             _a[e.className] = !!e.className,
-            _a), this.classNames);
+            _a
+        ), this.classNames);
         this.style = e.style;
         var _a;
     };
@@ -28,4 +29,3 @@ var BaseTooltip = (function () {
     };
     return BaseTooltip;
 }());
-export { BaseTooltip };

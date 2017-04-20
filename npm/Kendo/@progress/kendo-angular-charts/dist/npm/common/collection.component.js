@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var configuration_service_1 = require("./configuration.service");
 /**
  * @hidden

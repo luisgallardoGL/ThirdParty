@@ -1,8 +1,7 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var Subject_1 = require("rxjs/Subject");
-require("rxjs/add/operator/auditTime");
+var core_1 = require('@angular/core');
+var Subject_1 = require('rxjs/Subject');
+require('rxjs/add/operator/auditTime');
 /**
  * Emit up to 10 resize events per second by default.
  * Chosen as a compromise between responsiveness and performance.
@@ -94,29 +93,29 @@ var ResizeSensorComponent = (function () {
         shrink.scrollLeft = 100000;
         shrink.scrollTop = 100000;
     };
+    ResizeSensorComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'kendo-resize-sensor',
+                    styles: [':host { ' + WRAP_STYLE + ' }'],
+                    template: '<div #expand style="' + WRAP_STYLE + '" (scroll)="scroll()">' +
+                        '  <div #expandChild style="' + EXPAND_CHILD_STYLE + '"></div>' +
+                        '</div>' +
+                        '<div #shrink style="' + WRAP_STYLE + '" (scroll)="scroll()">' +
+                        '  <div style="' + SHRINK_CHILD_STYLE + '"></div>' +
+                        '</div>'
+                },] },
+    ];
+    /** @nocollapse */
+    ResizeSensorComponent.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+    ]; };
+    ResizeSensorComponent.propDecorators = {
+        'rateLimit': [{ type: core_1.Input },],
+        'resize': [{ type: core_1.Output },],
+        'expand': [{ type: core_1.ViewChild, args: ['expand',] },],
+        'expandChild': [{ type: core_1.ViewChild, args: ['expandChild',] },],
+        'shrink': [{ type: core_1.ViewChild, args: ['shrink',] },],
+    };
     return ResizeSensorComponent;
 }());
-ResizeSensorComponent.decorators = [
-    { type: core_1.Component, args: [{
-                selector: 'kendo-resize-sensor',
-                styles: [':host { ' + WRAP_STYLE + ' }'],
-                template: '<div #expand style="' + WRAP_STYLE + '" (scroll)="scroll()">' +
-                    '  <div #expandChild style="' + EXPAND_CHILD_STYLE + '"></div>' +
-                    '</div>' +
-                    '<div #shrink style="' + WRAP_STYLE + '" (scroll)="scroll()">' +
-                    '  <div style="' + SHRINK_CHILD_STYLE + '"></div>' +
-                    '</div>'
-            },] },
-];
-/** @nocollapse */
-ResizeSensorComponent.ctorParameters = function () { return [
-    { type: core_1.ElementRef, },
-]; };
-ResizeSensorComponent.propDecorators = {
-    'rateLimit': [{ type: core_1.Input },],
-    'resize': [{ type: core_1.Output },],
-    'expand': [{ type: core_1.ViewChild, args: ['expand',] },],
-    'expandChild': [{ type: core_1.ViewChild, args: ['expandChild',] },],
-    'shrink': [{ type: core_1.ViewChild, args: ['shrink',] },],
-};
 exports.ResizeSensorComponent = ResizeSensorComponent;

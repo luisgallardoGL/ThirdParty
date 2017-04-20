@@ -12,7 +12,8 @@ import PointEventsMixin from '../mixins/point-events-mixin';
 import NoteMixin from '../mixins/note-mixin';
 
 import { WHITE, LEFT, RIGHT, BOTTOM, TOP } from '../../common/constants';
-import { alignPathToPixel, deepExtend, defined, getTemplate, valueOrDefault } from '../../common';
+import { alignPathToPixel, deepExtend, defined, valueOrDefault } from '../../common';
+import { TemplateService } from '../../services';
 
 var BAR_ALIGN_MIN_WIDTH = 6;
 
@@ -50,10 +51,11 @@ var Bar = (function (ChartElement) {
         var labels = options.labels;
 
         if (labels.visible) {
-            var labelTemplate = getTemplate(labels);
             var labelText;
 
-            if (labelTemplate) {
+            if (labels.template) {
+                var labelTemplate = TemplateService.compile(labels.template);
+
                 labelText = labelTemplate({
                     dataItem: this.dataItem,
                     category: this.category,

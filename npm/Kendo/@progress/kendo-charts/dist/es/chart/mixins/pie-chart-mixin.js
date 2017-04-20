@@ -1,4 +1,4 @@
-import { getTemplate } from '../../common';
+import { TemplateService } from '../../services';
 
 var PieChartMixin = {
     createLegendItem: function(value, point, options) {
@@ -9,12 +9,12 @@ var PieChartMixin = {
 
         if (options && options.visibleInLegend !== false) {
             var pointVisible = options.visible !== false;
-            var labelTemplate = pointVisible ? getTemplate(labelsOptions) :
-                getTemplate(inactiveItemsLabels) || getTemplate(labelsOptions);
+            var labelTemplate = pointVisible ? labelsOptions.template :
+                (inactiveItemsLabels.template || labelsOptions.template);
             var text = options.category || "";
 
             if (labelTemplate) {
-                text = labelTemplate({
+                text = TemplateService.compile(labelTemplate)({
                     text: text,
                     series: options.series,
                     dataItem: options.dataItem,

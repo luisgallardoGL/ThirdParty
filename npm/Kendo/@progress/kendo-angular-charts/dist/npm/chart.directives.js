@@ -1,13 +1,13 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var chart_component_1 = require("./chart.component");
+var chart_component_1 = require('./chart.component');
 exports.ChartComponent = chart_component_1.ChartComponent;
-var series_tooltip_template_directive_1 = require("./chart/tooltip/series-tooltip-template.directive");
-var shared_tooltip_template_directive_1 = require("./chart/tooltip/shared-tooltip-template.directive");
-var crosshair_tooltip_component_1 = require("./chart/tooltip/crosshair-tooltip.component");
-var crosshair_tooltips_container_component_1 = require("./chart/tooltip/crosshair-tooltips-container.component");
-var tooltip_popup_component_1 = require("./chart/tooltip/tooltip-popup.component");
-var chart_directives_generated_1 = require("./chart.directives.generated");
+var series_tooltip_template_directive_1 = require('./chart/tooltip/series-tooltip-template.directive');
+var shared_tooltip_template_directive_1 = require('./chart/tooltip/shared-tooltip-template.directive');
+var crosshair_tooltip_component_1 = require('./chart/tooltip/crosshair-tooltip.component');
+var crosshair_tooltips_container_component_1 = require('./chart/tooltip/crosshair-tooltips-container.component');
+var tooltip_popup_component_1 = require('./chart/tooltip/tooltip-popup.component');
+var chart_directives_generated_1 = require('./chart.directives.generated');
+// Re-exports
 /**
  * @hidden
  */

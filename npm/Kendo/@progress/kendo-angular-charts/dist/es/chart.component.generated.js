@@ -4,7 +4,7 @@ import { copyChanges } from './common/copy-changes';
 /**
  * @hidden
  */
-var ChartComponentGenerated = (function () {
+export var ChartComponentGenerated = (function () {
     function ChartComponentGenerated(configurationService) {
         this.configurationService = configurationService;
         /**
@@ -108,44 +108,43 @@ var ChartComponentGenerated = (function () {
         copyChanges(changes, store);
         this.configurationService.push(store);
     };
+    ChartComponentGenerated.propDecorators = {
+        'pannable': [{ type: Input },],
+        'renderAs': [{ type: Input },],
+        'seriesColors': [{ type: Input },],
+        'title': [{ type: Input },],
+        'transitions': [{ type: Input },],
+        'zoomable': [{ type: Input },],
+        'axisDefaults': [{ type: Input },],
+        'categoryAxis': [{ type: Input },],
+        'chartArea': [{ type: Input },],
+        'legend': [{ type: Input },],
+        'panes': [{ type: Input },],
+        'plotArea': [{ type: Input },],
+        'series': [{ type: Input },],
+        'seriesDefaults': [{ type: Input },],
+        'tooltip': [{ type: Input },],
+        'valueAxis': [{ type: Input },],
+        'xAxis': [{ type: Input },],
+        'yAxis': [{ type: Input },],
+        'axisLabelClick': [{ type: Output },],
+        'drag': [{ type: Output },],
+        'dragEnd': [{ type: Output },],
+        'dragStart': [{ type: Output },],
+        'legendItemHover': [{ type: Output },],
+        'noteClick': [{ type: Output },],
+        'noteHover': [{ type: Output },],
+        'plotAreaClick': [{ type: Output },],
+        'plotAreaHover': [{ type: Output },],
+        'render': [{ type: Output },],
+        'select': [{ type: Output },],
+        'selectEnd': [{ type: Output },],
+        'selectStart': [{ type: Output },],
+        'seriesClick': [{ type: Output },],
+        'seriesHover': [{ type: Output },],
+        'zoom': [{ type: Output },],
+        'zoomEnd': [{ type: Output },],
+        'zoomStart': [{ type: Output },],
+    };
     return ChartComponentGenerated;
 }());
-export { ChartComponentGenerated };
-ChartComponentGenerated.propDecorators = {
-    'pannable': [{ type: Input },],
-    'renderAs': [{ type: Input },],
-    'seriesColors': [{ type: Input },],
-    'title': [{ type: Input },],
-    'transitions': [{ type: Input },],
-    'zoomable': [{ type: Input },],
-    'axisDefaults': [{ type: Input },],
-    'categoryAxis': [{ type: Input },],
-    'chartArea': [{ type: Input },],
-    'legend': [{ type: Input },],
-    'panes': [{ type: Input },],
-    'plotArea': [{ type: Input },],
-    'series': [{ type: Input },],
-    'seriesDefaults': [{ type: Input },],
-    'tooltip': [{ type: Input },],
-    'valueAxis': [{ type: Input },],
-    'xAxis': [{ type: Input },],
-    'yAxis': [{ type: Input },],
-    'axisLabelClick': [{ type: Output },],
-    'drag': [{ type: Output },],
-    'dragEnd': [{ type: Output },],
-    'dragStart': [{ type: Output },],
-    'legendItemHover': [{ type: Output },],
-    'noteClick': [{ type: Output },],
-    'noteHover': [{ type: Output },],
-    'plotAreaClick': [{ type: Output },],
-    'plotAreaHover': [{ type: Output },],
-    'render': [{ type: Output },],
-    'select': [{ type: Output },],
-    'selectEnd': [{ type: Output },],
-    'selectStart': [{ type: Output },],
-    'seriesClick': [{ type: Output },],
-    'seriesHover': [{ type: Output },],
-    'zoom': [{ type: Output },],
-    'zoomEnd': [{ type: Output },],
-    'zoomStart': [{ type: Output },],
-};
