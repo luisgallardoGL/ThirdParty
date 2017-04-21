@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var getTouch = function (domEvent) {
     return {
         x: {
@@ -11,14 +10,11 @@ var getTouch = function (domEvent) {
     };
 };
 var eventArgs = function (e, previousArgs) {
-    var pointers = e.pointers;
-    var pointer = pointers[0];
-    var xLocation = pointer.pageX;
-    var yLocation = pointer.pageY;
+    var center = e.center;
     var distance = 0;
-    if (pointers.length > 1) {
-        var pointer1 = pointers[0];
-        var pointer2 = pointers[1];
+    if (e.pointers.length > 1) {
+        var pointer1 = e.pointers[0];
+        var pointer2 = e.pointers[1];
         distance = Math.sqrt(Math.pow(pointer1.pageX - pointer2.pageX, 2) + Math.pow(pointer1.pageY - pointer2.pageY, 2));
     }
     return {
@@ -28,19 +24,19 @@ var eventArgs = function (e, previousArgs) {
             e.preventDefault();
         },
         target: e.target,
-        touches: pointers.map(getTouch),
+        touches: e.pointers.map(getTouch),
         type: e.type,
         x: {
-            delta: previousArgs ? xLocation - previousArgs.x.location : 0,
+            delta: previousArgs ? center.x - previousArgs.center.x : 0,
             initialDelta: e.deltaX,
-            location: xLocation,
-            startLocation: xLocation - e.deltaX
+            location: e.center.x,
+            startLocation: center.x - e.deltaX
         },
         y: {
-            delta: previousArgs ? yLocation - previousArgs.y.location : 0,
+            delta: previousArgs ? center.y - previousArgs.center.y : 0,
             initialDelta: e.deltaY,
-            location: yLocation,
-            startLocation: yLocation - e.deltaY
+            location: e.center.y,
+            startLocation: center.y - e.deltaY
         }
     };
 };
@@ -92,10 +88,12 @@ var DomEvents = (function () {
     };
     DomEvents.prototype.panstart = function (e) {
         delete this.previous;
-        this.previous = this.trigger('start', e);
+        this.trigger('start', e);
+        this.previous = e;
     };
     DomEvents.prototype.panmove = function (e) {
-        this.previous = this.trigger('move', e);
+        this.trigger('move', e);
+        this.previous = e;
     };
     DomEvents.prototype.panend = function (e) {
         this.trigger('end', e);
@@ -111,11 +109,9 @@ var DomEvents = (function () {
         this.trigger('gestureend', e);
     };
     DomEvents.prototype.trigger = function (name, e) {
-        var args = eventArgs(e, this.previous);
         if (this.eventHandlers[name]) {
-            this.eventHandlers[name](args);
+            this.eventHandlers[name](eventArgs(e, this.previous));
         }
-        return args;
     };
     DomEvents.prototype.bind = function (events) {
         if (events === void 0) { events = {}; }
@@ -144,20 +140,6 @@ var DomEvents = (function () {
             delete this.hammerInstance;
         }
         delete this.eventHandlers;
-    };
-    DomEvents.prototype.toggleDrag = function (enable) {
-        this.toggle('pan', enable);
-    };
-    DomEvents.prototype.toggleZoom = function (enable) {
-        this.toggle('pinch', enable);
-    };
-    DomEvents.prototype.toggle = function (recognizer, enable) {
-        if (this.hammerInstance) {
-            var instanceRecognizer = this.hammerInstance.get(recognizer);
-            instanceRecognizer.set({
-                enable: enable
-            });
-        }
     };
     return DomEvents;
 }());

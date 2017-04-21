@@ -25,16 +25,15 @@ import { SparklineModule } from './sparkline.module';
  * }
  * ```
  */
-var ChartsModule = (function () {
+export var ChartsModule = (function () {
     function ChartsModule() {
     }
+    ChartsModule.decorators = [
+        { type: NgModule, args: [{
+                    exports: [ChartModule, SparklineModule, StockChartModule]
+                },] },
+    ];
+    /** @nocollapse */
+    ChartsModule.ctorParameters = function () { return []; };
     return ChartsModule;
 }());
-export { ChartsModule };
-ChartsModule.decorators = [
-    { type: NgModule, args: [{
-                exports: [ChartModule, SparklineModule, StockChartModule]
-            },] },
-];
-/** @nocollapse */
-ChartsModule.ctorParameters = function () { return []; };

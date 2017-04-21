@@ -1,7 +1,6 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var dom_events_1 = require("./dom-events");
+var core_1 = require('@angular/core');
+var dom_events_1 = require('./dom-events');
 var MISSING_HAMMER_MESSAGE = 'Hammerjs is not loaded.' +
     'Solution: http://www.telerik.com/kendo-angular-ui/components/charts/troubleshooting/#toc-hammerjs-is-not-loaded';
 /**

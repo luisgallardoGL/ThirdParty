@@ -2,7 +2,7 @@ import { Change } from "./configuration.service";
 /**
  * @hidden
  */
-var CollectionComponent = (function () {
+export var CollectionComponent = (function () {
     function CollectionComponent(configKey, configurationService, collectionService) {
         var _this = this;
         this.configKey = configKey;
@@ -39,4 +39,3 @@ var CollectionComponent = (function () {
     };
     return CollectionComponent;
 }());
-export { CollectionComponent };
