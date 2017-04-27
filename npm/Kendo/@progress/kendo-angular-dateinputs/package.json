@@ -1,0 +1,157 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "@progress/kendo-angular-dateinputs@^0.5.1",
+        "scope": "@progress",
+        "escapedName": "@progress%2fkendo-angular-dateinputs",
+        "name": "@progress/kendo-angular-dateinputs",
+        "rawSpec": "^0.5.1",
+        "spec": ">=0.5.1 <0.6.0",
+        "type": "range"
+      },
+      "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI"
+    ]
+  ],
+  "_from": "@progress/kendo-angular-dateinputs@>=0.5.1 <0.6.0",
+  "_id": "@progress/kendo-angular-dateinputs@0.5.1",
+  "_inCache": true,
+  "_location": "/@progress/kendo-angular-dateinputs",
+  "_nodeVersion": "6.10.1",
+  "_npmUser": {},
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "@progress/kendo-angular-dateinputs@^0.5.1",
+    "scope": "@progress",
+    "escapedName": "@progress%2fkendo-angular-dateinputs",
+    "name": "@progress/kendo-angular-dateinputs",
+    "rawSpec": "^0.5.1",
+    "spec": ">=0.5.1 <0.6.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-dateinputs/-/kendo-angular-dateinputs-0.5.1.tgz",
+  "_shasum": "f57a6ddbe91b64e92e6aaa7b568c69c92e5b6745",
+  "_shrinkwrap": null,
+  "_spec": "@progress/kendo-angular-dateinputs@^0.5.1",
+  "_where": "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI",
+  "author": {
+    "name": "Progress"
+  },
+  "bugs": {
+    "url": "https://github.com/telerik/kendo-angular-date-inputs/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100
+    }
+  },
+  "dependencies": {
+    "@progress/kendo-date-math": "^0.3.0"
+  },
+  "description": "DateInputs Package for Angular 2",
+  "devDependencies": {
+    "@angular/common": "^2.4.0",
+    "@angular/compiler": "^2.4.0",
+    "@angular/compiler-cli": "^2.4.0",
+    "@angular/core": "^2.4.0",
+    "@angular/forms": "^2.4.0",
+    "@angular/http": "^2.4.0",
+    "@angular/platform-browser": "^2.4.0",
+    "@angular/platform-browser-dynamic": "^2.4.0",
+    "@angular/platform-server": "^2.4.0",
+    "@krux/condition-jenkins": "1.0.1",
+    "@progress/kendo-angular-intl": "^0.11.0",
+    "@progress/kendo-angular-l10n": "^0.2.0",
+    "@progress/kendo-angular-tasks": "^8.0.1",
+    "@progress/kendo-theme-default": "^2.10.0",
+    "@telerik/kendo-intl": "^0.14.0",
+    "@types/core-js": "0.9.35",
+    "@types/jasmine": "2.2.34",
+    "@types/zone.js": "0.0.27",
+    "cldr-data": "^30.0.0",
+    "codelyzer": "2.0.0-beta.2",
+    "core-js": "^2.2.2",
+    "cz-conventional-changelog": "^1.1.5",
+    "ghooks": "^1.0.3",
+    "gulp": "^3.9.0",
+    "rxjs": "~5.0.0",
+    "semantic-release": "^4.3.5",
+    "tslint": "~4.0.0",
+    "typescript": "~2.0.0",
+    "validate-commit-msg": "^1.1.1",
+    "zone.js": "^0.7.2"
+  },
+  "dist": {
+    "shasum": "f57a6ddbe91b64e92e6aaa7b568c69c92e5b6745",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-dateinputs/-/kendo-angular-dateinputs-0.5.1.tgz"
+  },
+  "gitHead": "9e329c0634f580303c447da573b025d31699105d",
+  "homepage": "https://github.com/telerik/kendo-angular-date-inputs#readme",
+  "jsnext:main": "dist/es/main.js",
+  "keywords": [
+    "Kendo UI",
+    "AngularJS 2"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "main": "dist/npm/main.js",
+  "module": "dist/es/main.js",
+  "name": "@progress/kendo-angular-dateinputs",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "@angular/common": "^2.4.0",
+    "@angular/core": "^2.4.0",
+    "@angular/forms": "^2.4.0",
+    "rxjs": "^5.0.1",
+    "@progress/kendo-angular-intl": "^0.11.0",
+    "@progress/kendo-angular-l10n": "^0.2.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npm.telerik.com"
+  },
+  "readme": "ERROR: No README data found!",
+  "readmeFilename": "README.md",
+  "release": {
+    "branch": "master",
+    "debug": false,
+    "verifyConditions": {
+      "path": "./node_modules/@krux/condition-jenkins"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telerik/kendo-angular-date-inputs.git"
+  },
+  "scripts": {
+    "api-check": "gulp api-check",
+    "build-package": "gulp build-package",
+    "e2e": "gulp e2e",
+    "lint": "gulp lint",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "gulp start",
+    "test": "gulp test"
+  },
+  "typings": "dist/es/main.d.ts",
+  "version": "0.5.1"
+}

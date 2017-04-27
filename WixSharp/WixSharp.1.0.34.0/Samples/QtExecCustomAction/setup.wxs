@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="540fa443-d23e-40e5-9ad0-cf33a74a2ebf" Name="CustomActionTest" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="540fa443-d23e-40e5-9ad0-cf33974a2ebe" Manufacturer="OSH">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Media Id="1" Cabinet="CustomActionTest.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
+        <Directory Id="ProgramFilesFolder.WixSharp" Name="WixSharp">
+          <Directory Id="INSTALLDIR" Name="DummyDir">
+
+            <Component Id="INSTALLDIR.EmptyDirectory" Guid="540fa443-d23e-40e5-9ad0-cf33328f497f" KeyPath="yes">
+              <CreateFolder />
+              <RemoveFolder Id="INSTALLDIR" On="uninstall" />
+            </Component>
+
+          </Directory>
+
+          <Component Id="ProgramFilesFolder.WixSharp" Guid="540fa443-d23e-40e5-9ad0-cf33ffbacb9e" KeyPath="yes">
+            <CreateFolder />
+            <RemoveFolder Id="ProgramFilesFolder.WixSharp" On="uninstall" />
+          </Component>
+
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <CustomAction Id="Set_Action1_WixQuietExec_notepad.exe" Property="WixQuietExecCmdLine" Value="&quot;notepad.exe&quot; C:\boot.ini" />
+    <CustomAction Id="Action1_WixQuietExec_notepad.exe" BinaryKey="WixCA" DllEntry="WixQuietExec" Return="check" Execute="immediate" />
+
+    <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
+      <ComponentRef Id="INSTALLDIR.EmptyDirectory" />
+      <ComponentRef Id="ProgramFilesFolder.WixSharp" />
+    </Feature>
+
+    <InstallExecuteSequence>
+      <Custom Action="Set_Action1_WixQuietExec_notepad.exe" After="InstallInitialize"> (NOT Installed) </Custom>
+      <Custom Action="Action1_WixQuietExec_notepad.exe" After="Set_Action1_WixQuietExec_notepad.exe"> (NOT Installed) </Custom>
+    </InstallExecuteSequence>
+
+  </Product>
+</Wix>
+

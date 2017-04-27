@@ -1,0 +1,111 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "@telerik/kendo-intl@^0.14.0",
+        "scope": "@telerik",
+        "escapedName": "@telerik%2fkendo-intl",
+        "name": "@telerik/kendo-intl",
+        "rawSpec": "^0.14.0",
+        "spec": ">=0.14.0 <0.15.0",
+        "type": "range"
+      },
+      "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-intl"
+    ]
+  ],
+  "_from": "@telerik/kendo-intl@>=0.14.0 <0.15.0",
+  "_id": "@telerik/kendo-intl@0.14.5",
+  "_inCache": true,
+  "_location": "/@telerik/kendo-intl",
+  "_nodeVersion": "6.10.2",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/kendo-intl-0.14.5.tgz_1491384629062_0.2340447490569204"
+  },
+  "_npmUser": {
+    "name": "telerik",
+    "email": "npm@telerik.com"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "@telerik/kendo-intl@^0.14.0",
+    "scope": "@telerik",
+    "escapedName": "@telerik%2fkendo-intl",
+    "name": "@telerik/kendo-intl",
+    "rawSpec": "^0.14.0",
+    "spec": ">=0.14.0 <0.15.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/@progress/kendo-angular-intl"
+  ],
+  "_resolved": "https://registry.npmjs.org/@telerik/kendo-intl/-/kendo-intl-0.14.5.tgz",
+  "_shasum": "cbcc37d6a7cedc079c26d3612e3d45c385dfc900",
+  "_shrinkwrap": null,
+  "_spec": "@telerik/kendo-intl@^0.14.0",
+  "_where": "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI\\node_modules\\@progress\\kendo-angular-intl",
+  "author": {
+    "name": "Telerik"
+  },
+  "bugs": {
+    "url": "https://github.com/telerik/kendo-intl/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "dependencies": {},
+  "description": "A package exporting functions for date and number parsing and formatting",
+  "devDependencies": {
+    "@telerik/eslint-config": "^1.0.0",
+    "@telerik/kendo-package-tasks": "^1.2.0",
+    "cldr-data": "latest",
+    "cz-conventional-changelog": "^1.1.5",
+    "ghooks": "^1.0.3",
+    "gulp": "3.9.1",
+    "semantic-release": "^4.3.5",
+    "validate-commit-msg": "^1.1.1"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "cbcc37d6a7cedc079c26d3612e3d45c385dfc900",
+    "tarball": "https://registry.npmjs.org/@telerik/kendo-intl/-/kendo-intl-0.14.5.tgz"
+  },
+  "gitHead": "8868db7ebf725cc721f064a8ceb9e3ef5490d787",
+  "homepage": "https://github.com/telerik/kendo-intl#readme",
+  "jsnext:main": "dist/es/main.js",
+  "keywords": [
+    "Kendo",
+    "Internationalization"
+  ],
+  "license": "Apache-2.0",
+  "main": "dist/npm/main.js",
+  "maintainers": [
+    {
+      "name": "telerik",
+      "email": "npm@telerik.com"
+    }
+  ],
+  "module": "dist/es/main.js",
+  "name": "@telerik/kendo-intl",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telerik/kendo-intl.git"
+  },
+  "scripts": {
+    "build-package": "gulp build-rollup-package",
+    "lint": "gulp lint",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "gulp test"
+  },
+  "typings": "dist/es/main",
+  "version": "0.14.5"
+}

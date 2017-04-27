@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Bundle Name="MyBundle" AboutUrl="https://wixsharp.codeplex.com/" Compressed="yes" IconSourceFile="app_icon.ico" Manufacturer="MyCorp" UpgradeCode="6f330b47-2577-43ad-9095-1861bb25889b" Version="1.0.0.0" >
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+      <Payload SourceFile="licence.html" />
+
+      <WixStandardBootstrapperApplication LogoFile="logo.png" LicenseUrl="licence.html" xmlns="http://schemas.microsoft.com/wix/BalExtension" />
+    </BootstrapperApplicationRef>
+
+    <Chain>
+      <util:FileSearchRef Id="AdobeSearchss"/>
+      <ExePackage SourceFile="adobe_setup.exe" DetectCondition="AdobeReaderInstalled"/>
+      <MsiPackage DisplayInternalUI="yes" SourceFile="My Product.msi" />
+    </Chain>
+  </Bundle>
+  <Fragment>
+    <util:FileSearch
+          Id='AdobeSearch'
+          Variable="AdobeReaderInstalled"
+          Result="exists"
+          Path="[ProgramFilesFolder]Adobe\Reader 11.0\Reader\AcroRd32exe"
+       />
+</Fragment>
+</Wix>
+

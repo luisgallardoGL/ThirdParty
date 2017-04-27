@@ -1,0 +1,4 @@
+{
+    "Element": "{% slug api_kendo-drawing_element_kendouiforangular %}",
+    "Rect": "{% slug api_kendo-drawing_geometry_rect_kendouiforangular %}"
+}
