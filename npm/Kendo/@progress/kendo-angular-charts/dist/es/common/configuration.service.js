@@ -8,17 +8,18 @@ export var THROTTLE_MS = 1000 / 60;
 /**
  * @hidden
  */
-export var Change = (function () {
+var Change = (function () {
     function Change(key, value) {
         this.key = key;
         this.value = value;
     }
     return Change;
 }());
+export { Change };
 /**
  * @hidden
  */
-export var ConfigurationService = (function () {
+var ConfigurationService = (function () {
     function ConfigurationService() {
         this.store = {};
         this.source = new BehaviorSubject({});
@@ -43,10 +44,11 @@ export var ConfigurationService = (function () {
         store[key] = change.value;
         this.source.next(this.store);
     };
-    ConfigurationService.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    ConfigurationService.ctorParameters = function () { return []; };
     return ConfigurationService;
 }());
+export { ConfigurationService };
+ConfigurationService.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+ConfigurationService.ctorParameters = function () { return []; };

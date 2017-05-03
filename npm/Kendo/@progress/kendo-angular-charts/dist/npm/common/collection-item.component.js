@@ -1,6 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var collection_service_1 = require("./collection.service");
-var copy_changes_1 = require('./copy-changes');
+var copy_changes_1 = require("./copy-changes");
 /**
  * @hidden
  */

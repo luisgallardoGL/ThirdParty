@@ -1,8 +1,13 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ConfigurationService } from "../common/configuration.service";
 import { CollectionService } from "../common/collection.service";
@@ -39,26 +44,28 @@ import { YAxisComponentGenerated } from './y-axis.component.generated';
  *
  * ```
  */
-export var YAxisComponent = (function (_super) {
+var YAxisComponent = (function (_super) {
     __extends(YAxisComponent, _super);
     // Place custom properties here
     function YAxisComponent(configurationService, collectionService) {
-        _super.call(this, configurationService, collectionService);
-        this.configurationService = configurationService;
-        this.collectionService = collectionService;
+        var _this = _super.call(this, configurationService, collectionService) || this;
+        _this.configurationService = configurationService;
+        _this.collectionService = collectionService;
+        return _this;
     }
-    YAxisComponent.decorators = [
-        { type: Component, args: [{
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    providers: [CollectionService],
-                    selector: 'kendo-chart-y-axis',
-                    template: ''
-                },] },
-    ];
-    /** @nocollapse */
-    YAxisComponent.ctorParameters = function () { return [
-        { type: ConfigurationService, },
-        { type: CollectionService, },
-    ]; };
     return YAxisComponent;
 }(YAxisComponentGenerated));
+export { YAxisComponent };
+YAxisComponent.decorators = [
+    { type: Component, args: [{
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                providers: [CollectionService],
+                selector: 'kendo-chart-y-axis',
+                template: ''
+            },] },
+];
+/** @nocollapse */
+YAxisComponent.ctorParameters = function () { return [
+    { type: ConfigurationService, },
+    { type: CollectionService, },
+]; };

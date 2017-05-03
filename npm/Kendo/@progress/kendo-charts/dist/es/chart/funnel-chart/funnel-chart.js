@@ -10,9 +10,7 @@ import evalOptions from '../utils/eval-options';
 import segmentVisible from '../utils/segment-visible';
 
 import { BLACK, WHITE, CENTER, LEFT } from '../../common/constants';
-import { deepExtend, isFunction, limitValue, setDefaultOptions } from '../../common';
-
-import { TemplateService } from '../../services';
+import { deepExtend, isFunction, getTemplate, limitValue, setDefaultOptions } from '../../common';
 
 var FunnelChart = (function (ChartElement) {
     function FunnelChart(plotArea, options) {
@@ -88,7 +86,7 @@ var FunnelChart = (function (ChartElement) {
             series: series,
             dataItem: fields.dataItem,
             index: fields.index
-        }, { defaults: series._defaults, excluded: [ "data", "toggle", "visual" ] });
+        }, { defaults: series._defaults, excluded: [ "data", "content", "template", "toggle", "visual" ] });
     };
 
     FunnelChart.prototype.createSegment = function createSegment (value, fields) {
@@ -116,8 +114,8 @@ var FunnelChart = (function (ChartElement) {
         var text = value;
 
         if (labels.visible) {
-            if (labels.template) {
-                var labelTemplate = TemplateService.compile(labels.template);
+            var labelTemplate = getTemplate(labels);
+            if (labelTemplate) {
                 text = labelTemplate({
                     dataItem: dataItem,
                     value: value,

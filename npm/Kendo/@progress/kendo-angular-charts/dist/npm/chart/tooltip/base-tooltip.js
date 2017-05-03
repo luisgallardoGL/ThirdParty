@@ -1,5 +1,6 @@
-/* tslint:disable:align */
 "use strict";
+/* tslint:disable:align */
+Object.defineProperty(exports, "__esModule", { value: true });
 var TOOLTIP_CLASS = "k-chart-tooltip";
 /**
  * @hidden
@@ -20,8 +21,7 @@ var BaseTooltip = (function () {
         this.popupClasses = Object.assign((_a = {},
             _a[TOOLTIP_CLASS] = true,
             _a[e.className] = !!e.className,
-            _a
-        ), this.classNames);
+            _a), this.classNames);
         this.style = e.style;
         var _a;
     };

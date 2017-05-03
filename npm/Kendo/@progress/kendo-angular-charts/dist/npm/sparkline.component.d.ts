@@ -50,7 +50,11 @@ export declare class SparklineComponent extends ChartComponent {
     /**
      * @hidden
      */
-    classNames: any;
+    tooltipWrapperClass: string;
+    /**
+     * @hidden
+     */
+    tooltipContentClasses: any;
     constructor(configurationService: ConfigurationService, themeService: ThemeService, element: ElementRef, intl: IntlService, ngZone: NgZone, instanceEventService: InstanceEventService);
     protected createInstance(element: any, observer: ChartInstanceObserver): void;
     protected updateOptions(): void;

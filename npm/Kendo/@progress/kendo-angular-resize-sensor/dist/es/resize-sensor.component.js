@@ -18,7 +18,7 @@ var SHRINK_CHILD_STYLE = EXPAND_CHILD_STYLE + 'width: 200%; height: 200%;';
  *
  * Triggers a "resize" event whenever the parent DOM element size changes.
  */
-export var ResizeSensorComponent = (function () {
+var ResizeSensorComponent = (function () {
     function ResizeSensorComponent(element) {
         this.element = element;
         /**
@@ -92,28 +92,29 @@ export var ResizeSensorComponent = (function () {
         shrink.scrollLeft = 100000;
         shrink.scrollTop = 100000;
     };
-    ResizeSensorComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'kendo-resize-sensor',
-                    styles: [':host { ' + WRAP_STYLE + ' }'],
-                    template: '<div #expand style="' + WRAP_STYLE + '" (scroll)="scroll()">' +
-                        '  <div #expandChild style="' + EXPAND_CHILD_STYLE + '"></div>' +
-                        '</div>' +
-                        '<div #shrink style="' + WRAP_STYLE + '" (scroll)="scroll()">' +
-                        '  <div style="' + SHRINK_CHILD_STYLE + '"></div>' +
-                        '</div>'
-                },] },
-    ];
-    /** @nocollapse */
-    ResizeSensorComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-    ]; };
-    ResizeSensorComponent.propDecorators = {
-        'rateLimit': [{ type: Input },],
-        'resize': [{ type: Output },],
-        'expand': [{ type: ViewChild, args: ['expand',] },],
-        'expandChild': [{ type: ViewChild, args: ['expandChild',] },],
-        'shrink': [{ type: ViewChild, args: ['shrink',] },],
-    };
     return ResizeSensorComponent;
 }());
+export { ResizeSensorComponent };
+ResizeSensorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'kendo-resize-sensor',
+                styles: [':host { ' + WRAP_STYLE + ' }'],
+                template: '<div #expand style="' + WRAP_STYLE + '" (scroll)="scroll()">' +
+                    '  <div #expandChild style="' + EXPAND_CHILD_STYLE + '"></div>' +
+                    '</div>' +
+                    '<div #shrink style="' + WRAP_STYLE + '" (scroll)="scroll()">' +
+                    '  <div style="' + SHRINK_CHILD_STYLE + '"></div>' +
+                    '</div>'
+            },] },
+];
+/** @nocollapse */
+ResizeSensorComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+]; };
+ResizeSensorComponent.propDecorators = {
+    'rateLimit': [{ type: Input },],
+    'resize': [{ type: Output },],
+    'expand': [{ type: ViewChild, args: ['expand',] },],
+    'expandChild': [{ type: ViewChild, args: ['expandChild',] },],
+    'shrink': [{ type: ViewChild, args: ['shrink',] },],
+};

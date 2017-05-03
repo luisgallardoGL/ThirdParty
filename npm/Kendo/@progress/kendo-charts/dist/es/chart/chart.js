@@ -3,8 +3,6 @@ import { drawing as draw, throttle } from '@progress/kendo-drawing';
 import { RootElement, Title, CategoryAxis, DateCategoryAxis, Point } from '../core';
 
 import Highlight from './highlight';
-import ChartPlotArea from './api-elements/chart-plotarea';
-import ChartAxis from './api-elements/chart-axis';
 import Pannable from './pan-and-zoom/pannable';
 import ZoomSelection from './pan-and-zoom/zoom-selection';
 import MousewheelZoom from './pan-and-zoom/mousewheel-zoom';
@@ -20,6 +18,7 @@ import { ChartService, DomEventsBuilder } from '../services';
 import getField from './utils/get-field';
 import isDateAxis from './utils/is-date-axis';
 import getDateField from './utils/get-date-field';
+import { ChartAxis, ChartPane, ChartPlotArea } from './api-elements';
 
 import { X, Y, VALUE, DEFAULT_WIDTH, DEFAULT_HEIGHT } from '../common/constants';
 import { addClass, Class, setDefaultOptions, deepExtend, defined, isObject, isFunction, elementSize, elementOffset,
@@ -154,6 +153,23 @@ var Chart = (function (Class) {
 
     Chart.prototype.findAxisByName = function findAxisByName (name) {
         return this.getAxis(name);
+    };
+
+    Chart.prototype.findPaneByName = function findPaneByName (name) {
+        var panes = this._plotArea.panes;
+
+        for (var idx = 0; idx < panes.length; idx++) {
+            if (panes[idx].options.name === name) {
+                return new ChartPane(panes[idx]);
+            }
+        }
+    };
+
+    Chart.prototype.findPaneByIndex = function findPaneByIndex (idx) {
+        var panes = this._plotArea.panes;
+        if (panes[idx]) {
+            return new ChartPane(panes[idx]);
+        }
     };
 
     Chart.prototype.plotArea = function plotArea () {

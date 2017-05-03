@@ -13,9 +13,9 @@ import { TemplateRef } from '@angular/core';
  *   template: `
  *     <kendo-chart>
  *       <kendo-chart-tooltip>
- *          <template kendoChartSeriesTooltipTemplate let-value="value">
+ *          <ng-template kendoChartSeriesTooltipTemplate let-value="value">
  *             Value is {{value}}
- *           </template>
+ *           </ng-template>
  *       </kendo-chart-tooltip>
  *       <kendo-chart-series>
  *         <kendo-chart-series-item [data]="[1, 2, 3]">

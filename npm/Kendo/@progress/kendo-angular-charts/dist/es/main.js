@@ -2,8 +2,6 @@ export * from './chart.directives';
 export * from './chart.directives.generated';
 export * from './common/events';
 export * from './common/property-types';
-export * from './common/api-types';
-export * from './stock-chart/option-types';
 export * from './stock-chart/events';
 export * from './stock-chart.directives';
 export * from './sparkline.directives';

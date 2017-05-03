@@ -13,12 +13,12 @@ import { Directive, TemplateRef, Optional } from '@angular/core';
  *   template: `
  *     <kendo-chart>
  *       <kendo-chart-tooltip [shared]="true">
- *         <template kendoChartSharedTooltipTemplate let-category="category" let-points="points">
+ *         <ng-template kendoChartSharedTooltipTemplate let-category="category" let-points="points">
  *             <div> {{ category }} </div>
  *             <div *ngFor="let point of points">
  *                 {{ point.series.name }} : {{ point.value }}
  *             </div>
- *         </template>
+ *         </ng-template>
  *       </kendo-chart-tooltip>
  *       <kendo-chart-category-axis>
  *         <kendo-chart-category-axis-item [categories]="['A', 'B', 'C']">
@@ -38,18 +38,19 @@ import { Directive, TemplateRef, Optional } from '@angular/core';
  *
  * ```
  */
-export var SharedTooltipTemplateDirective = (function () {
+var SharedTooltipTemplateDirective = (function () {
     function SharedTooltipTemplateDirective(templateRef) {
         this.templateRef = templateRef;
     }
-    SharedTooltipTemplateDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[kendoChartSharedTooltipTemplate]'
-                },] },
-    ];
-    /** @nocollapse */
-    SharedTooltipTemplateDirective.ctorParameters = function () { return [
-        { type: TemplateRef, decorators: [{ type: Optional },] },
-    ]; };
     return SharedTooltipTemplateDirective;
 }());
+export { SharedTooltipTemplateDirective };
+SharedTooltipTemplateDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[kendoChartSharedTooltipTemplate]'
+            },] },
+];
+/** @nocollapse */
+SharedTooltipTemplateDirective.ctorParameters = function () { return [
+    { type: TemplateRef, decorators: [{ type: Optional },] },
+]; };

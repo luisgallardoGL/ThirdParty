@@ -1,7 +1,7 @@
 /**
  * The point passed to the tooltip template.
  */
-export var TooltipTemplatePoint = (function () {
+var TooltipTemplatePoint = (function () {
     /**
      * @hidden
      */
@@ -32,3 +32,4 @@ export var TooltipTemplatePoint = (function () {
     });
     return TooltipTemplatePoint;
 }());
+export { TooltipTemplatePoint };

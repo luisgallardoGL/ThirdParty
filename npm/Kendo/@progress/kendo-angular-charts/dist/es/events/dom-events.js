@@ -66,7 +66,7 @@ var eventGroups = [{
 /**
  * @hidden
  */
-export var DomEvents = (function () {
+var DomEvents = (function () {
     function DomEvents(hammerInstance, events) {
         this.hammerInstance = hammerInstance;
         this.eventHandlers = {};
@@ -159,3 +159,4 @@ export var DomEvents = (function () {
     };
     return DomEvents;
 }());
+export { DomEvents };

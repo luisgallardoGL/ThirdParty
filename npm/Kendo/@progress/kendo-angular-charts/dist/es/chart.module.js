@@ -29,22 +29,23 @@ import { CHART_DIRECTIVES } from './chart.directives';
  * }
  * ```
  */
-export var ChartModule = (function () {
+var ChartModule = (function () {
     function ChartModule() {
     }
-    ChartModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [CHART_DIRECTIVES],
-                    exports: [CHART_DIRECTIVES],
-                    imports: [CommonModule, PopupModule, ResizeSensorModule],
-                    providers: [
-                        { provide: IntlService, useClass: CldrIntlService },
-                        ThemeService,
-                        TooltipTemplateService
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    ChartModule.ctorParameters = function () { return []; };
     return ChartModule;
 }());
+export { ChartModule };
+ChartModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [CHART_DIRECTIVES],
+                exports: [CHART_DIRECTIVES],
+                imports: [CommonModule, PopupModule, ResizeSensorModule],
+                providers: [
+                    { provide: IntlService, useClass: CldrIntlService },
+                    ThemeService,
+                    TooltipTemplateService
+                ]
+            },] },
+];
+/** @nocollapse */
+ChartModule.ctorParameters = function () { return []; };

@@ -1,6 +1,7 @@
 "use strict";
-var core_1 = require('@angular/core');
-var Subject_1 = require('rxjs/Subject');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var Subject_1 = require("rxjs/Subject");
 /**
  * @hidden
  */
@@ -23,11 +24,11 @@ var CollectionService = (function () {
     CollectionService.prototype.notify = function (change) {
         this.source.next(change);
     };
-    CollectionService.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /** @nocollapse */
-    CollectionService.ctorParameters = function () { return []; };
     return CollectionService;
 }());
+CollectionService.decorators = [
+    { type: core_1.Injectable },
+];
+/** @nocollapse */
+CollectionService.ctorParameters = function () { return []; };
 exports.CollectionService = CollectionService;

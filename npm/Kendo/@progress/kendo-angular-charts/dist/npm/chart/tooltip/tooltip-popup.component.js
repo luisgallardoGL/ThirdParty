@@ -1,16 +1,22 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var core_1 = require('@angular/core');
-var series_tooltip_template_directive_1 = require('./series-tooltip-template.directive');
-var shared_tooltip_template_directive_1 = require('./shared-tooltip-template.directive');
-var tooltip_template_point_1 = require('./tooltip-template-point');
-var base_tooltip_1 = require('./base-tooltip');
-var has_parent_1 = require('../../common/has-parent');
-var tooltip_template_service_1 = require('../../common/tooltip-template.service');
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var series_tooltip_template_directive_1 = require("./series-tooltip-template.directive");
+var shared_tooltip_template_directive_1 = require("./shared-tooltip-template.directive");
+var tooltip_template_point_1 = require("./tooltip-template-point");
+var base_tooltip_1 = require("./base-tooltip");
+var has_parent_1 = require("../../common/has-parent");
+var tooltip_template_service_1 = require("../../common/tooltip-template.service");
 var SHARED_TOOLTIP_CLASS = 'k-chart-shared-tooltip';
 // Codelyzer 2.0.0-beta2 doesn't handle inherited members
 /* tslint:disable:no-access-missing-member */
@@ -20,20 +26,15 @@ var SHARED_TOOLTIP_CLASS = 'k-chart-shared-tooltip';
 var TooltipPopupComponent = (function (_super) {
     __extends(TooltipPopupComponent, _super);
     function TooltipPopupComponent(element, templateService) {
-        _super.call(this);
-        this.element = element;
-        this.templateService = templateService;
-        this.seriesTooltipContext = {};
-        this.seriesSharedTooltipContext = {};
-        this.animate = true;
+        var _this = _super.call(this) || this;
+        _this.element = element;
+        _this.templateService = templateService;
+        _this.seriesTooltipContext = {};
+        _this.seriesSharedTooltipContext = {};
+        _this.animate = true;
+        _this.wrapperClass = 'k-chart-tooltip-wrapper';
+        return _this;
     }
-    Object.defineProperty(TooltipPopupComponent.prototype, "className", {
-        get: function () {
-            return 'k-chart-tooltip-wrapper';
-        },
-        enumerable: true,
-        configurable: true
-    });
     TooltipPopupComponent.prototype.show = function (e) {
         _super.prototype.show.call(this, e);
         this.shared = e.shared;
@@ -85,24 +86,24 @@ var TooltipPopupComponent = (function (_super) {
         }
         return result;
     };
-    TooltipPopupComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'kendo-chart-tooltip-popup',
-                    template: "\n    <kendo-popup [offset]=\"offset\" [popupAlign]=\"align\" [collision]=\"collision\" [animate]=\"animate\" *ngIf=\"active\" >\n        <div [ngClass]=\"popupClasses\" [ngStyle]=\"style\">\n          <template [ngTemplateOutlet]=\"seriesTooltipTemplateRef\" *ngIf=\"!shared\"\n                    [ngOutletContext]=\"seriesTooltipContext\">\n          </template>\n          <template [ngTemplateOutlet]=\"seriesSharedTooltipTemplateRef\" *ngIf=\"shared\"\n                    [ngOutletContext]=\"seriesSharedTooltipContext\">\n          </template>\n        </div>\n    </kendo-popup>\n    <template kendoChartSeriesTooltipTemplate let-formattedValue=\"formattedValue\">\n        <span [innerHTML]=\"formattedValue\"></span>\n    </template>\n    <template kendoChartSharedTooltipTemplate let-points=\"points\" let-categoryText=\"categoryText\" let-colspan=\"colspan\" let-colorMarker=\"colorMarker\" let-nameColumn=\"nameColumn\" >\n        <table>\n            <tr><th [attr.colspan]='colspan'> {{ categoryText }} </th></tr>\n            <tr *ngFor=\"let point of points\">\n                <td *ngIf=\"colorMarker\"><span class='k-chart-shared-tooltip-marker' [style.background-color]='point.series.color'></span></td>\n                <td *ngIf=\"nameColumn\">\n                    <ng-container *ngIf=\"point.series.name !== undefined\">{{ point.series.name }}</ng-container>\n                    <ng-container *ngIf=\"point.series.name === undefined\">&nbsp;</ng-container>\n                </td>\n                <td>\n                  <template [ngTemplateOutlet]=\"point.template\"\n                            [ngOutletContext]=\"point\">\n                  </template>\n                </td>\n            </tr>\n        </table>\n    </template>\n    "
-                },] },
-    ];
-    /** @nocollapse */
-    TooltipPopupComponent.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: tooltip_template_service_1.TooltipTemplateService, },
-    ]; };
-    TooltipPopupComponent.propDecorators = {
-        'defaultSeriesTooltipTemplate': [{ type: core_1.ViewChild, args: [series_tooltip_template_directive_1.SeriesTooltipTemplateDirective,] },],
-        'defaultSharedTooltipTemplate': [{ type: core_1.ViewChild, args: [shared_tooltip_template_directive_1.SharedTooltipTemplateDirective,] },],
-        'animate': [{ type: core_1.Input },],
-        'classNames': [{ type: core_1.Input },],
-        'className': [{ type: core_1.HostBinding, args: ['class',] },],
-    };
     return TooltipPopupComponent;
 }(base_tooltip_1.BaseTooltip));
+TooltipPopupComponent.decorators = [
+    { type: core_1.Component, args: [{
+                selector: 'kendo-chart-tooltip-popup',
+                template: "\n    <kendo-popup [offset]=\"offset\" [popupAlign]=\"align\" [collision]=\"collision\" [animate]=\"animate\" *ngIf=\"active\" >\n        <div [ngClass]=\"popupClasses\" [ngStyle]=\"style\">\n          <ng-template [ngTemplateOutlet]=\"seriesTooltipTemplateRef\" *ngIf=\"!shared\"\n                    [ngOutletContext]=\"seriesTooltipContext\">\n          </ng-template>\n          <ng-template [ngTemplateOutlet]=\"seriesSharedTooltipTemplateRef\" *ngIf=\"shared\"\n                    [ngOutletContext]=\"seriesSharedTooltipContext\">\n          </ng-template>\n        </div>\n    </kendo-popup>\n    <ng-template kendoChartSeriesTooltipTemplate let-formattedValue=\"formattedValue\">\n        <span [innerHTML]=\"formattedValue\"></span>\n    </ng-template>\n    <ng-template kendoChartSharedTooltipTemplate let-points=\"points\" let-categoryText=\"categoryText\" let-colspan=\"colspan\" let-colorMarker=\"colorMarker\" let-nameColumn=\"nameColumn\" >\n        <table>\n            <tr><th [attr.colspan]='colspan'> {{ categoryText }} </th></tr>\n            <tr *ngFor=\"let point of points\">\n                <td *ngIf=\"colorMarker\"><span class='k-chart-shared-tooltip-marker' [style.background-color]='point.series.color'></span></td>\n                <td *ngIf=\"nameColumn\">\n                    <ng-container *ngIf=\"point.series.name !== undefined\">{{ point.series.name }}</ng-container>\n                    <ng-container *ngIf=\"point.series.name === undefined\">&nbsp;</ng-container>\n                </td>\n                <td>\n                  <ng-template [ngTemplateOutlet]=\"point.template\"\n                            [ngOutletContext]=\"point\">\n                  </ng-template>\n                </td>\n            </tr>\n        </table>\n    </ng-template>\n    "
+            },] },
+];
+/** @nocollapse */
+TooltipPopupComponent.ctorParameters = function () { return [
+    { type: core_1.ElementRef, },
+    { type: tooltip_template_service_1.TooltipTemplateService, },
+]; };
+TooltipPopupComponent.propDecorators = {
+    'defaultSeriesTooltipTemplate': [{ type: core_1.ViewChild, args: [series_tooltip_template_directive_1.SeriesTooltipTemplateDirective,] },],
+    'defaultSharedTooltipTemplate': [{ type: core_1.ViewChild, args: [shared_tooltip_template_directive_1.SharedTooltipTemplateDirective,] },],
+    'animate': [{ type: core_1.Input },],
+    'classNames': [{ type: core_1.Input },],
+    'wrapperClass': [{ type: core_1.HostBinding, args: ['class',] }, { type: core_1.Input },],
+};
 exports.TooltipPopupComponent = TooltipPopupComponent;

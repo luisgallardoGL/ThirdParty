@@ -5,7 +5,7 @@ var MISSING_HAMMER_MESSAGE = 'Hammerjs is not loaded.' +
 /**
  * @hidden
  */
-export var DomEventsBuilder = (function () {
+var DomEventsBuilder = (function () {
     function DomEventsBuilder() {
     }
     DomEventsBuilder.create = function (element, events) {
@@ -30,3 +30,4 @@ export var DomEventsBuilder = (function () {
     };
     return DomEventsBuilder;
 }());
+export { DomEventsBuilder };

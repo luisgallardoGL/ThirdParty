@@ -13,9 +13,9 @@ import { Directive, TemplateRef, Optional } from '@angular/core';
  *   template: `
  *     <kendo-chart>
  *       <kendo-chart-tooltip>
- *          <template kendoChartSeriesTooltipTemplate let-value="value">
+ *          <ng-template kendoChartSeriesTooltipTemplate let-value="value">
  *             Value is {{value}}
- *           </template>
+ *           </ng-template>
  *       </kendo-chart-tooltip>
  *       <kendo-chart-series>
  *         <kendo-chart-series-item [data]="[1, 2, 3]">
@@ -29,18 +29,19 @@ import { Directive, TemplateRef, Optional } from '@angular/core';
  *
  * ```
  */
-export var SeriesTooltipTemplateDirective = (function () {
+var SeriesTooltipTemplateDirective = (function () {
     function SeriesTooltipTemplateDirective(templateRef) {
         this.templateRef = templateRef;
     }
-    SeriesTooltipTemplateDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[kendoChartSeriesTooltipTemplate]'
-                },] },
-    ];
-    /** @nocollapse */
-    SeriesTooltipTemplateDirective.ctorParameters = function () { return [
-        { type: TemplateRef, decorators: [{ type: Optional },] },
-    ]; };
     return SeriesTooltipTemplateDirective;
 }());
+export { SeriesTooltipTemplateDirective };
+SeriesTooltipTemplateDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[kendoChartSeriesTooltipTemplate]'
+            },] },
+];
+/** @nocollapse */
+SeriesTooltipTemplateDirective.ctorParameters = function () { return [
+    { type: TemplateRef, decorators: [{ type: Optional },] },
+]; };

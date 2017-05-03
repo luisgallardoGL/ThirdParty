@@ -8,9 +8,7 @@ import { OUTSIDE_END, INSIDE_END, PIE, FADEIN, TOOLTIP_OFFSET } from '../constan
 import hasGradientOverlay from '../utils/has-gradient-overlay';
 
 import { TOP, BOTTOM, LEFT, RIGHT, DEFAULT_FONT, CIRCLE, WHITE, BLACK, CENTER, DEFAULT_PRECISION } from '../../common/constants';
-import { setDefaultOptions, getSpacing, deepExtend, round, rad } from '../../common';
-
-import { TemplateService } from '../../services';
+import { setDefaultOptions, getSpacing, getTemplate, deepExtend, round, rad } from '../../common';
 
 var PieSegment = (function (ChartElement) {
     function PieSegment(value, sector, options) {
@@ -34,8 +32,8 @@ var PieSegment = (function (ChartElement) {
         }
         this._rendered = true;
 
-        if (labels.template) {
-            var labelTemplate = TemplateService.compile(labels.template);
+        var labelTemplate = getTemplate(labels);
+        if (labelTemplate) {
             labelText = labelTemplate({
                 dataItem: this.dataItem,
                 category: this.category,

@@ -14,12 +14,12 @@ export declare class TooltipPopupComponent extends BaseTooltip {
     seriesSharedTooltipTemplateRef: TemplateRef<any>;
     seriesTooltipContext: any;
     seriesSharedTooltipContext: any;
-    protected shared: boolean;
+    shared: boolean;
     defaultSeriesTooltipTemplate: SeriesTooltipTemplateDirective;
     defaultSharedTooltipTemplate: SharedTooltipTemplateDirective;
     animate: boolean;
     classNames: any;
-    readonly className: string;
+    wrapperClass: string;
     constructor(element: ElementRef, templateService: TooltipTemplateService);
     show(e: any): void;
     containsElement(element: any): boolean;

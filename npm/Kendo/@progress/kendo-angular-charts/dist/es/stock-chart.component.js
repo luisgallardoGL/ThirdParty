@@ -1,8 +1,13 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 import { Input, Component, NgZone, HostBinding, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ConfigurationService } from './common/configuration.service';
 import { RootConfigurationService } from './common/root-configuration.service';
@@ -59,21 +64,22 @@ var NAVIGATOR_DEFAULTS = {
  *
  * ```
  */
-export var StockChartComponent = (function (_super) {
+var StockChartComponent = (function (_super) {
     __extends(StockChartComponent, _super);
     function StockChartComponent(configurationService, themeService, element, intl, ngZone, instanceEventService) {
-        _super.call(this, configurationService, themeService, element, intl, ngZone, instanceEventService);
-        this.configurationService = configurationService;
-        this.themeService = themeService;
-        this.element = element;
-        this.intl = intl;
-        this.ngZone = ngZone;
-        this.instanceEventService = instanceEventService;
+        var _this = _super.call(this, configurationService, themeService, element, intl, ngZone, instanceEventService) || this;
+        _this.configurationService = configurationService;
+        _this.themeService = themeService;
+        _this.element = element;
+        _this.intl = intl;
+        _this.ngZone = ngZone;
+        _this.instanceEventService = instanceEventService;
         /**
          * Fires when the navigator range is changed.
          */
-        this.navigatorFilter = new EventEmitter();
-        this.redrawSlaves = false;
+        _this.navigatorFilter = new EventEmitter();
+        _this.redrawSlaves = false;
+        return _this;
     }
     Object.defineProperty(StockChartComponent.prototype, "className", {
         get: function () {
@@ -112,32 +118,33 @@ export var StockChartComponent = (function (_super) {
     StockChartComponent.prototype.applyNavigatorDefaults = function () {
         this.options.navigator = Object.assign({}, this.options.navigator, NAVIGATOR_DEFAULTS);
     };
-    StockChartComponent.decorators = [
-        { type: Component, args: [{
-                    exportAs: 'kendoStockChart',
-                    providers: [
-                        ConfigurationService,
-                        TooltipTemplateService,
-                        { provide: RootConfigurationService, useExisting: ConfigurationService },
-                        StockInstanceEventService
-                    ],
-                    selector: 'kendo-stockchart',
-                    template: "\n        <div class=\"k-chart-surface\" (mouseleave)=\"chartMouseleave($event)\"></div>\n        <kendo-chart-crosshair-tooltips-container>\n        </kendo-chart-crosshair-tooltips-container>\n        <kendo-chart-tooltip-popup (mouseleave)=\"tooltipMouseleave($event)\">\n        </kendo-chart-tooltip-popup>\n        <kendo-resize-sensor (resize)=\"chartResize()\"></kendo-resize-sensor>\n    "
-                },] },
-    ];
-    /** @nocollapse */
-    StockChartComponent.ctorParameters = function () { return [
-        { type: ConfigurationService, },
-        { type: ThemeService, },
-        { type: ElementRef, },
-        { type: IntlService, },
-        { type: NgZone, },
-        { type: StockInstanceEventService, },
-    ]; };
-    StockChartComponent.propDecorators = {
-        'className': [{ type: HostBinding, args: ['class',] },],
-        'navigator': [{ type: Input },],
-        'navigatorFilter': [{ type: Output },],
-    };
     return StockChartComponent;
 }(ChartComponent));
+export { StockChartComponent };
+StockChartComponent.decorators = [
+    { type: Component, args: [{
+                exportAs: 'kendoStockChart',
+                providers: [
+                    ConfigurationService,
+                    TooltipTemplateService,
+                    { provide: RootConfigurationService, useExisting: ConfigurationService },
+                    StockInstanceEventService
+                ],
+                selector: 'kendo-stockchart',
+                template: "\n        <div class=\"k-chart-surface\" (mouseleave)=\"chartMouseleave($event)\"></div>\n        <kendo-chart-crosshair-tooltips-container>\n        </kendo-chart-crosshair-tooltips-container>\n        <kendo-chart-tooltip-popup (mouseleave)=\"tooltipMouseleave($event)\">\n        </kendo-chart-tooltip-popup>\n        <kendo-resize-sensor (resize)=\"chartResize()\"></kendo-resize-sensor>\n    "
+            },] },
+];
+/** @nocollapse */
+StockChartComponent.ctorParameters = function () { return [
+    { type: ConfigurationService, },
+    { type: ThemeService, },
+    { type: ElementRef, },
+    { type: IntlService, },
+    { type: NgZone, },
+    { type: StockInstanceEventService, },
+]; };
+StockChartComponent.propDecorators = {
+    'className': [{ type: HostBinding, args: ['class',] },],
+    'navigator': [{ type: Input },],
+    'navigatorFilter': [{ type: Output },],
+};

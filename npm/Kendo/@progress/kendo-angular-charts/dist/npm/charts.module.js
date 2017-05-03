@@ -1,8 +1,9 @@
 "use strict";
-var core_1 = require('@angular/core');
-var chart_module_1 = require('./chart.module');
-var stock_chart_module_1 = require('./stock-chart.module');
-var sparkline_module_1 = require('./sparkline.module');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var chart_module_1 = require("./chart.module");
+var stock_chart_module_1 = require("./stock-chart.module");
+var sparkline_module_1 = require("./sparkline.module");
 /**
  * A [module](https://angular.io/docs/ts/latest/guide/ngmodule.html) that includes all Chart components and directives.
  *
@@ -29,13 +30,13 @@ var sparkline_module_1 = require('./sparkline.module');
 var ChartsModule = (function () {
     function ChartsModule() {
     }
-    ChartsModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    exports: [chart_module_1.ChartModule, sparkline_module_1.SparklineModule, stock_chart_module_1.StockChartModule]
-                },] },
-    ];
-    /** @nocollapse */
-    ChartsModule.ctorParameters = function () { return []; };
     return ChartsModule;
 }());
+ChartsModule.decorators = [
+    { type: core_1.NgModule, args: [{
+                exports: [chart_module_1.ChartModule, sparkline_module_1.SparklineModule, stock_chart_module_1.StockChartModule]
+            },] },
+];
+/** @nocollapse */
+ChartsModule.ctorParameters = function () { return []; };
 exports.ChartsModule = ChartsModule;

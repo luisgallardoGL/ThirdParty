@@ -200,6 +200,138 @@ function getSpacing(value, defaultSpacing) {
     return spacing;
 }
 
+var defaultImplementation = {
+    format: function (format, value) { return value; },
+
+    toString: function (value) { return value; },
+
+    parseDate: function (value) { return new Date(value); }
+};
+
+var current = defaultImplementation;
+
+var IntlService = function IntlService () {};
+
+var staticAccessors = { implementation: {} };
+
+IntlService.register = function register (userImplementation) {
+    current = userImplementation;
+};
+
+staticAccessors.implementation.get = function () {
+    return current;
+};
+
+Object.defineProperties( IntlService, staticAccessors );
+
+var FORMAT_REPLACE_REGEX = /\{(\d+)(:[^\}]+)?\}/g;
+
+var FormatService = function FormatService(intlService) {
+    this._intlService = intlService;
+};
+
+var prototypeAccessors$1 = { intlService: {} };
+
+prototypeAccessors$1.intlService.get = function () {
+    return this._intlService || IntlService.implementation;
+};
+
+FormatService.prototype.auto = function auto (formatString) {
+        var values = [], len = arguments.length - 1;
+        while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
+
+    var intl = this.intlService;
+
+    if (formatString.match(FORMAT_REGEX)) {
+        return intl.format.apply(intl, [ formatString ].concat( values ));
+    }
+
+    return intl.toString(values[0], formatString);
+};
+
+FormatService.prototype.localeAuto = function localeAuto (formatString, values, locale) {
+    var intl = this.intlService;
+    var result;
+
+    if (formatString.match(FORMAT_REGEX)) {
+        result = formatString.replace(FORMAT_REPLACE_REGEX, function(match, index, placeholderFormat) {
+            var value = values[parseInt(index, 10)];
+
+            return intl.toString(value, placeholderFormat ? placeholderFormat.substring(1) : "", locale);
+        });
+    } else {
+        result = intl.toString(values[0], formatString, locale);
+    }
+
+    return result;
+};
+
+Object.defineProperties( FormatService.prototype, prototypeAccessors$1 );
+
+var ChartService = function ChartService(chart, context) {
+    if ( context === void 0 ) context = {};
+
+    this._intlService = context.intlService;
+    this.sender = context.sender || chart;
+    this.format = new FormatService(context.intlService);
+    this.chart = chart;
+};
+
+var prototypeAccessors = { intl: {} };
+
+prototypeAccessors.intl.get = function () {
+    return this._intlService || IntlService.implementation;
+};
+
+ChartService.prototype.notify = function notify (name, args) {
+    this.chart.trigger(name, args);
+};
+
+Object.defineProperties( ChartService.prototype, prototypeAccessors );
+
+var current$1;
+
+var DomEventsBuilder = function DomEventsBuilder () {};
+
+DomEventsBuilder.register = function register (userImplementation) {
+    current$1 = userImplementation;
+};
+
+DomEventsBuilder.create = function create (element, events) {
+    if (current$1) {
+        return current$1.create(element, events);
+    }
+};
+
+var current$2 = {
+    compile: function(template) {
+        return template;
+    }
+};
+
+var TemplateService = function TemplateService () {};
+
+TemplateService.register = function register (userImplementation) {
+    current$2 = userImplementation;
+};
+
+TemplateService.compile = function compile (template) {
+    return current$2.compile(template);
+};
+
+function getTemplate(options) {
+    if ( options === void 0 ) options = {};
+
+    var template;
+    if (options.template) {
+        options.template = template = TemplateService.compile(options.template);
+    } else if (isFunction(options.content)) {
+        template = options.content;
+    }
+
+    return template;
+}
+
 var FIELD_REGEX = /\[(?:(\d+)|['"](.*?)['"])\]|((?:(?!\[.*?\]|\.).)+)/g;
 var getterCache = {};
 
@@ -2292,125 +2424,6 @@ setDefaultOptions(AxisLabel, {
     _autoReflow: false
 });
 
-var defaultImplementation = {
-    format: function (format, value) { return value; },
-
-    toString: function (value) { return value; },
-
-    parseDate: function (value) { return new Date(value); }
-};
-
-var current = defaultImplementation;
-
-var IntlService = function IntlService () {};
-
-var staticAccessors = { implementation: {} };
-
-IntlService.register = function register (userImplementation) {
-    current = userImplementation;
-};
-
-staticAccessors.implementation.get = function () {
-    return current;
-};
-
-Object.defineProperties( IntlService, staticAccessors );
-
-var FORMAT_REPLACE_REGEX = /\{(\d+)(:[^\}]+)?\}/g;
-
-var FormatService = function FormatService(intlService) {
-    this._intlService = intlService;
-};
-
-var prototypeAccessors$1 = { intlService: {} };
-
-prototypeAccessors$1.intlService.get = function () {
-    return this._intlService || IntlService.implementation;
-};
-
-FormatService.prototype.auto = function auto (formatString) {
-        var values = [], len = arguments.length - 1;
-        while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
-
-    var intl = this.intlService;
-
-    if (formatString.match(FORMAT_REGEX)) {
-        return intl.format.apply(intl, [ formatString ].concat( values ));
-    }
-
-    return intl.toString(values[0], formatString);
-};
-
-FormatService.prototype.localeAuto = function localeAuto (formatString, values, locale) {
-    var intl = this.intlService;
-    var result;
-
-    if (formatString.match(FORMAT_REGEX)) {
-        result = formatString.replace(FORMAT_REPLACE_REGEX, function(match, index, placeholderFormat) {
-            var value = values[parseInt(index, 10)];
-
-            return intl.toString(value, placeholderFormat ? placeholderFormat.substring(1) : "", locale);
-        });
-    } else {
-        result = intl.toString(values[0], formatString, locale);
-    }
-
-    return result;
-};
-
-Object.defineProperties( FormatService.prototype, prototypeAccessors$1 );
-
-var ChartService = function ChartService(chart, context) {
-    if ( context === void 0 ) context = {};
-
-    this._intlService = context.intlService;
-    this.sender = context.sender || chart;
-    this.format = new FormatService(context.intlService);
-    this.chart = chart;
-};
-
-var prototypeAccessors = { intl: {} };
-
-prototypeAccessors.intl.get = function () {
-    return this._intlService || IntlService.implementation;
-};
-
-ChartService.prototype.notify = function notify (name, args) {
-    this.chart.trigger(name, args);
-};
-
-Object.defineProperties( ChartService.prototype, prototypeAccessors );
-
-var current$1;
-
-var DomEventsBuilder = function DomEventsBuilder () {};
-
-DomEventsBuilder.register = function register (userImplementation) {
-    current$1 = userImplementation;
-};
-
-DomEventsBuilder.create = function create (element, events) {
-    if (current$1) {
-        return current$1.create(element, events);
-    }
-};
-
-var current$2 = {
-    compile: function(template) {
-        return template;
-    }
-};
-
-var TemplateService = function TemplateService () {};
-
-TemplateService.register = function register (userImplementation) {
-    current$2 = userImplementation;
-};
-
-TemplateService.compile = function compile (template) {
-    return current$2.compile(template);
-};
-
 var DEFAULT_ICON_SIZE = 7;
 var DEFAULT_LABEL_COLOR = "#fff";
 
@@ -2448,8 +2461,8 @@ var Note = (function (BoxElement$$1) {
             var width, height;
 
             if (defined(label) && label.visible) {
-                if (label.template) {
-                    var noteTemplate = TemplateService.compile(label.template);
+                var noteTemplate = getTemplate(label);
+                if (noteTemplate) {
                     text = noteTemplate(this.fields);
                 } else if (label.format) {
                     text = this.chartService.format.auto(label.format, text);
@@ -3335,10 +3348,10 @@ var Axis = (function (ChartElement$$1) {
     };
 
     Axis.prototype.axisLabelText = function axisLabelText (value, dataItem, options) {
+        var tmpl = getTemplate(options);
         var text = value;
 
-        if (options.template) {
-            var tmpl = TemplateService.compile(options.template);
+        if (tmpl) {
             text = tmpl({ value: value, dataItem: dataItem, format: options.format, culture: options.culture });
         } else if (options.format) {
             text = this.chartService.format.localeAuto(options.format, [ value ], options.culture);
@@ -7008,6 +7021,11 @@ var ChartAxis = (function (Class$$1) {
     return ChartAxis;
 }(_progress_kendoDrawing.Class));
 
+var ChartPane = function ChartPane(pane) {
+    this.visual = pane.visual;
+    this.chartsVisual = pane.chartContainer.visual;
+};
+
 var ChartPlotArea = (function (Class$$1) {
     function ChartPlotArea(plotArea) {
         Class$$1.call(this);
@@ -8009,7 +8027,7 @@ var CategoricalChart = (function (ChartElement$$1) {
     };
 
     CategoricalChart.prototype.evalPointOptions = function evalPointOptions (options, value, category, categoryIx, series, seriesIx) {
-        var state = { defaults: series._defaults, excluded: [ "data", "aggregate", "_events", "tooltip", "template", "visual", "toggle", "_outOfRangeMinPoint", "_outOfRangeMaxPoint" ] };
+        var state = { defaults: series._defaults, excluded: [ "data", "aggregate", "_events", "tooltip", "content", "template", "visual", "toggle", "_outOfRangeMinPoint", "_outOfRangeMaxPoint" ] };
 
         var doEval = this._evalSeries[seriesIx];
         if (!defined(doEval)) {
@@ -8312,9 +8330,9 @@ var LinePoint = (function (ChartElement$$1) {
         }
 
         if (labels.visible) {
+            var labelTemplate = getTemplate(labels);
             var labelText = this.value;
-            if (labels.template) {
-                var labelTemplate = TemplateService.compile(labels.template);
+            if (labelTemplate) {
                 labelText = labelTemplate({
                     dataItem: this.dataItem,
                     category: this.category,
@@ -9639,11 +9657,10 @@ var Bar = (function (ChartElement$$1) {
         var labels = options.labels;
 
         if (labels.visible) {
+            var labelTemplate = getTemplate(labels);
             var labelText;
 
-            if (labels.template) {
-                var labelTemplate = TemplateService.compile(labels.template);
-
+            if (labelTemplate) {
                 labelText = labelTemplate({
                     dataItem: this.dataItem,
                     category: this.category,
@@ -11136,7 +11153,7 @@ var ScatterChart = (function (ChartElement$$1) {
     ScatterChart.prototype.evalPointOptions = function evalPointOptions (options, value, fields) {
         var series = fields.series;
         var seriesIx = fields.seriesIx;
-        var state = { defaults: series._defaults, excluded: [ "data", "tooltip", "template", "visual", "toggle", "_outOfRangeMinPoint", "_outOfRangeMaxPoint" ] };
+        var state = { defaults: series._defaults, excluded: [ "data", "tooltip", "content", "template", "visual", "toggle", "_outOfRangeMinPoint", "_outOfRangeMaxPoint" ] };
 
         var doEval = this._evalSeries[seriesIx];
         if (!defined(doEval)) {
@@ -12627,9 +12644,9 @@ var PlotAreaBase = (function (ChartElement$$1) {
             }
 
             var text = currentSeries.name || "";
-            var labelTemplate = seriesVisible ? labels.template : (inactiveItemsLabels.template || labels.template);
+            var labelTemplate = seriesVisible ? getTemplate(labels) : getTemplate(inactiveItemsLabels) || getTemplate(labels);
             if (labelTemplate) {
-                text = TemplateService.compile(labelTemplate)({
+                text = labelTemplate({
                     text: text,
                     series: currentSeries
                 });
@@ -13556,10 +13573,10 @@ var RangeBar = (function (Bar$$1) {
     };
 
     RangeBar.prototype._createLabel = function _createLabel (options) {
+        var labelTemplate = getTemplate(options);
         var labelText;
 
-        if (options.template) {
-            var labelTemplate = TemplateService.compile(options.template);
+        if (labelTemplate) {
             labelText = labelTemplate({
                 dataItem: this.dataItem,
                 category: this.category,
@@ -16780,8 +16797,8 @@ var PieSegment = (function (ChartElement$$1) {
         }
         this._rendered = true;
 
-        if (labels.template) {
-            var labelTemplate = TemplateService.compile(labels.template);
+        var labelTemplate = getTemplate(labels);
+        if (labelTemplate) {
             labelText = labelTemplate({
                 dataItem: this.dataItem,
                 category: this.category,
@@ -17100,12 +17117,12 @@ var PieChartMixin = {
 
         if (options && options.visibleInLegend !== false) {
             var pointVisible = options.visible !== false;
-            var labelTemplate = pointVisible ? labelsOptions.template :
-                (inactiveItemsLabels.template || labelsOptions.template);
+            var labelTemplate = pointVisible ? getTemplate(labelsOptions) :
+                getTemplate(inactiveItemsLabels) || getTemplate(labelsOptions);
             var text = options.category || "";
 
             if (labelTemplate) {
-                text = TemplateService.compile(labelTemplate)({
+                text = labelTemplate({
                     text: text,
                     series: options.series,
                     dataItem: options.dataItem,
@@ -17267,7 +17284,7 @@ var PieChart = (function (ChartElement$$1) {
             dataItem: fields.dataItem,
             category: fields.category,
             percentage: fields.percentage
-        }, { defaults: series._defaults, excluded: [ "data", "template", "visual", "toggle" ] });
+        }, { defaults: series._defaults, excluded: [ "data", "content", "template", "visual", "toggle" ] });
     };
 
     PieChart.prototype.addValue = function addValue (value, sector, fields) {
@@ -18863,7 +18880,7 @@ var FunnelChart = (function (ChartElement$$1) {
             series: series,
             dataItem: fields.dataItem,
             index: fields.index
-        }, { defaults: series._defaults, excluded: [ "data", "toggle", "visual" ] });
+        }, { defaults: series._defaults, excluded: [ "data", "content", "template", "toggle", "visual" ] });
     };
 
     FunnelChart.prototype.createSegment = function createSegment (value, fields) {
@@ -18891,8 +18908,8 @@ var FunnelChart = (function (ChartElement$$1) {
         var text = value;
 
         if (labels.visible) {
-            if (labels.template) {
-                var labelTemplate = TemplateService.compile(labels.template);
+            var labelTemplate = getTemplate(labels);
+            if (labelTemplate) {
                 text = labelTemplate({
                     dataItem: dataItem,
                     value: value,
@@ -19330,6 +19347,23 @@ var Chart = (function (Class$$1) {
 
     Chart.prototype.findAxisByName = function findAxisByName (name) {
         return this.getAxis(name);
+    };
+
+    Chart.prototype.findPaneByName = function findPaneByName (name) {
+        var panes = this._plotArea.panes;
+
+        for (var idx = 0; idx < panes.length; idx++) {
+            if (panes[idx].options.name === name) {
+                return new ChartPane(panes[idx]);
+            }
+        }
+    };
+
+    Chart.prototype.findPaneByIndex = function findPaneByIndex (idx) {
+        var panes = this._plotArea.panes;
+        if (panes[idx]) {
+            return new ChartPane(panes[idx]);
+        }
     };
 
     Chart.prototype.plotArea = function plotArea () {
@@ -21166,6 +21200,7 @@ var NavigatorHint = (function (Class$$1) {
         var scale = posRange / range;
         var offset = middle - options.min;
         var text = this.chartService.intl.format(options.format, from, to);
+        var template = getTemplate(options);
 
         this.clearHideTimeout();
 
@@ -21177,8 +21212,8 @@ var NavigatorHint = (function (Class$$1) {
             this._visible = true;
         }
 
-        if (options.template) {
-            text = TemplateService.compile(options.template)({
+        if (template) {
+            text = template({
                 from: from,
                 to: to
             });
@@ -21357,7 +21392,7 @@ var Navigator = (function (Class$$1) {
             this.hint = new NavigatorHint(chart.element, chart.chartService, {
                 min: min,
                 max: max,
-                template: options.hint.template,
+                template: getTemplate(options.hint),
                 format: options.hint.format
             });
         }
@@ -22328,6 +22363,7 @@ exports.MousewheelZoom = MousewheelZoom;
 exports.ZoomSelection = ZoomSelection;
 exports.Pannable = Pannable;
 exports.ChartAxis = ChartAxis;
+exports.ChartPane = ChartPane;
 exports.ChartPlotArea = ChartPlotArea;
 exports.anyHasZIndex = anyHasZIndex;
 exports.appendIfNotNull = areNumbers;
@@ -22362,6 +22398,7 @@ exports.clockwise = clockwise;
 exports.deepExtend = deepExtend;
 exports.elementStyles = elementStyles;
 exports.getSpacing = getSpacing;
+exports.getTemplate = getTemplate;
 exports.getter = getter;
 exports.grep = grep;
 exports.hasClasses = hasClasses;

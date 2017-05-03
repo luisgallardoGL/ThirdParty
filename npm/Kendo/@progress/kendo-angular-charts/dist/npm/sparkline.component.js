@@ -1,17 +1,23 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var core_1 = require('@angular/core');
-var configuration_service_1 = require('./common/configuration.service');
-var tooltip_template_service_1 = require('./common/tooltip-template.service');
-var instance_event_service_1 = require('./events/instance-event.service');
-var chart_component_1 = require('./chart.component');
-var theme_service_1 = require('./common/theme.service');
-var kendo_angular_intl_1 = require('@progress/kendo-angular-intl');
-var kendo_charts_1 = require('@progress/kendo-charts');
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var configuration_service_1 = require("./common/configuration.service");
+var tooltip_template_service_1 = require("./common/tooltip-template.service");
+var instance_event_service_1 = require("./events/instance-event.service");
+var chart_component_1 = require("./chart.component");
+var theme_service_1 = require("./common/theme.service");
+var kendo_angular_intl_1 = require("@progress/kendo-angular-intl");
+var kendo_charts_1 = require("@progress/kendo-charts");
 /* tslint:disable:no-access-missing-member */
 /**
  * The root Chart component.
@@ -41,19 +47,24 @@ var kendo_charts_1 = require('@progress/kendo-charts');
 var SparklineComponent = (function (_super) {
     __extends(SparklineComponent, _super);
     function SparklineComponent(configurationService, themeService, element, intl, ngZone, instanceEventService) {
-        _super.call(this, configurationService, themeService, element, intl, ngZone, instanceEventService);
-        this.configurationService = configurationService;
-        this.themeService = themeService;
-        this.element = element;
-        this.intl = intl;
-        this.ngZone = ngZone;
-        this.instanceEventService = instanceEventService;
+        var _this = _super.call(this, configurationService, themeService, element, intl, ngZone, instanceEventService) || this;
+        _this.configurationService = configurationService;
+        _this.themeService = themeService;
+        _this.element = element;
+        _this.intl = intl;
+        _this.ngZone = ngZone;
+        _this.instanceEventService = instanceEventService;
         /**
          * @hidden
          */
-        this.classNames = {
+        _this.tooltipWrapperClass = 'k-sparkline-tooltip-wrapper';
+        /**
+         * @hidden
+         */
+        _this.tooltipContentClasses = {
             'k-sparkline-tooltip': true
         };
+        return _this;
     }
     Object.defineProperty(SparklineComponent.prototype, "className", {
         get: function () {
@@ -72,28 +83,28 @@ var SparklineComponent = (function (_super) {
     SparklineComponent.prototype.updateOptions = function () {
         this.instance.setOptions(kendo_charts_1.Sparkline.normalizeOptions(this.options));
     };
-    SparklineComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    exportAs: 'kendoSparkline',
-                    providers: [configuration_service_1.ConfigurationService, tooltip_template_service_1.TooltipTemplateService, instance_event_service_1.InstanceEventService],
-                    selector: 'kendo-sparkline',
-                    template: "\n        <span class=\"k-chart-surface\" (mouseleave)=\"chartMouseleave($event)\"></span>\n        <kendo-chart-crosshair-tooltips-container>\n        </kendo-chart-crosshair-tooltips-container>\n        <kendo-chart-tooltip-popup [animate]=\"false\" [classNames]=\"classNames\" (mouseleave)=\"tooltipMouseleave($event)\">\n        </kendo-chart-tooltip-popup>\n        <kendo-resize-sensor (resize)=\"chartResize()\"></kendo-resize-sensor>\n    "
-                },] },
-    ];
-    /** @nocollapse */
-    SparklineComponent.ctorParameters = function () { return [
-        { type: configuration_service_1.ConfigurationService, },
-        { type: theme_service_1.ThemeService, },
-        { type: core_1.ElementRef, },
-        { type: kendo_angular_intl_1.IntlService, },
-        { type: core_1.NgZone, },
-        { type: instance_event_service_1.InstanceEventService, },
-    ]; };
-    SparklineComponent.propDecorators = {
-        'className': [{ type: core_1.HostBinding, args: ['class',] },],
-        'type': [{ type: core_1.Input },],
-        'data': [{ type: core_1.Input },],
-    };
     return SparklineComponent;
 }(chart_component_1.ChartComponent));
+SparklineComponent.decorators = [
+    { type: core_1.Component, args: [{
+                exportAs: 'kendoSparkline',
+                providers: [configuration_service_1.ConfigurationService, tooltip_template_service_1.TooltipTemplateService, instance_event_service_1.InstanceEventService],
+                selector: 'kendo-sparkline',
+                template: "\n        <span class=\"k-chart-surface\" (mouseleave)=\"chartMouseleave($event)\"></span>\n        <kendo-chart-crosshair-tooltips-container>\n        </kendo-chart-crosshair-tooltips-container>\n        <kendo-chart-tooltip-popup [animate]=\"false\" [wrapperClass]=\"tooltipWrapperClass\" [classNames]=\"tooltipContentClasses\" (mouseleave)=\"tooltipMouseleave($event)\">\n        </kendo-chart-tooltip-popup>\n        <kendo-resize-sensor (resize)=\"chartResize()\"></kendo-resize-sensor>\n    "
+            },] },
+];
+/** @nocollapse */
+SparklineComponent.ctorParameters = function () { return [
+    { type: configuration_service_1.ConfigurationService, },
+    { type: theme_service_1.ThemeService, },
+    { type: core_1.ElementRef, },
+    { type: kendo_angular_intl_1.IntlService, },
+    { type: core_1.NgZone, },
+    { type: instance_event_service_1.InstanceEventService, },
+]; };
+SparklineComponent.propDecorators = {
+    'className': [{ type: core_1.HostBinding, args: ['class',] },],
+    'type': [{ type: core_1.Input },],
+    'data': [{ type: core_1.Input },],
+};
 exports.SparklineComponent = SparklineComponent;

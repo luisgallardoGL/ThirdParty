@@ -11,9 +11,7 @@ import createAxisTick from './utils/create-axis-tick';
 import createAxisGridLine from './utils/create-axis-grid-line';
 
 import { NONE, BLACK, CENTER, TOP, BOTTOM, LEFT, RIGHT, OUTSIDE, X, Y, WIDTH, HEIGHT } from '../common/constants';
-import { alignPathToPixel, deepExtend, grep, defined, isObject, inArray, limitValue, round, setDefaultOptions } from '../common';
-
-import { TemplateService } from '../services';
+import { alignPathToPixel, deepExtend, getTemplate, grep, defined, isObject, inArray, limitValue, round, setDefaultOptions } from '../common';
 
 var Axis = (function (ChartElement) {
     function Axis(options, chartService) {
@@ -616,10 +614,10 @@ var Axis = (function (ChartElement) {
     };
 
     Axis.prototype.axisLabelText = function axisLabelText (value, dataItem, options) {
+        var tmpl = getTemplate(options);
         var text = value;
 
-        if (options.template) {
-            var tmpl = TemplateService.compile(options.template);
+        if (tmpl) {
             text = tmpl({ value: value, dataItem: dataItem, format: options.format, culture: options.culture });
         } else if (options.format) {
             text = this.chartService.format.localeAuto(options.format, [ value ], options.culture);

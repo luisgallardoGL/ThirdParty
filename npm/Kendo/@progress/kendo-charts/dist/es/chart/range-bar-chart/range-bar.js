@@ -1,10 +1,7 @@
 import Bar from '../bar-chart/bar';
 import BarLabel from '../bar-chart/bar-label';
 
-import { deepExtend } from '../../common';
-
-import { TemplateService } from '../../services';
-
+import { deepExtend, getTemplate } from '../../common';
 
 var RangeBar = (function (Bar) {
     function RangeBar () {
@@ -32,10 +29,10 @@ var RangeBar = (function (Bar) {
     };
 
     RangeBar.prototype._createLabel = function _createLabel (options) {
+        var labelTemplate = getTemplate(options);
         var labelText;
 
-        if (options.template) {
-            var labelTemplate = TemplateService.compile(options.template);
+        if (labelTemplate) {
             labelText = labelTemplate({
                 dataItem: this.dataItem,
                 category: this.category,

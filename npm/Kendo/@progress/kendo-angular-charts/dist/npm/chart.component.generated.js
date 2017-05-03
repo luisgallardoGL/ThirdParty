@@ -1,7 +1,8 @@
 "use strict";
-var core_1 = require('@angular/core');
-var core_2 = require('@angular/core');
-var copy_changes_1 = require('./common/copy-changes');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var core_2 = require("@angular/core");
+var copy_changes_1 = require("./common/copy-changes");
 /**
  * @hidden
  */
@@ -109,44 +110,44 @@ var ChartComponentGenerated = (function () {
         copy_changes_1.copyChanges(changes, store);
         this.configurationService.push(store);
     };
-    ChartComponentGenerated.propDecorators = {
-        'pannable': [{ type: core_1.Input },],
-        'renderAs': [{ type: core_1.Input },],
-        'seriesColors': [{ type: core_1.Input },],
-        'title': [{ type: core_1.Input },],
-        'transitions': [{ type: core_1.Input },],
-        'zoomable': [{ type: core_1.Input },],
-        'axisDefaults': [{ type: core_1.Input },],
-        'categoryAxis': [{ type: core_1.Input },],
-        'chartArea': [{ type: core_1.Input },],
-        'legend': [{ type: core_1.Input },],
-        'panes': [{ type: core_1.Input },],
-        'plotArea': [{ type: core_1.Input },],
-        'series': [{ type: core_1.Input },],
-        'seriesDefaults': [{ type: core_1.Input },],
-        'tooltip': [{ type: core_1.Input },],
-        'valueAxis': [{ type: core_1.Input },],
-        'xAxis': [{ type: core_1.Input },],
-        'yAxis': [{ type: core_1.Input },],
-        'axisLabelClick': [{ type: core_2.Output },],
-        'drag': [{ type: core_2.Output },],
-        'dragEnd': [{ type: core_2.Output },],
-        'dragStart': [{ type: core_2.Output },],
-        'legendItemHover': [{ type: core_2.Output },],
-        'noteClick': [{ type: core_2.Output },],
-        'noteHover': [{ type: core_2.Output },],
-        'plotAreaClick': [{ type: core_2.Output },],
-        'plotAreaHover': [{ type: core_2.Output },],
-        'render': [{ type: core_2.Output },],
-        'select': [{ type: core_2.Output },],
-        'selectEnd': [{ type: core_2.Output },],
-        'selectStart': [{ type: core_2.Output },],
-        'seriesClick': [{ type: core_2.Output },],
-        'seriesHover': [{ type: core_2.Output },],
-        'zoom': [{ type: core_2.Output },],
-        'zoomEnd': [{ type: core_2.Output },],
-        'zoomStart': [{ type: core_2.Output },],
-    };
     return ChartComponentGenerated;
 }());
+ChartComponentGenerated.propDecorators = {
+    'pannable': [{ type: core_1.Input },],
+    'renderAs': [{ type: core_1.Input },],
+    'seriesColors': [{ type: core_1.Input },],
+    'title': [{ type: core_1.Input },],
+    'transitions': [{ type: core_1.Input },],
+    'zoomable': [{ type: core_1.Input },],
+    'axisDefaults': [{ type: core_1.Input },],
+    'categoryAxis': [{ type: core_1.Input },],
+    'chartArea': [{ type: core_1.Input },],
+    'legend': [{ type: core_1.Input },],
+    'panes': [{ type: core_1.Input },],
+    'plotArea': [{ type: core_1.Input },],
+    'series': [{ type: core_1.Input },],
+    'seriesDefaults': [{ type: core_1.Input },],
+    'tooltip': [{ type: core_1.Input },],
+    'valueAxis': [{ type: core_1.Input },],
+    'xAxis': [{ type: core_1.Input },],
+    'yAxis': [{ type: core_1.Input },],
+    'axisLabelClick': [{ type: core_2.Output },],
+    'drag': [{ type: core_2.Output },],
+    'dragEnd': [{ type: core_2.Output },],
+    'dragStart': [{ type: core_2.Output },],
+    'legendItemHover': [{ type: core_2.Output },],
+    'noteClick': [{ type: core_2.Output },],
+    'noteHover': [{ type: core_2.Output },],
+    'plotAreaClick': [{ type: core_2.Output },],
+    'plotAreaHover': [{ type: core_2.Output },],
+    'render': [{ type: core_2.Output },],
+    'select': [{ type: core_2.Output },],
+    'selectEnd': [{ type: core_2.Output },],
+    'selectStart': [{ type: core_2.Output },],
+    'seriesClick': [{ type: core_2.Output },],
+    'seriesHover': [{ type: core_2.Output },],
+    'zoom': [{ type: core_2.Output },],
+    'zoomEnd': [{ type: core_2.Output },],
+    'zoomStart': [{ type: core_2.Output },],
+};
 exports.ChartComponentGenerated = ChartComponentGenerated;

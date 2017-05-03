@@ -1,7 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Specifies the `weekStartDay` of a [CategoryAxisItemComponent]({% slug api_charts_categoryaxisitemcomponent_kendouiforangular %}).
  */
+var WeekStartDay;
 (function (WeekStartDay) {
     /**
      * Specifies Sunday as the first day of the week.
@@ -31,5 +33,4 @@
      * Specifies Saturday as the first day of the week.
      */
     WeekStartDay[WeekStartDay["Saturday"] = 6] = "Saturday";
-})(exports.WeekStartDay || (exports.WeekStartDay = {}));
-var WeekStartDay = exports.WeekStartDay;
+})(WeekStartDay = exports.WeekStartDay || (exports.WeekStartDay = {}));

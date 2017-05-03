@@ -1,7 +1,9 @@
 /**
  * Specifies the `weekStartDay` of a [CategoryAxisItemComponent]({% slug api_charts_categoryaxisitemcomponent_kendouiforangular %}).
  */
-export var WeekStartDay;
+/**
+ * Specifies the `weekStartDay` of a [CategoryAxisItemComponent]({% slug api_charts_categoryaxisitemcomponent_kendouiforangular %}).
+ */ export var WeekStartDay;
 (function (WeekStartDay) {
     /**
      * Specifies Sunday as the first day of the week.

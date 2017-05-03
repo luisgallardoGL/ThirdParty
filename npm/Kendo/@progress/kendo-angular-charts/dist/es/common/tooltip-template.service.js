@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 /**
  * @hidden
  */
-export var TooltipTemplateService = (function () {
+var TooltipTemplateService = (function () {
     function TooltipTemplateService() {
     }
     TooltipTemplateService.prototype.setTemplate = function (template) {
@@ -23,10 +23,11 @@ export var TooltipTemplateService = (function () {
     TooltipTemplateService.prototype.getSharedTemplate = function () {
         return this.sharedTemplate;
     };
-    TooltipTemplateService.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    TooltipTemplateService.ctorParameters = function () { return []; };
     return TooltipTemplateService;
 }());
+export { TooltipTemplateService };
+TooltipTemplateService.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+TooltipTemplateService.ctorParameters = function () { return []; };

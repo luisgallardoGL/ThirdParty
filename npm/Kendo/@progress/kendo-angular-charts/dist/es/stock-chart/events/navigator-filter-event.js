@@ -1,21 +1,28 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 import { BaseEvent } from '../../events/base-event';
 /**
  * Arguments for the `navigatorFilter` event.
  */
-export var NavigatorFilterEvent = (function (_super) {
+var NavigatorFilterEvent = (function (_super) {
     __extends(NavigatorFilterEvent, _super);
     /**
      * Constructs the event arguments from a raw object.
      */
     function NavigatorFilterEvent(e, sender) {
-        _super.call(this, sender);
-        this.from = e.from;
-        this.to = e.to;
+        var _this = _super.call(this, sender) || this;
+        _this.from = e.from;
+        _this.to = e.to;
+        return _this;
     }
     return NavigatorFilterEvent;
 }(BaseEvent));
+export { NavigatorFilterEvent };

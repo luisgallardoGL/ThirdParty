@@ -27,17 +27,18 @@ import { STOCK_CHART_DIRECTIVES } from './stock-chart.directives';
  * }
  * ```
  */
-export var StockChartModule = (function () {
+var StockChartModule = (function () {
     function StockChartModule() {
     }
-    StockChartModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [STOCK_CHART_DIRECTIVES],
-                    exports: [STOCK_CHART_DIRECTIVES, ChartModule],
-                    imports: [ChartModule, CommonModule, PopupModule, ResizeSensorModule]
-                },] },
-    ];
-    /** @nocollapse */
-    StockChartModule.ctorParameters = function () { return []; };
     return StockChartModule;
 }());
+export { StockChartModule };
+StockChartModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [STOCK_CHART_DIRECTIVES],
+                exports: [STOCK_CHART_DIRECTIVES, ChartModule],
+                imports: [ChartModule, CommonModule, PopupModule, ResizeSensorModule]
+            },] },
+];
+/** @nocollapse */
+StockChartModule.ctorParameters = function () { return []; };

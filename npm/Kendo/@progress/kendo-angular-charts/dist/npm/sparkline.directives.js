@@ -1,7 +1,7 @@
 "use strict";
-var sparkline_component_1 = require('./sparkline.component');
+Object.defineProperty(exports, "__esModule", { value: true });
+var sparkline_component_1 = require("./sparkline.component");
 exports.SparklineComponent = sparkline_component_1.SparklineComponent;
-// Re-exports
 /**
  * @hidden
  */

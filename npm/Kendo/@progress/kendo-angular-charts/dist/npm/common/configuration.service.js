@@ -1,7 +1,8 @@
 "use strict";
-var core_1 = require('@angular/core');
-var BehaviorSubject_1 = require('rxjs/BehaviorSubject');
-require('rxjs/add/operator/auditTime');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
+require("rxjs/add/operator/auditTime");
 /**
  * @hidden
  */
@@ -45,11 +46,11 @@ var ConfigurationService = (function () {
         store[key] = change.value;
         this.source.next(this.store);
     };
-    ConfigurationService.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /** @nocollapse */
-    ConfigurationService.ctorParameters = function () { return []; };
     return ConfigurationService;
 }());
+ConfigurationService.decorators = [
+    { type: core_1.Injectable },
+];
+/** @nocollapse */
+ConfigurationService.ctorParameters = function () { return []; };
 exports.ConfigurationService = ConfigurationService;

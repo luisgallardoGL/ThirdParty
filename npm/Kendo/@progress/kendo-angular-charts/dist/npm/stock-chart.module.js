@@ -1,10 +1,11 @@
 "use strict";
-var core_1 = require('@angular/core');
-var chart_module_1 = require('./chart.module');
-var common_1 = require('@angular/common');
-var kendo_angular_popup_1 = require('@progress/kendo-angular-popup');
-var kendo_angular_resize_sensor_1 = require('@progress/kendo-angular-resize-sensor');
-var stock_chart_directives_1 = require('./stock-chart.directives');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var chart_module_1 = require("./chart.module");
+var common_1 = require("@angular/common");
+var kendo_angular_popup_1 = require("@progress/kendo-angular-popup");
+var kendo_angular_resize_sensor_1 = require("@progress/kendo-angular-resize-sensor");
+var stock_chart_directives_1 = require("./stock-chart.directives");
 /**
  * A [module](https://angular.io/docs/ts/latest/guide/ngmodule.html) that includes the StockChart component and directives.
  *
@@ -31,15 +32,15 @@ var stock_chart_directives_1 = require('./stock-chart.directives');
 var StockChartModule = (function () {
     function StockChartModule() {
     }
-    StockChartModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    declarations: [stock_chart_directives_1.STOCK_CHART_DIRECTIVES],
-                    exports: [stock_chart_directives_1.STOCK_CHART_DIRECTIVES, chart_module_1.ChartModule],
-                    imports: [chart_module_1.ChartModule, common_1.CommonModule, kendo_angular_popup_1.PopupModule, kendo_angular_resize_sensor_1.ResizeSensorModule]
-                },] },
-    ];
-    /** @nocollapse */
-    StockChartModule.ctorParameters = function () { return []; };
     return StockChartModule;
 }());
+StockChartModule.decorators = [
+    { type: core_1.NgModule, args: [{
+                declarations: [stock_chart_directives_1.STOCK_CHART_DIRECTIVES],
+                exports: [stock_chart_directives_1.STOCK_CHART_DIRECTIVES, chart_module_1.ChartModule],
+                imports: [chart_module_1.ChartModule, common_1.CommonModule, kendo_angular_popup_1.PopupModule, kendo_angular_resize_sensor_1.ResizeSensorModule]
+            },] },
+];
+/** @nocollapse */
+StockChartModule.ctorParameters = function () { return []; };
 exports.StockChartModule = StockChartModule;

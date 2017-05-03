@@ -1,6 +1,7 @@
 "use strict";
-var configuration_service_1 = require('./configuration.service');
-var copy_changes_1 = require('./copy-changes');
+Object.defineProperty(exports, "__esModule", { value: true });
+var configuration_service_1 = require("./configuration.service");
+var copy_changes_1 = require("./copy-changes");
 var VISIBLE_KEY = 'visible';
 /**
  * @hidden

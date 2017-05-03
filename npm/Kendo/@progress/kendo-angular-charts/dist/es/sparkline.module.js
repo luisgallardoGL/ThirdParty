@@ -27,17 +27,18 @@ import { ResizeSensorModule } from '@progress/kendo-angular-resize-sensor';
  * }
  * ```
  */
-export var SparklineModule = (function () {
+var SparklineModule = (function () {
     function SparklineModule() {
     }
-    SparklineModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [SPARKLINE_DIRECTIVES],
-                    exports: [SPARKLINE_DIRECTIVES, ChartModule],
-                    imports: [ChartModule, CommonModule, PopupModule, ResizeSensorModule]
-                },] },
-    ];
-    /** @nocollapse */
-    SparklineModule.ctorParameters = function () { return []; };
     return SparklineModule;
 }());
+export { SparklineModule };
+SparklineModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [SPARKLINE_DIRECTIVES],
+                exports: [SPARKLINE_DIRECTIVES, ChartModule],
+                imports: [ChartModule, CommonModule, PopupModule, ResizeSensorModule]
+            },] },
+];
+/** @nocollapse */
+SparklineModule.ctorParameters = function () { return []; };
