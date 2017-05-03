@@ -18,7 +18,4 @@ export declare class DomEvents {
     bind(events?: any): void;
     unbind(): void;
     destroy(): void;
-    toggleDrag(enable: boolean): void;
-    toggleZoom(enable: boolean): void;
-    private toggle(recognizer, enable);
 }

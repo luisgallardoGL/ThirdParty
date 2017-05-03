@@ -3,11 +3,11 @@
  */
 export interface AxisRange {
     /**
-     * The axis minimum value.
+     * The axis min value.
      */
     min: Number | Date;
     /**
-     * The axis maximum value.
+     * The axis max value.
      */
     max: Number | Date;
 }

@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 /**
  * @hidden
  */
@@ -25,11 +24,11 @@ var TooltipTemplateService = (function () {
     TooltipTemplateService.prototype.getSharedTemplate = function () {
         return this.sharedTemplate;
     };
+    TooltipTemplateService.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /** @nocollapse */
+    TooltipTemplateService.ctorParameters = function () { return []; };
     return TooltipTemplateService;
 }());
-TooltipTemplateService.decorators = [
-    { type: core_1.Injectable },
-];
-/** @nocollapse */
-TooltipTemplateService.ctorParameters = function () { return []; };
 exports.TooltipTemplateService = TooltipTemplateService;

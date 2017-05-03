@@ -1,7 +1,7 @@
 /**
  * @hidden
  */
-var BaseEvent = (function () {
+export var BaseEvent = (function () {
     /**
      * @hidden
      */
@@ -10,4 +10,3 @@ var BaseEvent = (function () {
     }
     return BaseEvent;
 }());
-export { BaseEvent };
