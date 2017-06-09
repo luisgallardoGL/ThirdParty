@@ -13,6 +13,7 @@ import { TagTemplateDirective } from './templates/tag-template.directive';
 import { NoDataTemplateDirective } from './templates/no-data-template.directive';
 import { MultiselectMessages } from './error-messages';
 import { PreventableEvent } from './common/preventable-event';
+import { RTL } from '@progress/kendo-angular-l10n';
 var MULTISELECT_VALUE_ACCESSOR = {
     multi: true,
     provide: NG_VALUE_ACCESSOR,
@@ -36,8 +37,7 @@ var MULTISELECT_VALUE_ACCESSOR = {
  * ```
  */
 export var MultiSelectComponent = (function () {
-    function MultiSelectComponent(direction, selectionService, renderer, navigationService, wrapper) {
-        this.direction = direction;
+    function MultiSelectComponent(rtl, selectionService, renderer, navigationService, wrapper) {
         this.selectionService = selectionService;
         this.renderer = renderer;
         this.navigationService = navigationService;
@@ -89,6 +89,7 @@ export var MultiSelectComponent = (function () {
         this.selectedDataItems = [];
         this._popupSettings = { height: 200, animate: true };
         this.isFocused = false;
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.wrapper = wrapper.nativeElement;
         this.subscribeEvents();
     }
@@ -664,7 +665,7 @@ export var MultiSelectComponent = (function () {
     ];
     /** @nocollapse */
     MultiSelectComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [RTL,] },] },
         { type: SelectionService, },
         { type: Renderer, },
         { type: NavigationService, },

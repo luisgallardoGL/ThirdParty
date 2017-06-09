@@ -1,18 +1,19 @@
 import { Component, Renderer, Input, Output, EventEmitter, ViewChild, HostBinding, Optional, Inject } from '@angular/core';
 import { Keys } from './common/keys';
 import { combineStr, isDocumentAvailable } from './util';
+import { RTL } from '@progress/kendo-angular-l10n';
 /**
  * @hidden
  */
 export var SearchBarComponent = (function () {
-    function SearchBarComponent(direction, renderer) {
-        this.direction = direction;
+    function SearchBarComponent(rtl, renderer) {
         this.valueChange = new EventEmitter();
         this.onBlur = new EventEmitter();
         this.onFocus = new EventEmitter();
         this.onClick = new EventEmitter();
         this.onNavigate = new EventEmitter();
         this._userInput = "";
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.renderer = renderer;
     }
     Object.defineProperty(SearchBarComponent.prototype, "userInput", {
@@ -104,7 +105,7 @@ export var SearchBarComponent = (function () {
     ];
     /** @nocollapse */
     SearchBarComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [RTL,] },] },
         { type: Renderer, },
     ]; };
     SearchBarComponent.propDecorators = {

@@ -1,4 +1,4 @@
-export { DateFieldNameOptions, DateFormatNameOptions, DateFormatOptions, NumberFormatOptions, DateFormatPart } from '@telerik/kendo-intl';
+export { DateFormatNameOptions, DateFormatOptions, NumberFormatOptions } from '@telerik/kendo-intl';
 /**
  * @hidden
  */
@@ -6,7 +6,7 @@ export declare const dateFormatNames: Function;
 /**
  * @hidden
  */
-export declare const dateFieldName: Function;
+export declare const dateFormatString: Function;
 /**
  * @hidden
  */
@@ -39,10 +39,6 @@ export declare const parseDate: Function;
  * @hidden
  */
 export declare const parseNumber: Function;
-/**
- * @hidden
- */
-export declare const splitDateFormat: Function;
 /**
  * @hidden
  */

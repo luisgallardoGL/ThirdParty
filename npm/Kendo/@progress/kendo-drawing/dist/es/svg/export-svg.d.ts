@@ -9,7 +9,7 @@ export interface SVGExportOptions {
    *
    * @default false
    */
-  raw?: boolean;
+  raw: boolean;
 }
 
 /**

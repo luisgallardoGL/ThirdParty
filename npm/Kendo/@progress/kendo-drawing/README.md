@@ -1,7 +1,6 @@
 # Kendo UI for Angular 2: Drawing
 
-* [Overview](http://www.telerik.com/kendo-angular-ui/components/drawing/#toc-drawing-overview)
-* [Basic Usage and Installation](http://www.telerik.com/kendo-angular-ui/components/drawing/#toc-basic-usage)
+* [Overview](http://www.telerik.com/kendo-angular-ui/components/drawing/)
 
 ## Overview
 

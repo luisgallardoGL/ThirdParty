@@ -49,7 +49,7 @@ export default function formatNumber(number, format, locale) {
     if ( format === void 0 ) format = "n";
     if ( locale === void 0 ) locale = "en";
 
-    if (number === undefined || number === null) {
+    if (number === undefined) {
         return "";
     }
 

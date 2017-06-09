@@ -28,7 +28,7 @@ exports.dateFormatNames = intlMethod(intl.dateFormatNames);
 /**
  * @hidden
  */
-exports.dateFieldName = intlMethod(intl.dateFieldName);
+exports.dateFormatString = intlMethod(intl.dateFormatString);
 /**
  * @hidden
  */
@@ -61,10 +61,6 @@ exports.parseDate = intlMethod(intl.parseDate);
  * @hidden
  */
 exports.parseNumber = intlMethod(intl.parseNumber);
-/**
- * @hidden
- */
-exports.splitDateFormat = intlMethod(intl.splitDateFormat);
 /**
  * @hidden
  */

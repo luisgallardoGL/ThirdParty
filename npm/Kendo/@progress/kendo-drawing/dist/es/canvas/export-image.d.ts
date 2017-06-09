@@ -7,12 +7,12 @@ export interface ImageExportOptions {
   /**
    * The height of the exported image. Defaults to the scene height.
    */
-  height?: number;
+  height: number;
 
   /**
    * The width of the exported image. Defaults to the scene width.
    */
-  width?: number;
+  width: number;
 
   /**
    * Specifies how [cross-origin images](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) have to be requested.
@@ -29,7 +29,7 @@ export interface ImageExportOptions {
    *
    * @default anonymous
    */
-  cors?: string;
+  cors: string;
 }
 
 /**

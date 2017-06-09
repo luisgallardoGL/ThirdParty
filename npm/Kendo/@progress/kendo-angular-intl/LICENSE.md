@@ -7,9 +7,9 @@ SOFTWARE PRODUCT LICENSE
 
 This is a license agreement and not an agreement for sale.
 
-Telerik Kendo UI for Angular is release candidate software. Release candidate software is not at the level of performance and compatibility of a final, generally available, product offering. Release candidate software may contain errors or bugs that may impact the performance or usability of the release candidate software.
+Telerik Kendo UI for Angular 2 is release candidate software. Release candidate software is not at the level of performance and compatibility of a final, generally available, product offering. Release candidate software may contain errors or bugs that may impact the performance or usability of the release candidate software.
 
-Telerik Kendo UI for Angular is only licensed for use by certain end users of Telerik DevCraft Complete, Telerik DevCraft Ultimate, Telerik Kendo UI Complete, and/or Telerik Kendo UI Professional products (each a “Telerik Product Collection”). For terms and conditions applicable to your use of Telerik Kendo UI for Angular please see the Telerik End User License Agreement (“EULA”) accompanying that version of the Telerik Product Collection which formed the basis of your eligibility to access and use Telerik Kendo UI for Angular. Telerik Kendo UI for Angular may only be used in accordance with the terms and conditions of such EULA.
+Telerik Kendo UI for Angular 2 is only licensed for use by certain end users of Telerik DevCraft Complete, Telerik DevCraft Ultimate, Telerik Kendo UI Complete, and/or Telerik Kendo UI Professional products (each a “Telerik Product Collection”). For terms and conditions applicable to your use of Telerik Kendo UI for Angular 2 please see the Telerik End User License Agreement (“EULA”) accompanying that version of the Telerik Product Collection which formed the basis of your eligibility to access and use Telerik Kendo UI for Angular 2. Telerik Kendo UI for Angular 2 may only be used in accordance with the terms and conditions of such EULA.
 
 1. BETA LICENSE
 1.1 Grant. Telerik hereby grants to you, and you accept, a non–exclusive, non–transferable license to install and use the Software for evaluation purposes only, solely as authorized below.
