@@ -1,1 +1,1 @@
-export * from './dist/es/pdf';
+export * from './dist/es/pdf.js'

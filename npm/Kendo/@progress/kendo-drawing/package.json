@@ -5,42 +5,42 @@
   "_args": [
     [
       {
-        "raw": "@progress/kendo-drawing@^0.15.0",
+        "raw": "@progress/kendo-drawing@0.14.0",
         "scope": "@progress",
         "escapedName": "@progress%2fkendo-drawing",
         "name": "@progress/kendo-drawing",
-        "rawSpec": "^0.15.0",
-        "spec": ">=0.15.0 <0.16.0",
-        "type": "range"
+        "rawSpec": "0.14.0",
+        "spec": "0.14.0",
+        "type": "version"
       },
-      "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI"
+      "c:\\workspace\\Capella\\UI\\FireflyUI"
     ]
   ],
-  "_from": "@progress/kendo-drawing@>=0.15.0 <0.16.0",
-  "_id": "@progress/kendo-drawing@0.15.5",
+  "_from": "@progress/kendo-drawing@0.14.0",
+  "_id": "@progress/kendo-drawing@0.14.0",
   "_inCache": true,
   "_location": "/@progress/kendo-drawing",
-  "_nodeVersion": "6.10.2",
+  "_nodeVersion": "6.10.0",
   "_npmUser": {},
   "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "@progress/kendo-drawing@^0.15.0",
+    "raw": "@progress/kendo-drawing@0.14.0",
     "scope": "@progress",
     "escapedName": "@progress%2fkendo-drawing",
     "name": "@progress/kendo-drawing",
-    "rawSpec": "^0.15.0",
-    "spec": ">=0.15.0 <0.16.0",
-    "type": "range"
+    "rawSpec": "0.14.0",
+    "spec": "0.14.0",
+    "type": "version"
   },
   "_requiredBy": [
-    "/"
+    "#USER"
   ],
-  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-drawing/-/kendo-drawing-0.15.5.tgz",
-  "_shasum": "3a73c9b04f39bc5be8be27c833033d0ce472274f",
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-drawing/-/kendo-drawing-0.14.0.tgz",
+  "_shasum": "b10a8cd3484be5531a7120fc709a345d8b90ba9c",
   "_shrinkwrap": null,
-  "_spec": "@progress/kendo-drawing@^0.15.0",
-  "_where": "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI",
+  "_spec": "@progress/kendo-drawing@0.14.0",
+  "_where": "c:\\workspace\\Capella\\UI\\FireflyUI",
   "author": {
     "name": "Progress"
   },
@@ -87,10 +87,10 @@
     "validate-commit-msg": "^1.1.1"
   },
   "dist": {
-    "shasum": "3a73c9b04f39bc5be8be27c833033d0ce472274f",
-    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-drawing/-/kendo-drawing-0.15.5.tgz"
+    "shasum": "b10a8cd3484be5531a7120fc709a345d8b90ba9c",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-drawing/-/kendo-drawing-0.14.0.tgz"
   },
-  "gitHead": "bac2019481b490a6a5bff6f461919593d0929bb9",
+  "gitHead": "3ebc5ffb54d0f90ca57321ab1c3f10d5c6fe4bcd",
   "homepage": "https://github.com/telerik/kendo-drawing#readme",
   "jsnext:main": "main.js",
   "keywords": [
@@ -116,7 +116,7 @@
   },
   "scripts": {
     "api-check": "gulp api-check",
-    "build-package": "gulp build-module && gulp build-cdn",
+    "build-package": "gulp build-module",
     "e2e": "gulp e2e",
     "lint": "gulp lint",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
@@ -125,5 +125,5 @@
     "verify-npm": "gulp verify-npm"
   },
   "typings": "main",
-  "version": "0.15.5"
+  "version": "0.14.0"
 }

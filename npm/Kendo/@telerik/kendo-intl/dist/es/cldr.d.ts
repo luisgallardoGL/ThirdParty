@@ -20,7 +20,7 @@ export interface DateFormatNameOptions {
     /**
      * Specifies whether the standalone names should be returned.
      */
-    standAlone?: boolean;
+    standAlone?: string;
 }
 
 /**
@@ -31,69 +31,6 @@ export interface DateFormatNameOptions {
  * @returns The date format names.
  */
 export function dateFormatNames(locale: string, options: DateFormatNameOptions): any;
-
-/**
- * Settings for the dateFieldName function.
- */
-export interface DateFieldNameOptions {
-    /**
-     * Specifies the type of names.
-     */
-    type: 'era'         |
-          'year'        |
-          'quarter'     |
-          'month'       |
-          'week'        |
-          'day'         |
-          'weekday'     |
-          'dayperiod'   |
-          'hour'        |
-          'minute'      |
-          'second'      |
-          'millisecond' |
-          'zone';
-
-    /**
-     * Specifies the names form.
-     */
-    nameType?: 'wide' | 'narrow' | 'short';
-}
-
-/**
- * Returns a localized date field name based on a specific format specifier.
- *
- * The available `type` values are:
- * - `era`
- * - `year`
- * - `quarter`
- * - `month`
- * - `week`
- * - `day`
- * - `dayperiod`
- * - `hour`
- * - `minute`
- * - `second`
- * - `zone`
- *
- * The available `nameType` values are:
- * - `wide`
- * - `narrow`
- * - `short`
- *
- * @param options Detailed configuration for the desired date field name.
- * @param locale The optional locale id. If not specified, the `"en"` locale id is used.
- * @returns The localized date field name from the current locale based on the option.
- *
- *
- * @example
- * ```
- * dateFieldName({ type: 'day' });                      //returns 'day';
- * dateFieldName({ type: 'day', nameType: 'wide' });    //returns 'day';
- * dateFieldName({ type: 'month', nameType: 'short' }); //returns 'mo.';
- * dateFieldName({ type: 'month', nameType: 'wide' });  //returns 'month';
- * ```
- */
-export function dateFieldName(options: DateFieldNameOptions, locale?: string): string;
 
 /**
  * Returns the first day index starting from Sunday based on the specified locale.

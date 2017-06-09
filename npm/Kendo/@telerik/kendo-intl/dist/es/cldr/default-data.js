@@ -132,8 +132,7 @@ var defaultData = {
                     "MMMd": "MMM d",
                     "MMMEd": "E, MMM d",
                     "MMMMd": "MMMM d",
-                    "MMMMW-count-one": "'week' W 'of' MMMM",
-                    "MMMMW-count-other": "'week' W 'of' MMMM",
+                    "MMMMW": "'week' W 'of' MMM",
                     "ms": "mm:ss",
                     "y": "y",
                     "yM": "M/y",
@@ -145,8 +144,7 @@ var defaultData = {
                     "yMMMM": "MMMM y",
                     "yQQQ": "QQQ y",
                     "yQQQQ": "QQQQ y",
-                    "yw-count-one": "'week' w 'of' y",
-                    "yw-count-other": "'week' w 'of' y"
+                    "yw": "'week' w 'of' y"
                 },
                 "appendItems": {
                     "Day": "{0} ({2}: {1})",
@@ -577,60 +575,6 @@ var defaultData = {
                         "0-alt-variant": "BCE",
                         "1-alt-variant": "CE"
                     }
-                }
-            },
-            "dateFields": {
-                "era": {
-                    "wide": "era"
-                },
-                "year": {
-                    "wide": "year",
-                    "short": "yr.",
-                    "narrow": "yr."
-                },
-                "quarter": {
-                    "wide": "quarter",
-                    "short": "qtr.",
-                    "narrow": "qtr."
-                },
-                "month": {
-                    "wide": "month",
-                    "short": "mo.",
-                    "narrow": "mo."
-                },
-                "week": {
-                    "wide": "week",
-                    "short": "wk.",
-                    "narrow": "wk."
-                },
-                "day": {
-                    "wide": "day",
-                    "short": "day",
-                    "narrow": "day"
-                },
-                "weekday": {
-                    "wide": "day of the week"
-                },
-                "dayperiod": {
-                    "wide": "AM/PM"
-                },
-                "hour": {
-                    "wide": "hour",
-                    "short": "hr.",
-                    "narrow": "hr."
-                },
-                "minute": {
-                    "wide": "minute",
-                    "short": "min.",
-                    "narrow": "min."
-                },
-                "second": {
-                    "wide": "second",
-                    "short": "sec.",
-                    "narrow": "sec."
-                },
-                "zone": {
-                    "wide": "time zone"
                 }
             }
         }

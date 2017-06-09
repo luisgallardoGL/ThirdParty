@@ -27,7 +27,7 @@ export var dateFormatNames = intlMethod(intl.dateFormatNames);
 /**
  * @hidden
  */
-export var dateFieldName = intlMethod(intl.dateFieldName);
+export var dateFormatString = intlMethod(intl.dateFormatString);
 /**
  * @hidden
  */
@@ -60,10 +60,6 @@ export var parseDate = intlMethod(intl.parseDate);
  * @hidden
  */
 export var parseNumber = intlMethod(intl.parseNumber);
-/**
- * @hidden
- */
-export var splitDateFormat = intlMethod(intl.splitDateFormat);
 /**
  * @hidden
  */

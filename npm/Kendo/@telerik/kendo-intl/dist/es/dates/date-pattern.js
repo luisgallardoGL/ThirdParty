@@ -197,10 +197,6 @@ export default function datePattern(format, info) {
             result = format;
         }
     } else if (format) {
-        if (format.pattern) {
-            return format.pattern;
-        }
-
         var skeleton = format.skeleton;
         if (!skeleton) {
             if (format.datetime) {

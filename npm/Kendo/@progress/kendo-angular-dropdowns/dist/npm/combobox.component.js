@@ -25,6 +25,7 @@ var util_1 = require('./util');
 var navigation_action_1 = require('./navigation-action');
 var keys_1 = require('./common/keys');
 var preventable_event_1 = require('./common/preventable-event');
+var kendo_angular_l10n_1 = require('@progress/kendo-angular-l10n');
 /**
  * @hidden
  */
@@ -51,8 +52,7 @@ exports.COMBOBOX_VALUE_ACCESSOR = {
  * ```
  */
 var ComboBoxComponent = (function () {
-    function ComboBoxComponent(direction, selectionService, navigationService, wrapper) {
-        this.direction = direction;
+    function ComboBoxComponent(rtl, selectionService, navigationService, wrapper) {
         this.selectionService = selectionService;
         this.navigationService = navigationService;
         this.selected = [];
@@ -166,6 +166,7 @@ var ComboBoxComponent = (function () {
         this._previousValue = undefined;
         this.suggestedText = undefined;
         this._popupSettings = { height: 200, animate: true };
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.wrapper = wrapper.nativeElement;
         this.data = [];
         this.customValueSubject = new Subject_1.Subject();
@@ -781,7 +782,7 @@ var ComboBoxComponent = (function () {
     ];
     /** @nocollapse */
     ComboBoxComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [kendo_angular_l10n_1.RTL,] },] },
         { type: selection_service_1.SelectionService, },
         { type: navigation_service_1.NavigationService, },
         { type: core_1.ElementRef, },

@@ -67,26 +67,6 @@ function loadCalendarNames(locale, calendar) {
     localeCalendar.eras = getEraNames(calendar.eras);
 }
 
-function loadCalendarDateFields(locale, fields) {
-    var localeCalendar = cldr[locale].calendar;
-    var dateFields = {};
-
-    for (var field in fields) {
-        var ref = field.split('-');
-        var fieldName = ref[0];
-        var formatType = ref[1]; if ( formatType === void 0 ) formatType = 'wide';
-        var fieldInfo = dateFields[fieldName] || {};
-        var displayName = fields[field].displayName;
-
-        if (!displayName) { continue; }
-
-        fieldInfo[formatType] = displayName;
-        dateFields[fieldName] = fieldInfo;
-    }
-
-    localeCalendar.dateFields = dateFields;
-}
-
 function getPredefinedFormat(paths, calendar) {
     var result = [];
 
@@ -128,10 +108,7 @@ export default function loadCalendarInfo(locale, info) {
         } else if (field === "calendars" && info[field].gregorian) {
             loadCalendarPatterns(locale, info[field].gregorian);
             loadCalendarNames(locale, info[field].gregorian);
-        } else if (field === "fields") {
-            loadCalendarDateFields(locale, info.fields);
         }
     }
 }
-
 //# sourceMappingURL=load-dates.js.map
