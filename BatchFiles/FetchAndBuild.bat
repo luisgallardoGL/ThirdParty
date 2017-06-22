@@ -53,7 +53,6 @@ if errorlevel 1 (
    exit /b %errorlevel%
 )
 popd
-pause
 pushd DataProviders
 ECHO Building DataProviders...
 msbuild DataProviders.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
