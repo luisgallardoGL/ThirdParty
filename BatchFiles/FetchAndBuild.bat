@@ -53,15 +53,6 @@ if errorlevel 1 (
    exit /b %errorlevel%
 )
 popd
-pushd Rounding_V2
-ECHO Pulling Rounding_V2
-git rev-parse --abbrev-ref HEAD
-git pull
-if errorlevel 1 (
-   echo Failure Reason Given is %errorlevel% in Rounding_V2
-   exit /b %errorlevel%
-)
-popd
 pause
 pushd DataProviders
 ECHO Building DataProviders...
