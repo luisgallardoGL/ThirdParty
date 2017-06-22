@@ -16,7 +16,6 @@ import { ValueTemplateDirective } from './templates/value-template.directive';
 import { HeaderTemplateDirective } from './templates/header-template.directive';
 import { FooterTemplateDirective } from './templates/footer-template.directive';
 import { NoDataTemplateDirective } from './templates/no-data-template.directive';
-import { Direction } from './direction';
 import { PreventableEvent } from './common/preventable-event';
 /**
  * @hidden
@@ -40,10 +39,13 @@ export declare const DROPDOWNLIST_VALUE_ACCESSOR: any;
  * ```
  */
 export declare class DropDownListComponent implements ControlValueAccessor, OnDestroy, OnChanges {
-    private direction;
     readonly width: any;
     readonly height: any;
     popupOpen: boolean;
+    /**
+     * @hidden
+     */
+    iconClass: string;
     /**
      * Sets and gets the loading state of the DropDownList.
      */
@@ -203,7 +205,8 @@ export declare class DropDownListComponent implements ControlValueAccessor, OnDe
     private text;
     private wrapper;
     private _popupSettings;
-    constructor(direction: Direction, selectionService: SelectionService, navigationService: NavigationService, wrapper: ElementRef, renderer: Renderer, zone: NgZone);
+    private direction;
+    constructor(rtl: boolean, selectionService: SelectionService, navigationService: NavigationService, wrapper: ElementRef, renderer: Renderer, zone: NgZone);
     /**
      * @hidden
      */
@@ -252,6 +255,10 @@ export declare class DropDownListComponent implements ControlValueAccessor, OnDe
      * @hidden
      */
     readonly listContainerClasses: Object;
+    /**
+     * @hidden
+     */
+    readonly buttonClasses: Object;
     /**
      * @hidden
      */

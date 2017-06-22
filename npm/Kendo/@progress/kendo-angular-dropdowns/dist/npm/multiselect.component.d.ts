@@ -8,7 +8,6 @@ import { HeaderTemplateDirective } from './templates/header-template.directive';
 import { FooterTemplateDirective } from './templates/footer-template.directive';
 import { TagTemplateDirective } from './templates/tag-template.directive';
 import { NoDataTemplateDirective } from './templates/no-data-template.directive';
-import { Direction } from './direction';
 import { PreventableEvent } from './common/preventable-event';
 /**
  * Represents the Kendo UI MultiSelect component for Angular.
@@ -28,7 +27,6 @@ import { PreventableEvent } from './common/preventable-event';
  * ```
  */
 export declare class MultiSelectComponent implements OnDestroy, OnChanges, AfterContentChecked, AfterViewInit {
-    private direction;
     private selectionService;
     private renderer;
     private navigationService;
@@ -143,7 +141,7 @@ export declare class MultiSelectComponent implements OnDestroy, OnChanges, After
      * @hidden
      */
     click(): void;
-    constructor(direction: Direction, selectionService: SelectionService, renderer: Renderer, navigationService: NavigationService, wrapper: ElementRef);
+    constructor(rtl: boolean, selectionService: SelectionService, renderer: Renderer, navigationService: NavigationService, wrapper: ElementRef);
     readonly listContainerClasses: any[];
     readonly width: any;
     /**
@@ -228,6 +226,7 @@ export declare class MultiSelectComponent implements OnDestroy, OnChanges, After
     private observableSubscriptions;
     private changeSubscription;
     private isFocused;
+    private direction;
     private subscribeEvents();
     private unsubscribeEvents();
     private handleItemChange(event);

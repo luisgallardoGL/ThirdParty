@@ -3,18 +3,19 @@
 var core_1 = require('@angular/core');
 var keys_1 = require('./common/keys');
 var util_1 = require('./util');
+var kendo_angular_l10n_1 = require('@progress/kendo-angular-l10n');
 /**
  * @hidden
  */
 var SearchBarComponent = (function () {
-    function SearchBarComponent(direction, renderer) {
-        this.direction = direction;
+    function SearchBarComponent(rtl, renderer) {
         this.valueChange = new core_1.EventEmitter();
         this.onBlur = new core_1.EventEmitter();
         this.onFocus = new core_1.EventEmitter();
         this.onClick = new core_1.EventEmitter();
         this.onNavigate = new core_1.EventEmitter();
         this._userInput = "";
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.renderer = renderer;
     }
     Object.defineProperty(SearchBarComponent.prototype, "userInput", {
@@ -106,7 +107,7 @@ var SearchBarComponent = (function () {
     ];
     /** @nocollapse */
     SearchBarComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [kendo_angular_l10n_1.RTL,] },] },
         { type: core_1.Renderer, },
     ]; };
     SearchBarComponent.propDecorators = {

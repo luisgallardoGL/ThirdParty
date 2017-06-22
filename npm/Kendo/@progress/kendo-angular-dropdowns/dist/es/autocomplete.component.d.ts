@@ -8,7 +8,6 @@ import { PopupSettings } from './popup-settings';
 import { SelectionService } from './selection.service';
 import { NavigationService } from './navigation.service';
 import { NoDataTemplateDirective } from './templates/no-data-template.directive';
-import { Direction } from './direction';
 import { PreventableEvent } from './common/preventable-event';
 /**
  * @hidden
@@ -35,7 +34,6 @@ export declare const AUTOCOMPLETE_VALUE_ACCESSOR: any;
  * ```
  */
 export declare class AutoCompleteComponent implements ControlValueAccessor, OnDestroy, OnChanges {
-    private direction;
     private selectionService;
     private navigationService;
     readonly width: any;
@@ -145,7 +143,7 @@ export declare class AutoCompleteComponent implements ControlValueAccessor, OnDe
     popupMinWidth: string;
     protected onChangeCallback: Function;
     protected onTouchedCallback: Function;
-    constructor(direction: Direction, selectionService: SelectionService, navigationService: NavigationService, wrapper: ElementRef);
+    constructor(rtl: boolean, selectionService: SelectionService, navigationService: NavigationService, wrapper: ElementRef);
     ngOnDestroy(): void;
     ngOnChanges(_changes: {
         [propertyName: string]: SimpleChange;
@@ -216,6 +214,7 @@ export declare class AutoCompleteComponent implements ControlValueAccessor, OnDe
     private closeSubscription;
     private wrapper;
     private _isFocused;
+    private direction;
     private subscribeEvents();
     private unsubscribeEvents();
     private handleItemChange(event);

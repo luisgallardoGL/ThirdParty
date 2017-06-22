@@ -7,8 +7,7 @@ var animationFrame = wnd.requestAnimationFrame ||
                     wnd.msRequestAnimationFrame ||
                     function(callback) { setTimeout(callback, 1000 / 60); };
 
-export default function animationFrameProxy(callback) {
+export default function(callback) {
     animationFrame.call(wnd, callback);
 }
-
 //# sourceMappingURL=animation-frame.js.map

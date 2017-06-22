@@ -1,4 +1,4 @@
-import { DateFieldNameOptions, DateFormatOptions, DateFormatNameOptions, NumberFormatOptions, DateFormatPart } from '@telerik/kendo-intl';
+import { DateFormatOptions, DateFormatNameOptions, NumberFormatOptions } from '@telerik/kendo-intl';
 /**
  * An abstract base class that implements
  * the Internationalization service methods
@@ -34,6 +34,16 @@ export declare abstract class IntlService {
      */
     abstract formatDate(value: Date, format?: String | DateFormatOptions, localeId?: string): string;
     /**
+     * Returns the full format based on the `Date` object and the specified format.
+     * If no format is provided, the default short date format is used.
+     *
+     * @param value - The date to format.
+     * @param format - The format string or options.
+     * @param localeId - The locale ID to use in place of the default one. Optional.
+     * @return - The full date format.
+     */
+    abstract dateFormatString(value: Date, format?: String | DateFormatOptions, localeId?: string): string;
+    /**
      * Converts a string to a `Date` object based on the specified format.
      *
      * @param value - The string to convert.
@@ -68,30 +78,6 @@ export declare abstract class IntlService {
      * @return - The day names from the current locale based on the option.
      */
     abstract dateFormatNames(options: DateFormatNameOptions, localeId?: string): any;
-    /**
-     * Returns a localized date field name based on specific dateFieldName options.
-     *
-     * @param options - Detailed configuration for the desired date field name.
-     * @param localeId The optional locale id. If not specified, the `"en"` locale id is used.
-     * @returns The localized date field name from the current locale based on the option.
-     *
-     * @example
-     * ```
-     * dateFieldName({ type: 'day' });                      //returns 'day';
-     * dateFieldName({ type: 'day', nameType: 'wide' });    //returns 'day';
-     * dateFieldName({ type: 'month', nameType: 'short' }); //returns 'mo.';
-     * dateFieldName({ type: 'month', nameType: 'wide' });  //returns 'month';
-     * ```
-     */
-    abstract dateFieldName(options: DateFieldNameOptions, localeId?: string): string;
-    /**
-     * Splits the date format into objects containing information about each part of the pattern.
-     *
-     * @param format The format string or options.
-     * @param localeId The optional locale id. If not specified, the `"en"` locale id is used.
-     * @returns The date format parts.
-     */
-    abstract splitDateFormat(format: string | DateFormatOptions, localeId?: string): DateFormatPart[];
     /**
      * Returns the number symbols from the current locale based on the option.
      *

@@ -17,7 +17,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/partition';
 import 'rxjs/add/operator/throttleTime';
-import { Direction } from './direction';
 import { PreventableEvent } from './common/preventable-event';
 /**
  * @hidden
@@ -41,7 +40,6 @@ export declare const COMBOBOX_VALUE_ACCESSOR: any;
  * ```
  */
 export declare class ComboBoxComponent implements ControlValueAccessor, OnDestroy, OnChanges {
-    private direction;
     private selectionService;
     private navigationService;
     readonly width: any;
@@ -236,7 +234,8 @@ export declare class ComboBoxComponent implements ControlValueAccessor, OnDestro
     private _popupSettings;
     private customValueSubject;
     private valueSubject;
-    constructor(direction: Direction, selectionService: SelectionService, navigationService: NavigationService, wrapper: ElementRef);
+    private direction;
+    constructor(rtl: boolean, selectionService: SelectionService, navigationService: NavigationService, wrapper: ElementRef);
     ngOnInit(): void;
     private createValueStream();
     private subscribeEvents();

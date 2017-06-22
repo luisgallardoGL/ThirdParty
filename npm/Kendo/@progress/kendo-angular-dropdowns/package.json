@@ -5,19 +5,19 @@
   "_args": [
     [
       {
-        "raw": "@progress/kendo-angular-dropdowns@^0.35.0",
+        "raw": "@progress/kendo-angular-dropdowns@0.37.0",
         "scope": "@progress",
         "escapedName": "@progress%2fkendo-angular-dropdowns",
         "name": "@progress/kendo-angular-dropdowns",
-        "rawSpec": "^0.35.0",
-        "spec": ">=0.35.0 <0.36.0",
-        "type": "range"
+        "rawSpec": "0.37.0",
+        "spec": "0.37.0",
+        "type": "version"
       },
-      "C:\\GitHub\\Capella\\UI\\FireflyUI"
+      "c:\\workspace\\Capella\\UI\\FireflyUI"
     ]
   ],
-  "_from": "@progress/kendo-angular-dropdowns@>=0.35.0 <0.36.0",
-  "_id": "@progress/kendo-angular-dropdowns@0.35.1",
+  "_from": "@progress/kendo-angular-dropdowns@0.37.0",
+  "_id": "@progress/kendo-angular-dropdowns@0.37.0",
   "_inCache": true,
   "_location": "/@progress/kendo-angular-dropdowns",
   "_nodeVersion": "6.10.0",
@@ -25,22 +25,22 @@
   "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "@progress/kendo-angular-dropdowns@^0.35.0",
+    "raw": "@progress/kendo-angular-dropdowns@0.37.0",
     "scope": "@progress",
     "escapedName": "@progress%2fkendo-angular-dropdowns",
     "name": "@progress/kendo-angular-dropdowns",
-    "rawSpec": "^0.35.0",
-    "spec": ">=0.35.0 <0.36.0",
-    "type": "range"
+    "rawSpec": "0.37.0",
+    "spec": "0.37.0",
+    "type": "version"
   },
   "_requiredBy": [
-    "/"
+    "#USER"
   ],
-  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-dropdowns/-/kendo-angular-dropdowns-0.35.1.tgz",
-  "_shasum": "210cf664055bd6a3fc611223af97d5dc12b5ead3",
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-dropdowns/-/kendo-angular-dropdowns-0.37.0.tgz",
+  "_shasum": "da9991cd9152d15dd4c5e47cda15fac1783aa7ba",
   "_shrinkwrap": null,
-  "_spec": "@progress/kendo-angular-dropdowns@^0.35.0",
-  "_where": "C:\\GitHub\\Capella\\UI\\FireflyUI",
+  "_spec": "@progress/kendo-angular-dropdowns@0.37.0",
+  "_where": "c:\\workspace\\Capella\\UI\\FireflyUI",
   "author": {
     "name": "Progress"
   },
@@ -86,6 +86,7 @@
     "@angular/platform-browser-dynamic": "^2.4.0",
     "@angular/platform-server": "^2.4.0",
     "@krux/condition-jenkins": "1.0.1",
+    "@progress/kendo-angular-l10n": "^0.2.0",
     "@progress/kendo-angular-tasks": "^8.0.0",
     "@progress/kendo-theme-default": "^2.0.0",
     "codelyzer": "2.0.0-beta.4",
@@ -106,10 +107,10 @@
     "zone.js": "^0.7.2"
   },
   "dist": {
-    "shasum": "210cf664055bd6a3fc611223af97d5dc12b5ead3",
-    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-dropdowns/-/kendo-angular-dropdowns-0.35.1.tgz"
+    "shasum": "da9991cd9152d15dd4c5e47cda15fac1783aa7ba",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-dropdowns/-/kendo-angular-dropdowns-0.37.0.tgz"
   },
-  "gitHead": "f03510b240c2094431577772487a3ae6fa994bc2",
+  "gitHead": "30ddd8d889d59ea834324a221377ae985f6c0d84",
   "homepage": "https://github.com/telerik/kendo-angular-dropdowns#readme",
   "jsnext:main": "dist/es/main.js",
   "keywords": [
@@ -128,6 +129,7 @@
     "@angular/common": "^2.4.0",
     "@angular/core": "^2.4.0",
     "@angular/forms": "^2.4.0",
+    "@progress/kendo-angular-l10n": "^0.2.0",
     "rxjs": "^5.0.1"
   },
   "publishConfig": {
@@ -159,5 +161,5 @@
     "typings": "typings prune && typings install"
   },
   "typings": "dist/es/main.d.ts",
-  "version": "0.35.1"
+  "version": "0.37.0"
 }

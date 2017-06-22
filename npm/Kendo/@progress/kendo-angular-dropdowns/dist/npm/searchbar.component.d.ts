@@ -20,7 +20,7 @@ export declare class SearchBarComponent {
     readonly value: string;
     private _userInput;
     private renderer;
-    constructor(direction: Direction, renderer: Renderer);
+    constructor(rtl: boolean, renderer: Renderer);
     ngOnChanges(changes: any): void;
     private writeInputValue(text);
     private setInputSelection(start, end);
