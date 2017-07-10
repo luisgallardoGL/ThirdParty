@@ -5,9 +5,7 @@ import Crosshair from '../crosshair/crosshair';
 import Pane from '../pane';
 
 import { WHITE, BLACK, X, Y, COORD_PRECISION, TOP, BOTTOM, LEFT, RIGHT } from '../../common/constants';
-import { append, deepExtend, defined, getSpacing, inArray, isFunction, isString, round, setDefaultOptions } from '../../common';
-
-import { TemplateService } from '../../services';
+import { append, deepExtend, defined, getSpacing, getTemplate, inArray, isFunction, isString, round, setDefaultOptions } from '../../common';
 
 var PlotAreaBase = (function (ChartElement) {
     function PlotAreaBase(series, options, chartService) {
@@ -207,9 +205,9 @@ var PlotAreaBase = (function (ChartElement) {
             }
 
             var text = currentSeries.name || "";
-            var labelTemplate = seriesVisible ? labels.template : (inactiveItemsLabels.template || labels.template);
+            var labelTemplate = seriesVisible ? getTemplate(labels) : getTemplate(inactiveItemsLabels) || getTemplate(labels);
             if (labelTemplate) {
-                text = TemplateService.compile(labelTemplate)({
+                text = labelTemplate({
                     text: text,
                     series: currentSeries
                 });

@@ -100,7 +100,7 @@ var Surface = (function (BaseSurface) {
         });
 
         var promise = createPromise();
-        promiseAll(loadingStates).then(function () {
+        var resolveDataURL = function () {
             root._invalidate();
 
             try {
@@ -109,9 +109,9 @@ var Surface = (function (BaseSurface) {
             } catch (e) {
                 promise.reject(e);
             }
-        }, function (e) {
-            promise.reject(e);
-        });
+        };
+
+        promiseAll(loadingStates).then(resolveDataURL, resolveDataURL);
 
         return promise;
     };

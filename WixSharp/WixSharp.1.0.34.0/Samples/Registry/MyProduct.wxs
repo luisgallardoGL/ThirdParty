@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="6f330b47-2577-43ad-9095-1861ca25889c" Name="MyProduct" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="6f330b47-2577-43ad-9095-1861ba25889b" Manufacturer="OSH">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Media Id="1" Cabinet="MyProduct.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
+        <Directory Id="ProgramFilesFolder.My_Company" Name="My Company">
+          <Directory Id="INSTALLDIR" Name="My Product">
+
+            <Component Id="Component.readme.txt" Guid="6f330b47-2577-43ad-9095-18615e463af3">
+              <File Id="readme.txt" Source="readme.txt" />
+            </Component>
+
+            <Component Id="Registry1" Guid="6f330b47-2577-43ad-9095-1861b7315623" KeyPath="yes">
+              <RegistryKey Root="HKLM" Key="SOFTWARE\Galos\WixSharp\Test">
+                <RegistryValue Type="string" KeyPath="no" Value="sss" Name="strval" />
+              </RegistryKey>
+              <RemoveFolder Id="INSTALLDIR" On="uninstall" />
+            </Component>
+
+            <Component Id="Registry2" Guid="6f330b47-2577-43ad-9095-1861b7315626">
+              <RegistryKey Root="HKLM" Key="SOFTWARE\Galos\WixSharp\Test">
+                <RegistryValue Type="string" KeyPath="yes" Value="dfault val" />
+              </RegistryKey>
+            </Component>
+
+            <Component Id="Registry3" Guid="6f330b47-2577-43ad-9095-1861b7315625">
+              <RegistryKey Root="HKLM" Key="SOFTWARE\Galos\WixSharp\Test">
+                <RegistryValue Type="binary" KeyPath="yes" Value="00031231" Name="binaryval" />
+              </RegistryKey>
+            </Component>
+
+            <Component Id="Registry4" Guid="6f330b47-2577-43ad-9095-1861b7315620">
+              <RegistryKey Root="HKLM" Key="SOFTWARE\Galos\WixSharp\Test">
+                <RegistryValue Type="integer" KeyPath="yes" Value="32" Name="dword32" />
+              </RegistryKey>
+            </Component>
+
+            <Component Id="Registry5" Guid="6f330b47-2577-43ad-9095-1861b731561f">
+              <RegistryKey Root="HKLM" Key="SOFTWARE\Galos\WixSharp\Test">
+                <RegistryValue Type="multiString" KeyPath="yes" Name="mstringval">
+                  <MultiStringValue>one</MultiStringValue>
+                  <MultiStringValue>two</MultiStringValue>
+                  <MultiStringValue>three</MultiStringValue>
+                </RegistryValue>
+              </RegistryKey>
+            </Component>
+
+            <Component Id="Registry6" Guid="6f330b47-2577-43ad-9095-1861b7315622">
+              <RegistryKey Root="HKLM" Key="SOFTWARE\Galos\WixSharp\Test">
+                <RegistryValue Type="expandable" KeyPath="yes" Value="%PATH%" Name="expandableval" />
+              </RegistryKey>
+            </Component>
+
+            <Component Id="Registry7" Guid="6f330b47-2577-43ad-9095-1861b7315621">
+              <RegistryKey Root="HKLM" Key="SOFTWARE\Galos\WixSharp\Test\SubKey\SubKey">
+                <RegistryValue Type="string" KeyPath="yes" Value="testval" Name="Value1" />
+              </RegistryKey>
+            </Component>
+
+            <Component Id="Registry8" Guid="6f330b47-2577-43ad-9095-1861b731562c">
+              <RegistryKey Root="HKLM" Key="Software\My Company\My Product">
+                <RegistryValue Type="string" KeyPath="yes" Value="Hello" Name="Message" />
+              </RegistryKey>
+            </Component>
+
+            <Component Id="Registry9" Guid="6f330b47-2577-43ad-9095-1861b731562b">
+              <RegistryKey Root="HKLM" Key="Software\My Company\My Product">
+                <RegistryValue Type="integer" KeyPath="yes" Value="777" Name="Count" />
+              </RegistryKey>
+            </Component>
+
+            <Component Id="Registry10" Guid="6f330b47-2577-43ad-9095-1861b7415623">
+              <RegistryKey Root="HKCR" Key="test\shell\open\command">
+                <RegistryValue Type="expandable" KeyPath="yes" Value="&quot;[INSTALLDIR]test.exe&quot; &quot;%1&quot;" />
+              </RegistryKey>
+            </Component>
+
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="MyApp_Binaries" Title="MyApp Binaries" Absent="allow" Level="1">
+      <ComponentRef Id="Component.readme.txt" />
+      <ComponentRef Id="Registry1" />
+      <ComponentRef Id="Registry2" />
+      <ComponentRef Id="Registry3" />
+      <ComponentRef Id="Registry4" />
+      <ComponentRef Id="Registry5" />
+      <ComponentRef Id="Registry6" />
+      <ComponentRef Id="Registry7" />
+      <ComponentRef Id="Registry8" />
+      <ComponentRef Id="Registry9" />
+      <ComponentRef Id="Registry10" />
+    </Feature>
+
+  </Product>
+</Wix>
+

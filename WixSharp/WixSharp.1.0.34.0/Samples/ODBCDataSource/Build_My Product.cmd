@@ -1,0 +1,3 @@
+"C:\Program Files (x86)\WiX Toolset v3.10\bin\candle.exe" -sw1026   -ext "C:\Program Files (x86)\WiX Toolset v3.10\bin\WixUIExtension.dll" "E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\ODBCDataSource\My Product.wxs"  -out "E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\ODBCDataSource\My Product.wixobj"
+"C:\Program Files (x86)\WiX Toolset v3.10\bin\light.exe" -sw1076 -sw1079  -b "E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\ODBCDataSource" "E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\ODBCDataSource\My Product.wixobj"  -out "E:\Galos\Projects\WixSharp\src\WixSharp.Samples\Wix# Samples\ODBCDataSource\My Product.msi" -ext "C:\Program Files (x86)\WiX Toolset v3.10\bin\WixUIExtension.dll" -cultures:en-US
+pause

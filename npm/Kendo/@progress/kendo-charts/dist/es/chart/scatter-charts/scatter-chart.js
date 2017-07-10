@@ -169,7 +169,7 @@ var ScatterChart = (function (ChartElement) {
     ScatterChart.prototype.evalPointOptions = function evalPointOptions (options, value, fields) {
         var series = fields.series;
         var seriesIx = fields.seriesIx;
-        var state = { defaults: series._defaults, excluded: [ "data", "tooltip", "template", "visual", "toggle", "_outOfRangeMinPoint", "_outOfRangeMaxPoint" ] };
+        var state = { defaults: series._defaults, excluded: [ "data", "tooltip", "content", "template", "visual", "toggle", "_outOfRangeMinPoint", "_outOfRangeMaxPoint" ] };
 
         var doEval = this._evalSeries[seriesIx];
         if (!defined(doEval)) {

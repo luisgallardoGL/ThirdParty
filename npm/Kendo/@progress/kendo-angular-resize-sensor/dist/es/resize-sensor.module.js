@@ -4,16 +4,17 @@ var COMPONENT_DIRECTIVES = [ResizeSensorComponent];
 /**
  * Resize Sensor module
  */
-export var ResizeSensorModule = (function () {
+var ResizeSensorModule = (function () {
     function ResizeSensorModule() {
     }
-    ResizeSensorModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [COMPONENT_DIRECTIVES],
-                    exports: [COMPONENT_DIRECTIVES]
-                },] },
-    ];
-    /** @nocollapse */
-    ResizeSensorModule.ctorParameters = function () { return []; };
     return ResizeSensorModule;
 }());
+export { ResizeSensorModule };
+ResizeSensorModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [COMPONENT_DIRECTIVES],
+                exports: [COMPONENT_DIRECTIVES]
+            },] },
+];
+/** @nocollapse */
+ResizeSensorModule.ctorParameters = function () { return []; };

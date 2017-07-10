@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="8738cb8a-a52d-4c6b-a650-40d82be99748" Name="My Product" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="8738cb8a-a52d-4c6b-a650-40d81be99747" Manufacturer="OSH">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" InstallScope="perMachine" />
+    <Media Id="1" Cabinet="My_Product.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
+        <Directory Id="ProgramFilesFolder.My_Company" Name="My Company">
+          <Directory Id="INSTALLDIR" Name="My Product">
+
+            <Component Id="Component.readme.txt" Guid="8738cb8a-a52d-4c6b-a650-40d8bf0a499f">
+              <File Id="readme.txt" Source="readme.txt" />
+            </Component>
+
+            <Component Id="Component.logo.png" Guid="8738cb8a-a52d-4c6b-a650-40d863a9b6c7">
+              <File Id="logo.png" Source="logo.png" />
+            </Component>
+
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <UIRef Id="WixUI_Minimal" />
+
+    <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
+      <ComponentRef Id="Component.readme.txt" />
+      <ComponentRef Id="Component.logo.png" />
+    </Feature>
+
+  </Product>
+</Wix>
+

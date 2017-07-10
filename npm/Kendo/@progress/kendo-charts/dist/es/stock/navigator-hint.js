@@ -1,6 +1,5 @@
-import { Class, deepExtend, elementStyles, setDefaultOptions } from '../common';
+import { Class, deepExtend, elementStyles, getTemplate, setDefaultOptions } from '../common';
 import { toDate, toTime } from '../date-utils';
-import { TemplateService } from '../services';
 import FadeOutAnimation from './fade-out-animation';
 
 function createDiv(className, style) {
@@ -61,6 +60,7 @@ var NavigatorHint = (function (Class) {
         var scale = posRange / range;
         var offset = middle - options.min;
         var text = this.chartService.intl.format(options.format, from, to);
+        var template = getTemplate(options);
 
         this.clearHideTimeout();
 
@@ -72,8 +72,8 @@ var NavigatorHint = (function (Class) {
             this._visible = true;
         }
 
-        if (options.template) {
-            text = TemplateService.compile(options.template)({
+        if (template) {
+            text = template({
                 from: from,
                 to: to
             });

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="85f00a8b-7ef5-4137-b575-56212bc4f837" Name="MyMergeModuleSetup" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="85f00a8b-7ef5-4137-b575-56211bc4f836" Manufacturer="OSH">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Media Id="1" Cabinet="MyMergeModuleSetup.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
+        <Directory Id="INSTALLDIR" Name="My Company">
+
+          <Component Id="Component.MainFile.txt" Guid="85f00a8b-7ef5-4137-b575-5621f5c08d1f">
+            <File Id="MainFile.txt" Source="Files\MainFile.txt" />
+          </Component>
+
+          <Merge Id="MyMergeModule.msm" FileCompression="yes" Language="1033" SourceFile="Files\MyMergeModule.msm" DiskId="1" />
+          <Merge Id="MyMergeModule1.msm" FileCompression="yes" Language="1033" SourceFile="Files\MyMergeModule1.msm" DiskId="1" />
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <UIRef Id="WixUI_FeatureTree" />
+
+    <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
+      <Feature Id="Feature_A" Title="Feature A" Absent="allow" Level="1" Description="Feature A description">
+        <ComponentRef Id="Component.MainFile.txt" />
+      </Feature>
+
+      <Feature Id="Feature_B" Title="Feature B" Absent="allow" Level="1" Description="Feature B description">
+        <MergeRef Id="MyMergeModule.msm" />
+        <MergeRef Id="MyMergeModule1.msm" />
+      </Feature>
+    </Feature>
+
+  </Product>
+</Wix>
+

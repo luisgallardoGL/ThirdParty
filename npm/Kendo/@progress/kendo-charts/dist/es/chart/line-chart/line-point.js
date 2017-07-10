@@ -7,9 +7,7 @@ import NoteMixin from '../mixins/note-mixin';
 import { LINE_MARKER_SIZE, FADEIN, INITIAL_ANIMATION_DURATION, BORDER_BRIGHTNESS, TOOLTIP_OFFSET } from '../constants';
 
 import { WHITE, CIRCLE, CENTER, TOP, BOTTOM, LEFT } from '../../common/constants';
-import { deepExtend, defined, valueOrDefault, getSpacing } from '../../common';
-
-import { TemplateService } from '../../services';
+import { deepExtend, defined, getTemplate, valueOrDefault, getSpacing } from '../../common';
 
 var ABOVE = "above";
 var BELOW = "below";
@@ -45,9 +43,9 @@ var LinePoint = (function (ChartElement) {
         }
 
         if (labels.visible) {
+            var labelTemplate = getTemplate(labels);
             var labelText = this.value;
-            if (labels.template) {
-                var labelTemplate = TemplateService.compile(labels.template);
+            if (labelTemplate) {
                 labelText = labelTemplate({
                     dataItem: this.dataItem,
                     category: this.category,

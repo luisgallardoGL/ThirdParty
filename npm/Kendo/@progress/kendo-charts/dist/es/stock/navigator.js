@@ -3,7 +3,7 @@ import { Selection, filterSeriesByType } from '../chart';
 import { DRAG, DRAG_END, EQUALLY_SPACED_SERIES, ZOOM, ZOOM_END } from '../chart/constants';
 import { DateCategoryAxis } from '../core';
 import { addDuration, lteDateIndex, parseDate, toDate, toTime } from '../date-utils';
-import { Class, deepExtend, defined, InstanceObserver, last, limitValue, valueOrDefault } from '../common';
+import { Class, deepExtend, defined, getTemplate, InstanceObserver, last, limitValue, valueOrDefault } from '../common';
 import { NAVIGATOR_AXIS, NAVIGATOR_PANE } from './constants';
 
 var ZOOM_ACCELERATION = 3;
@@ -107,7 +107,7 @@ var Navigator = (function (Class) {
             this.hint = new NavigatorHint(chart.element, chart.chartService, {
                 min: min,
                 max: max,
-                template: options.hint.template,
+                template: getTemplate(options.hint),
                 format: options.hint.format
             });
         }

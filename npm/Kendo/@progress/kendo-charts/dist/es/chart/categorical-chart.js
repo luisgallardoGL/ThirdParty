@@ -317,7 +317,7 @@ var CategoricalChart = (function (ChartElement) {
     };
 
     CategoricalChart.prototype.evalPointOptions = function evalPointOptions (options, value, category, categoryIx, series, seriesIx) {
-        var state = { defaults: series._defaults, excluded: [ "data", "aggregate", "_events", "tooltip", "template", "visual", "toggle", "_outOfRangeMinPoint", "_outOfRangeMaxPoint" ] };
+        var state = { defaults: series._defaults, excluded: [ "data", "aggregate", "_events", "tooltip", "content", "template", "visual", "toggle", "_outOfRangeMinPoint", "_outOfRangeMaxPoint" ] };
 
         var doEval = this._evalSeries[seriesIx];
         if (!defined(doEval)) {
