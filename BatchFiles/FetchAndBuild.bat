@@ -29,6 +29,10 @@ pushd Common
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Common:         %branch%
 popd
+pushd Capella-API
+for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
+echo Capella-API:    %branch%
+popd
 pushd Capella-API_V2
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella-API_V2: %branch%
@@ -51,6 +55,12 @@ popd
 
 pushd Common
 ECHO Pulling Common
+git pull
+if not %errorlevel% == 0 ( goto :Error )
+popd
+
+pushd Capella-API
+ECHO Pulling Capella-API
 git pull
 if not %errorlevel% == 0 ( goto :Error )
 popd
@@ -84,6 +94,17 @@ nuget restore Common.sln -Verbosity quiet
 msbuild Common.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
    goto :Error
+) else (
+	ECHO Done.
+)
+popd
+
+pushd Capella-API
+ECHO Building Capella-API...
+nuget restore CapellaMobileServices.sln -Verbosity quiet
+msbuild CapellaMobileServices.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+if not %errorlevel% == 0 (
+	goto :Error
 ) else (
 	ECHO Done.
 )
