@@ -24,6 +24,7 @@ import { isPresent, isChanged, guid, isDocumentAvailable, getter } from './util'
 import { NavigationAction } from './navigation-action';
 import { Keys } from './common/keys';
 import { PreventableEvent } from './common/preventable-event';
+import { RTL } from '@progress/kendo-angular-l10n';
 /**
  * @hidden
  */
@@ -50,8 +51,7 @@ export var COMBOBOX_VALUE_ACCESSOR = {
  * ```
  */
 export var ComboBoxComponent = (function () {
-    function ComboBoxComponent(direction, selectionService, navigationService, wrapper) {
-        this.direction = direction;
+    function ComboBoxComponent(rtl, selectionService, navigationService, wrapper) {
         this.selectionService = selectionService;
         this.navigationService = navigationService;
         this.selected = [];
@@ -165,6 +165,7 @@ export var ComboBoxComponent = (function () {
         this._previousValue = undefined;
         this.suggestedText = undefined;
         this._popupSettings = { height: 200, animate: true };
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.wrapper = wrapper.nativeElement;
         this.data = [];
         this.customValueSubject = new Subject();
@@ -780,7 +781,7 @@ export var ComboBoxComponent = (function () {
     ];
     /** @nocollapse */
     ComboBoxComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [RTL,] },] },
         { type: SelectionService, },
         { type: NavigationService, },
         { type: ElementRef, },

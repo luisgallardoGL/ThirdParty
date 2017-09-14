@@ -15,6 +15,7 @@ var tag_template_directive_1 = require('./templates/tag-template.directive');
 var no_data_template_directive_1 = require('./templates/no-data-template.directive');
 var error_messages_1 = require('./error-messages');
 var preventable_event_1 = require('./common/preventable-event');
+var kendo_angular_l10n_1 = require('@progress/kendo-angular-l10n');
 var MULTISELECT_VALUE_ACCESSOR = {
     multi: true,
     provide: forms_1.NG_VALUE_ACCESSOR,
@@ -38,8 +39,7 @@ var MULTISELECT_VALUE_ACCESSOR = {
  * ```
  */
 var MultiSelectComponent = (function () {
-    function MultiSelectComponent(direction, selectionService, renderer, navigationService, wrapper) {
-        this.direction = direction;
+    function MultiSelectComponent(rtl, selectionService, renderer, navigationService, wrapper) {
         this.selectionService = selectionService;
         this.renderer = renderer;
         this.navigationService = navigationService;
@@ -91,6 +91,7 @@ var MultiSelectComponent = (function () {
         this.selectedDataItems = [];
         this._popupSettings = { height: 200, animate: true };
         this.isFocused = false;
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.wrapper = wrapper.nativeElement;
         this.subscribeEvents();
     }
@@ -666,7 +667,7 @@ var MultiSelectComponent = (function () {
     ];
     /** @nocollapse */
     MultiSelectComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [kendo_angular_l10n_1.RTL,] },] },
         { type: selection_service_1.SelectionService, },
         { type: core_1.Renderer, },
         { type: navigation_service_1.NavigationService, },

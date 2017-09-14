@@ -14,6 +14,7 @@ import { NavigationAction } from './navigation-action';
 import { NoDataTemplateDirective } from './templates/no-data-template.directive';
 import { Keys } from './common/keys';
 import { PreventableEvent } from './common/preventable-event';
+import { RTL } from '@progress/kendo-angular-l10n';
 /**
  * @hidden
  */
@@ -43,8 +44,7 @@ export var AUTOCOMPLETE_VALUE_ACCESSOR = {
  * ```
  */
 export var AutoCompleteComponent = (function () {
-    function AutoCompleteComponent(direction, selectionService, navigationService, wrapper) {
-        this.direction = direction;
+    function AutoCompleteComponent(rtl, selectionService, navigationService, wrapper) {
         this.selectionService = selectionService;
         this.navigationService = navigationService;
         /**
@@ -96,6 +96,7 @@ export var AutoCompleteComponent = (function () {
         this._open = false;
         this._value = "";
         this._isFocused = false;
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.wrapper = wrapper.nativeElement;
         this.data = [];
         this.subscribeEvents();
@@ -554,7 +555,7 @@ export var AutoCompleteComponent = (function () {
     ];
     /** @nocollapse */
     AutoCompleteComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [RTL,] },] },
         { type: SelectionService, },
         { type: NavigationService, },
         { type: ElementRef, },

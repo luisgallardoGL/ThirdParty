@@ -91,9 +91,9 @@ var animationFrame = wnd.requestAnimationFrame ||
                     wnd.msRequestAnimationFrame ||
                     function(callback) { setTimeout(callback, 1000 / 60); };
 
-function animationFrameProxy(callback) {
+var animationFrame$1 = function(callback) {
     animationFrame.call(wnd, callback);
-}
+};
 
 var Class = function Class () {};
 
@@ -4887,7 +4887,7 @@ var Animation = (function (Class$$1) {
                     this$1.step(easingPosition);
 
                     if (wallTime < finish) {
-                        animationFrameProxy(loop);
+                        animationFrame$1(loop);
                     } else {
                         this$1.abort();
                     }
@@ -7140,7 +7140,7 @@ var RootNode$2 = (function (GroupNode) {
 
         var invalidateHandler = this._invalidate.bind(this);
         this.invalidate = throttle(function () {
-            animationFrameProxy(invalidateHandler);
+            animationFrame$1(invalidateHandler);
         }, FRAME_DELAY);
     }
 
@@ -7668,7 +7668,7 @@ var Surface$3 = (function (BaseSurface) {
         });
 
         var promise = createPromise();
-        var resolveDataURL = function () {
+        promiseAll(loadingStates).then(function () {
             root._invalidate();
 
             try {
@@ -7677,9 +7677,9 @@ var Surface$3 = (function (BaseSurface) {
             } catch (e) {
                 promise.reject(e);
             }
-        };
-
-        promiseAll(loadingStates).then(resolveDataURL, resolveDataURL);
+        }, function (e) {
+            promise.reject(e);
+        });
 
         return promise;
     };
@@ -10090,7 +10090,7 @@ function loadImage(url, cont) {
             // (BinaryStream does not create a copy), potentially saving some GC cycles.
             var reader = new FileReader();
             reader.onload = function() {
-                img = new PDFJpegImage(BinaryStream(new Uint8Array(this.result)));
+                img = new PDFJpegImage(img.width, img.height, BinaryStream(new Uint8Array(this.result)));
                 URL.revokeObjectURL(bloburl);
                 cont(IMAGE_CACHE[url] = img);
             };
@@ -10148,7 +10148,8 @@ function loadImage(url, cont) {
 
             var stream = BinaryStream();
             stream.writeBase64(data);
-            img = new PDFJpegImage(stream);
+            stream.offset(0);
+            img = new PDFJpegImage(img.width, img.height, stream);
         }
 
         cont(IMAGE_CACHE[url] = img);
@@ -10500,67 +10501,17 @@ var PDFPageTree = defclass(function PDFPageTree(){
 
 // JPEG
 
-var SOF_CODES = [0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf];
-
-function PDFJpegImage(data) {
-    // we must determine the correct color space.  we'll parse a bit
-    // of the JPEG stream for this, it's still better than going
-    // through the canvas.
-    // https://github.com/telerik/kendo-ui-core/issues/2845
-    data.offset(0);
-    var width, height, colorSpace, bitsPerComponent;
-    var soi = data.readShort();
-    if (soi != 0xFFD8) {
-        // XXX: do we have some better options here?
-        throw new Error("Invalid JPEG image");
-    }
-    while (!data.eof()) {
-        var ff = data.readByte();
-        if (ff != 0xFF) {
-            throw new Error("Invalid JPEG image");
-        }
-        var marker = data.readByte();
-        var length = data.readShort();
-        if (SOF_CODES.indexOf(marker) >= 0) {
-            // "start of frame" marker
-            bitsPerComponent = data.readByte();
-            height = data.readShort();
-            width = data.readShort();
-            colorSpace = data.readByte();
-            break;
-        }
-        data.skip(length - 2);
-    }
-
-    if (colorSpace == null) {
-        throw new Error("Invalid JPEG image");
-    }
-
-    var props = {
-        Type             : _("XObject"),
-        Subtype          : _("Image"),
-        Width            : width,
-        Height           : height,
-        BitsPerComponent : bitsPerComponent,
-        Filter           : _("DCTDecode")
-    };
-
-    switch (colorSpace) {
-      case 1:
-        props.ColorSpace = _("DeviceGray");
-        break;
-      case 3:
-        props.ColorSpace = _("DeviceRGB");
-        break;
-      case 4:
-        props.ColorSpace = _("DeviceCMYK");
-        props.Decode = [ 1, 0, 1, 0, 1, 0, 1, 0 ]; // invert colors
-        break;
-    }
-
+function PDFJpegImage(width, height, data) {
     this.asStream = function() {
-        data.offset(0);
-        var stream = new PDFStream(data, props);
+        var stream = new PDFStream(data, {
+            Type             : _("XObject"),
+            Subtype          : _("Image"),
+            Width            : width,
+            Height           : height,
+            BitsPerComponent : 8,
+            ColorSpace       : _("DeviceRGB"),
+            Filter           : _("DCTDecode")
+        });
         stream._resourceName = _("I" + (++RESOURCE_COUNTER));
         return stream;
     };
@@ -12284,7 +12235,7 @@ function closest(el, selector) {
     // IE: stringifying rather than simply comparing with `document`,
     // which is not iframe-proof and fails in editor export —
     // https://github.com/telerik/kendo/issues/6721
-    while (el && !/^\[object (?:HTML)?Document\]$/.test(String(el))) {
+    while (el && String(el) != "[object HTMLDocument]") {
         if (matches(el, selector)) {
             return el;
         }
@@ -12311,18 +12262,15 @@ var cloneNodes = (function($){
                 }
                 if (/^canvas$/i.test(el.tagName)) {
                     clone.getContext("2d").drawImage(el, 0, 0);
-                } else if (/^(?:input|select|textarea|option)$/i.test(el.tagName)) {
+                } else if (/^input$/i.test(el.tagName)) {
                     // drop the name attributes so that we don't affect the selection of the
                     // original nodes (i.e. checked status of radio buttons) when we insert our copy
                     // into the DOM.  https://github.com/telerik/kendo/issues/5409
-                    clone.removeAttribute("id");
-                    clone.removeAttribute("name");
-                    clone.value = el.value;
-                    clone.checked = el.checked;
-                    clone.selected = el.selected;
-                }
-                for (i = el.firstChild; i; i = i.nextSibling) {
-                    clone.appendChild(cloneNodes(i));
+                    el.removeAttribute("name");
+                } else {
+                    for (i = el.firstChild; i; i = i.nextSibling) {
+                        clone.appendChild(cloneNodes(i));
+                    }
                 }
             }
             return clone;
@@ -12342,13 +12290,8 @@ var cloneNodes = (function($){
 
             // remove "name" attributes from <input> elements -
             // https://github.com/telerik/kendo/issues/5409
-            var orig = el.querySelectorAll("input, select, textarea, option");
-            slice$1$1(clone.querySelectorAll("input, select, textarea, option")).forEach(function(el, i){
-                el.removeAttribute("id");
-                el.removeAttribute("name");
-                el.value = orig[i].value;
-                el.checked = orig[i].checked;
-                el.selected = orig[i].selected;
+            slice$1$1(clone.querySelectorAll("input")).forEach(function(input){
+                input.removeAttribute("name");
             });
 
             return clone;
@@ -12661,9 +12604,6 @@ function drawDOM(element, options) {
         }
 
         function splitElement(element) {
-            if (element.tagName == "TABLE") {
-                setCSS(element, { tableLayout: "fixed" });
-            }
             var style = getComputedStyle(element);
             var bottomPadding = parseFloat(getPropertyValue(style, "padding-bottom"));
             var bottomBorder = parseFloat(getPropertyValue(style, "border-bottom-width"));
@@ -13289,17 +13229,6 @@ function doCounters(a, f, def) {
     }
 }
 
-function updateCounters(style) {
-    var counterReset = getPropertyValue(style, "counter-reset");
-    if (counterReset) {
-        doCounters(splitProperty(counterReset, /^\s+/), resetCounter, 0);
-    }
-    var counterIncrement = getPropertyValue(style, "counter-increment");
-    if (counterIncrement) {
-        doCounters(splitProperty(counterIncrement, /^\s+/), incCounter, 1);
-    }
-}
-
 function parseColor$2(str, css) {
     var color = parseColor(str, true);
     if (color) {
@@ -13461,7 +13390,7 @@ function getComputedStyle(element, pseudoElt) {
     return window.getComputedStyle(element, pseudoElt || null);
 }
 
-function getPropertyValue(style, prop, defa) {
+function getPropertyValue(style, prop) {
     var val = style.getPropertyValue(prop);
     if (val == null || val === "") {
         if (browser$2.webkit) {
@@ -13474,11 +13403,7 @@ function getPropertyValue(style, prop, defa) {
             val = style.getPropertyValue("-ms-" + prop);
         }
     }
-    if (arguments.length > 2 && (val == null || val === "")) {
-        return defa;
-    } else {
-        return val;
-    }
+    return val;
 }
 
 function pleaseSetPropertyValue(style, prop, value, important) {
@@ -13815,7 +13740,6 @@ function _renderWithPseudoElements(element, group) {
     var fake = [];
     function pseudo(kind, place) {
         var style = getComputedStyle(element, kind);
-        updateCounters(style);
         if (style.content && style.content != "normal" && style.content != "none" && style.width != "0px") {
             var psel = element.ownerDocument.createElement(KENDO_PSEUDO_ELEMENT);
             psel.style.cssText = getCssText(style);
@@ -14404,83 +14328,86 @@ function _renderElement(element, group) {
             return;
         }
 
-        // START paint borders
-        // if all borders have equal colors...
-        if (top.color == right.color && top.color == bottom.color && top.color == left.color) {
+        { // eslint-disable-line no-constant-condition
+            // so that it's easy to comment out..  uglifyjs will drop the spurious if.
 
-            // if same widths too, we can draw the whole border by stroking a single path.
-            if (top.width == right.width && top.width == bottom.width && top.width == left.width)
-            {
-                if (shouldDrawLeft && shouldDrawRight) {
-                    // reduce box by half the border width, so we can draw it by stroking.
-                    box = innerBox(box, top.width/2);
+            // if all borders have equal colors...
+            if (top.color == right.color && top.color == bottom.color && top.color == left.color) {
 
-                    // adjust the border radiuses, again by top.width/2, and make the path element.
-                    var path = elementRoundBox(element, box, top.width/2);
-                    path.options.stroke = {
-                        color: top.color,
-                        width: top.width
-                    };
-                    group.append(path);
+                // if same widths too, we can draw the whole border by stroking a single path.
+                if (top.width == right.width && top.width == bottom.width && top.width == left.width)
+                {
+                    if (shouldDrawLeft && shouldDrawRight) {
+                        // reduce box by half the border width, so we can draw it by stroking.
+                        box = innerBox(box, top.width/2);
+
+                        // adjust the border radiuses, again by top.width/2, and make the path element.
+                        var path = elementRoundBox(element, box, top.width/2);
+                        path.options.stroke = {
+                            color: top.color,
+                            width: top.width
+                        };
+                        group.append(path);
+                        return;
+                    }
+                }
+            }
+
+            // if border radiuses are zero and widths are at most one pixel, we can again use simple
+            // paths.
+            if (rTL0.x === 0 && rTR0.x === 0 && rBR0.x === 0 && rBL0.x === 0) {
+                // alright, 1.9px will do as well.  the difference in color blending should not be
+                // noticeable.
+                if (top.width < 2 && left.width < 2 && right.width < 2 && bottom.width < 2) {
+                    // top border
+                    if (top.width > 0) {
+                        group.append(
+                            new Path({
+                                stroke: { width: top.width, color: top.color }
+                            })
+                                .moveTo(box.left, box.top + top.width/2)
+                                .lineTo(box.right, box.top + top.width/2)
+                        );
+                    }
+
+                    // bottom border
+                    if (bottom.width > 0) {
+                        group.append(
+                            new Path({
+                                stroke: { width: bottom.width, color: bottom.color }
+                            })
+                                .moveTo(box.left, box.bottom - bottom.width/2)
+                                .lineTo(box.right, box.bottom - bottom.width/2)
+                        );
+                    }
+
+                    // left border
+                    if (shouldDrawLeft) {
+                        group.append(
+                            new Path({
+                                stroke: { width: left.width, color: left.color }
+                            })
+                                .moveTo(box.left + left.width/2, box.top)
+                                .lineTo(box.left + left.width/2, box.bottom)
+                        );
+                    }
+
+                    // right border
+                    if (shouldDrawRight) {
+                        group.append(
+                            new Path({
+                                stroke: { width: right.width, color: right.color }
+                            })
+                                .moveTo(box.right - right.width/2, box.top)
+                                .lineTo(box.right - right.width/2, box.bottom)
+                        );
+                    }
+
                     return;
                 }
             }
+
         }
-
-        // if border radiuses are zero and widths are at most one pixel, we can again use simple
-        // paths.
-        if (rTL0.x === 0 && rTR0.x === 0 && rBR0.x === 0 && rBL0.x === 0) {
-            // alright, 1.9px will do as well.  the difference in color blending should not be
-            // noticeable.
-            if (top.width < 2 && left.width < 2 && right.width < 2 && bottom.width < 2) {
-                // top border
-                if (top.width > 0) {
-                    group.append(
-                        new Path({
-                            stroke: { width: top.width, color: top.color }
-                        })
-                            .moveTo(box.left, box.top + top.width/2)
-                            .lineTo(box.right, box.top + top.width/2)
-                    );
-                }
-
-                // bottom border
-                if (bottom.width > 0) {
-                    group.append(
-                        new Path({
-                            stroke: { width: bottom.width, color: bottom.color }
-                        })
-                            .moveTo(box.left, box.bottom - bottom.width/2)
-                            .lineTo(box.right, box.bottom - bottom.width/2)
-                    );
-                }
-
-                // left border
-                if (shouldDrawLeft) {
-                    group.append(
-                        new Path({
-                            stroke: { width: left.width, color: left.color }
-                        })
-                            .moveTo(box.left + left.width/2, box.top)
-                            .lineTo(box.left + left.width/2, box.bottom)
-                    );
-                }
-
-                // right border
-                if (shouldDrawRight) {
-                    group.append(
-                        new Path({
-                            stroke: { width: right.width, color: right.color }
-                        })
-                            .moveTo(box.right - right.width/2, box.top)
-                            .lineTo(box.right - right.width/2, box.bottom)
-                    );
-                }
-
-                return;
-            }
-        }
-        // END paint borders
 
         var tmp = adjustBorderRadiusForBox(box, rTL0, rTR0, rBR0, rBL0);
         var rTL = tmp.tl;
@@ -14877,7 +14804,7 @@ function renderContents(element, group) {
         break;
 
       default:
-        var children = [], floats = [], positioned = [];
+        var blocks = [], floats = [], inline = [], positioned = [];
         for (var i = element.firstChild; i; i = i.nextSibling) {
             switch (i.nodeType) {
               case 3:         // Text
@@ -14887,22 +14814,29 @@ function renderContents(element, group) {
                 break;
               case 1:         // Element
                 var style = getComputedStyle(i);
+                var display = getPropertyValue(style, "display");
                 var floating = getPropertyValue(style, "float");
                 var position = getPropertyValue(style, "position");
                 if (position != "static") {
                     positioned.push(i);
                 }
-                else if (floating != "none") {
-                    floats.push(i);
-                } else {
-                    children.push(i);
+                else if (display != "inline") {
+                    if (floating != "none") {
+                        floats.push(i);
+                    } else {
+                        blocks.push(i);
+                    }
+                }
+                else {
+                    inline.push(i);
                 }
                 break;
             }
         }
 
-        mergeSort(children, zIndexSort).forEach(function(el){ renderElement(el, group); });
+        mergeSort(blocks, zIndexSort).forEach(function(el){ renderElement(el, group); });
         mergeSort(floats, zIndexSort).forEach(function(el){ renderElement(el, group); });
+        mergeSort(inline, zIndexSort).forEach(function(el){ renderElement(el, group); });
         mergeSort(positioned, zIndexSort).forEach(function(el){ renderElement(el, group); });
     }
 }
@@ -14951,7 +14885,6 @@ function renderText(element, node, group) {
     var range = element.ownerDocument.createRange();
     var align$$1 = getPropertyValue(style, "text-align");
     var isJustified = align$$1 == "justify";
-    var columnCount = getPropertyValue(style, "column-count", 1);
     var whiteSpace = getPropertyValue(style, "white-space");
 
     // IE shrinks the text with text-overflow: ellipsis,
@@ -15055,7 +14988,7 @@ function renderText(element, node, group) {
 
         // for justified text we must split at each space, because space has variable width.
         var found = false;
-        if (isJustified || columnCount > 1) {
+        if (isJustified) {
             pos = text.substr(start).search(/\s/);
             if (pos >= 0) {
                 // we can only split there if it's on the same line, otherwise we'll fall back
@@ -15278,7 +15211,15 @@ function groupInStackingContext(element, group, zIndex) {
 function renderElement(element, container) {
     var style = getComputedStyle(element);
 
-    updateCounters(style);
+    var counterReset = getPropertyValue(style, "counter-reset");
+    if (counterReset) {
+        doCounters(splitProperty(counterReset, /^\s+/), resetCounter, 0);
+    }
+
+    var counterIncrement = getPropertyValue(style, "counter-increment");
+    if (counterIncrement) {
+        doCounters(splitProperty(counterIncrement, /^\s+/), incCounter, 1);
+    }
 
     if (/^(style|script|link|meta|iframe|svg|col|colgroup)$/i.test(element.tagName)) {
         return;
@@ -15395,7 +15336,7 @@ exports.drawDOM = drawDOM;
 exports.exportPDF = exportPDF;
 exports.exportImage = exportImage;
 exports.exportSVG = exportSVG;
-exports.animationFrame = animationFrameProxy;
+exports.animationFrame = animationFrame$1;
 exports.Class = Class;
 exports.Color = Color;
 exports.htmlEncode = htmlEncode;

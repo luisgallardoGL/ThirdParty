@@ -5,42 +5,42 @@
   "_args": [
     [
       {
-        "raw": "@progress/kendo-angular-intl@^0.11.1",
+        "raw": "@progress/kendo-angular-intl@0.10.0",
         "scope": "@progress",
         "escapedName": "@progress%2fkendo-angular-intl",
         "name": "@progress/kendo-angular-intl",
-        "rawSpec": "^0.11.1",
-        "spec": ">=0.11.1 <0.12.0",
-        "type": "range"
+        "rawSpec": "0.10.0",
+        "spec": "0.10.0",
+        "type": "version"
       },
-      "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI"
+      "c:\\workspace\\Capella\\UI\\FireflyUI"
     ]
   ],
-  "_from": "@progress/kendo-angular-intl@>=0.11.1 <0.12.0",
-  "_id": "@progress/kendo-angular-intl@0.11.1",
+  "_from": "@progress/kendo-angular-intl@0.10.0",
+  "_id": "@progress/kendo-angular-intl@0.10.0",
   "_inCache": true,
   "_location": "/@progress/kendo-angular-intl",
-  "_nodeVersion": "6.10.0",
+  "_nodeVersion": "6.9.5",
   "_npmUser": {},
   "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "@progress/kendo-angular-intl@^0.11.1",
+    "raw": "@progress/kendo-angular-intl@0.10.0",
     "scope": "@progress",
     "escapedName": "@progress%2fkendo-angular-intl",
     "name": "@progress/kendo-angular-intl",
-    "rawSpec": "^0.11.1",
-    "spec": ">=0.11.1 <0.12.0",
-    "type": "range"
+    "rawSpec": "0.10.0",
+    "spec": "0.10.0",
+    "type": "version"
   },
   "_requiredBy": [
-    "/"
+    "#USER"
   ],
-  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-intl/-/kendo-angular-intl-0.11.1.tgz",
-  "_shasum": "2d3a07cc43d44e3f36e89584e93b5625c6a88fcb",
+  "_resolved": "https://registry.npm.telerik.com/@progress%2fkendo-angular-intl/-/kendo-angular-intl-0.10.0.tgz",
+  "_shasum": "7c2f4b1ee89069c6c58fdf531ac6ee1b6c4f2a52",
   "_shrinkwrap": null,
-  "_spec": "@progress/kendo-angular-intl@^0.11.1",
-  "_where": "C:\\Source\\VillageHealth\\Capella\\UI\\FireflyUI",
+  "_spec": "@progress/kendo-angular-intl@0.10.0",
+  "_where": "c:\\workspace\\Capella\\UI\\FireflyUI",
   "author": {
     "name": "Progress"
   },
@@ -71,7 +71,7 @@
     }
   },
   "dependencies": {
-    "@telerik/kendo-intl": "^0.14.0"
+    "@telerik/kendo-intl": "^0.12.0"
   },
   "description": "Kendo UI Internationalization for Angular 2 components",
   "devDependencies": {
@@ -82,11 +82,8 @@
     "@angular/platform-browser": "~2.4.0",
     "@angular/platform-browser-dynamic": "~2.4.0",
     "@angular/platform-server": "~2.4.0",
-    "@progress/kendo-angular-layout": "^0.21.3",
     "@progress/kendo-angular-tasks": "^8.0.0",
-    "@progress/kendo-theme-default": "^2.0.0",
-    "@progress/kendo-typescript-tasks": "2.11.0",
-    "@telerik/kendo-intl": "^0.14.0",
+    "@telerik/kendo-intl": "^0.12.0",
     "cldr-data": "30.0.0",
     "codelyzer": "2.0.0",
     "core-js": "^2.2.2",
@@ -102,10 +99,10 @@
     "zone.js": "^0.7.2"
   },
   "dist": {
-    "shasum": "2d3a07cc43d44e3f36e89584e93b5625c6a88fcb",
-    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-intl/-/kendo-angular-intl-0.11.1.tgz"
+    "shasum": "7c2f4b1ee89069c6c58fdf531ac6ee1b6c4f2a52",
+    "tarball": "http://registry.npm.telerik.com/@progress%2fkendo-angular-intl/-/kendo-angular-intl-0.10.0.tgz"
   },
-  "gitHead": "c15f85cb1a5490f7a39526eb472131230cc7ae9d",
+  "gitHead": "f95a055293d936156a66db9ac3586ba32b59d9b8",
   "homepage": "https://github.com/telerik/kendo-angular-intl#readme",
   "jsnext:main": "dist/es/main.js",
   "keywords": [
@@ -142,5 +139,5 @@
     "typings": "typings prune && typings install"
   },
   "typings": "dist/es/main",
-  "version": "0.11.1"
+  "version": "0.10.0"
 }

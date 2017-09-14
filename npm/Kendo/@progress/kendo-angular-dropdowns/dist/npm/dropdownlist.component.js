@@ -23,6 +23,7 @@ var footer_template_directive_1 = require('./templates/footer-template.directive
 var no_data_template_directive_1 = require('./templates/no-data-template.directive');
 var navigation_action_1 = require('./navigation-action');
 var preventable_event_1 = require('./common/preventable-event');
+var kendo_angular_l10n_1 = require('@progress/kendo-angular-l10n');
 /**
  * @hidden
  */
@@ -49,8 +50,7 @@ exports.DROPDOWNLIST_VALUE_ACCESSOR = {
  * ```
  */
 var DropDownListComponent = (function () {
-    function DropDownListComponent(direction, selectionService, navigationService, wrapper, renderer, zone) {
-        this.direction = direction;
+    function DropDownListComponent(rtl, selectionService, navigationService, wrapper, renderer, zone) {
         /**
          * Sets the disabled state of the component.
          */
@@ -111,6 +111,7 @@ var DropDownListComponent = (function () {
         this.wrapperBlurred = new core_1.EventEmitter();
         this._open = false;
         this._popupSettings = { height: 200, animate: true };
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.selectionService = selectionService;
         this.navigationService = navigationService;
         this.wrapper = wrapper.nativeElement;
@@ -437,6 +438,23 @@ var DropDownListComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DropDownListComponent.prototype, "buttonClasses", {
+        /**
+         * @hidden
+         */
+        get: function () {
+            return (_a = {},
+                _a[this.iconClass] = !this.loading && this.iconClass,
+                _a['k-i-arrow-s'] = !this.loading && !this.iconClass,
+                _a['k-i-loading'] = this.loading,
+                _a['k-icon'] = true,
+                _a
+            );
+            var _a;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @hidden
      */
@@ -697,12 +715,12 @@ var DropDownListComponent = (function () {
                     exportAs: 'kendoDropDownList',
                     providers: [exports.DROPDOWNLIST_VALUE_ACCESSOR, selection_service_1.SelectionService, navigation_service_1.NavigationService],
                     selector: 'kendo-dropdownlist',
-                    template: "\n        <span #anchor unselectable=\"on\"\n          [ngClass]=\"{\n            'k-dropdown-wrap': true,\n            'k-state-default': !this.disabled,\n            'k-state-disabled': this.disabled,\n            'k-state-focused': this.isFocused\n        }\" >\n           <span [ngClass]=\"{ 'k-input': true }\" unselectable=\"on\">\n               <template *ngIf=\"valueTemplate\"\n                   [templateContext]=\"{\n                       templateRef: valueTemplate.templateRef,\n                       $implicit: value\n                   }\">\n               </template>\n               <template [ngIf]=\"!valueTemplate\">{{ getText() }}</template>\n           </span>\n           <span [ngClass]=\"{ 'k-select': true}\" unselectable=\"on\">\n               <span [ngClass]=\"{\n                   'k-icon': true,\n                   'k-i-arrow-s': !loading,\n                   'k-i-loading': loading\n               }\"></span>\n           </span>\n        </span>\n        <kendo-popup *ngIf=\"popupOpen\"\n            [anchor]=\"anchor\"\n            [animate]=\"popupSettings.animate\"\n            [popupClass]=\"listContainerClasses\"\n            [style.width]=\"popupWidth\"\n            [style.minWidth]=\"popupMinWidth\"\n            (anchorViewportLeave)=\"popupOpen=false\"\n            (mousedown)=\"onMouseDown($event)\"\n            (open)=\"popupOpened()\">\n            <!--filterable-->\n            <template [ngIf]=\"filterable\">\n                <span [ngClass]=\"{ 'k-list-filter': true }\" (click)=\"$event.stopImmediatePropagation()\">\n                    <input #filterInput\n                        [dir]=\"dir\"\n                        [(ngModel)]=\"filterText\"\n                        class=\"k-textbox\"\n                        (input)=\"handleFilter($event)\"\n                        (focus)=\"onFilterFocus()\" />\n                    <span [ngClass]=\"{ 'k-icon': true, 'k-i-search': true }\" unselectable=\"on\"></span>\n                </span>\n            </template>\n            <!--default item-->\n            <template [ngIf]=\"defaultItem && !itemTemplate\">\n                <div [ngClass]=\"setDefaultItemClasses()\" kendoDropDownsSelectable [index]=\"-1\">\n                    {{ getDefaultItemText() }}\n                </div>\n            </template>\n            <template [ngIf]=\"defaultItem && itemTemplate\">\n                <div [ngClass]=\"setDefaultItemClasses()\" kendoDropDownsSelectable [index]=\"-1\">\n                    <template\n                        [templateContext]=\"{\n                            templateRef: itemTemplate.templateRef,\n                            $implicit: defaultItem\n                        }\">\n                    </template>\n                </div>\n            </template>\n            <!--header template-->\n            <template *ngIf=\"headerTemplate\"\n                [templateContext]=\"{\n                    templateRef: headerTemplate.templateRef\n                }\">\n            </template>\n            <!--list-->\n            <kendo-list\n                [id]=\"listBoxId\"\n                [optionPrefix]=\"optionPrefix\"\n                [data]=\"data\"\n                [textField]=\"textField\"\n                [valueField]=\"valueField\"\n                [template]=\"itemTemplate\"\n                [height]=\"height\"\n                [show]=\"popupOpen\"\n                >\n            </kendo-list>\n            <!--no-data template-->\n            <div class=\"k-nodata\" *ngIf=\"data.length === 0\">\n                <template [ngIf]=\"noDataTemplate\"\n                    [templateContext]=\"{\n                        templateRef: noDataTemplate ? noDataTemplate.templateRef : undefined\n                    }\">\n                </template>\n                <template [ngIf]=\"!noDataTemplate\">\n                    <div>NO DATA FOUND.</div>\n                </template>\n            </div>\n            <!--footer template-->\n            <template *ngIf=\"footerTemplate\"\n                [templateContext]=\"{\n                    templateRef: footerTemplate.templateRef\n                }\">\n            </template>\n        </kendo-popup>\n  "
+                    template: "\n        <span #anchor unselectable=\"on\"\n          [ngClass]=\"{\n            'k-dropdown-wrap': true,\n            'k-state-default': !this.disabled,\n            'k-state-disabled': this.disabled,\n            'k-state-focused': this.isFocused\n        }\" >\n           <span [ngClass]=\"{ 'k-input': true }\" unselectable=\"on\">\n               <template *ngIf=\"valueTemplate\"\n                   [templateContext]=\"{\n                       templateRef: valueTemplate.templateRef,\n                       $implicit: value\n                   }\">\n               </template>\n               <template [ngIf]=\"!valueTemplate\">{{ getText() }}</template>\n           </span>\n           <span [ngClass]=\"{ 'k-select': true}\" unselectable=\"on\">\n               <span [ngClass]=\"buttonClasses\"></span>\n           </span>\n        </span>\n        <kendo-popup *ngIf=\"popupOpen\"\n            [anchor]=\"anchor\"\n            [animate]=\"popupSettings.animate\"\n            [popupClass]=\"listContainerClasses\"\n            [style.width]=\"popupWidth\"\n            [style.minWidth]=\"popupMinWidth\"\n            (anchorViewportLeave)=\"popupOpen=false\"\n            (mousedown)=\"onMouseDown($event)\"\n            (open)=\"popupOpened()\">\n            <!--filterable-->\n            <template [ngIf]=\"filterable\">\n                <span [ngClass]=\"{ 'k-list-filter': true }\" (click)=\"$event.stopImmediatePropagation()\">\n                    <input #filterInput\n                        [dir]=\"dir\"\n                        [(ngModel)]=\"filterText\"\n                        class=\"k-textbox\"\n                        (input)=\"handleFilter($event)\"\n                        (focus)=\"onFilterFocus()\" />\n                    <span [ngClass]=\"{ 'k-icon': true, 'k-i-search': true }\" unselectable=\"on\"></span>\n                </span>\n            </template>\n            <!--default item-->\n            <template [ngIf]=\"defaultItem && !itemTemplate\">\n                <div [ngClass]=\"setDefaultItemClasses()\" kendoDropDownsSelectable [index]=\"-1\">\n                    {{ getDefaultItemText() }}\n                </div>\n            </template>\n            <template [ngIf]=\"defaultItem && itemTemplate\">\n                <div [ngClass]=\"setDefaultItemClasses()\" kendoDropDownsSelectable [index]=\"-1\">\n                    <template\n                        [templateContext]=\"{\n                            templateRef: itemTemplate.templateRef,\n                            $implicit: defaultItem\n                        }\">\n                    </template>\n                </div>\n            </template>\n            <!--header template-->\n            <template *ngIf=\"headerTemplate\"\n                [templateContext]=\"{\n                    templateRef: headerTemplate.templateRef\n                }\">\n            </template>\n            <!--list-->\n            <kendo-list\n                [id]=\"listBoxId\"\n                [optionPrefix]=\"optionPrefix\"\n                [data]=\"data\"\n                [textField]=\"textField\"\n                [valueField]=\"valueField\"\n                [template]=\"itemTemplate\"\n                [height]=\"height\"\n                [show]=\"popupOpen\"\n                >\n            </kendo-list>\n            <!--no-data template-->\n            <div class=\"k-nodata\" *ngIf=\"data.length === 0\">\n                <template [ngIf]=\"noDataTemplate\"\n                    [templateContext]=\"{\n                        templateRef: noDataTemplate ? noDataTemplate.templateRef : undefined\n                    }\">\n                </template>\n                <template [ngIf]=\"!noDataTemplate\">\n                    <div>NO DATA FOUND.</div>\n                </template>\n            </div>\n            <!--footer template-->\n            <template *ngIf=\"footerTemplate\"\n                [templateContext]=\"{\n                    templateRef: footerTemplate.templateRef\n                }\">\n            </template>\n        </kendo-popup>\n  "
                 },] },
     ];
     /** @nocollapse */
     DropDownListComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [kendo_angular_l10n_1.RTL,] },] },
         { type: selection_service_1.SelectionService, },
         { type: navigation_service_1.NavigationService, },
         { type: core_1.ElementRef, },
@@ -710,6 +728,7 @@ var DropDownListComponent = (function () {
         { type: core_1.NgZone, },
     ]; };
     DropDownListComponent.propDecorators = {
+        'iconClass': [{ type: core_1.Input },],
         'loading': [{ type: core_1.Input },],
         'data': [{ type: core_1.Input },],
         'value': [{ type: core_1.Input },],

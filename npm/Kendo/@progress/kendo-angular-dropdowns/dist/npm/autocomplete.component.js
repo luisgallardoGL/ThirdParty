@@ -15,6 +15,7 @@ var navigation_action_1 = require('./navigation-action');
 var no_data_template_directive_1 = require('./templates/no-data-template.directive');
 var keys_1 = require('./common/keys');
 var preventable_event_1 = require('./common/preventable-event');
+var kendo_angular_l10n_1 = require('@progress/kendo-angular-l10n');
 /**
  * @hidden
  */
@@ -44,8 +45,7 @@ exports.AUTOCOMPLETE_VALUE_ACCESSOR = {
  * ```
  */
 var AutoCompleteComponent = (function () {
-    function AutoCompleteComponent(direction, selectionService, navigationService, wrapper) {
-        this.direction = direction;
+    function AutoCompleteComponent(rtl, selectionService, navigationService, wrapper) {
         this.selectionService = selectionService;
         this.navigationService = navigationService;
         /**
@@ -97,6 +97,7 @@ var AutoCompleteComponent = (function () {
         this._open = false;
         this._value = "";
         this._isFocused = false;
+        this.direction = rtl ? 'rtl' : 'ltr';
         this.wrapper = wrapper.nativeElement;
         this.data = [];
         this.subscribeEvents();
@@ -555,7 +556,7 @@ var AutoCompleteComponent = (function () {
     ];
     /** @nocollapse */
     AutoCompleteComponent.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: ['kendo-direction',] },] },
+        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [kendo_angular_l10n_1.RTL,] },] },
         { type: selection_service_1.SelectionService, },
         { type: navigation_service_1.NavigationService, },
         { type: core_1.ElementRef, },

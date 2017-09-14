@@ -1,4 +1,6 @@
 import { cldr } from './info';
+import { territoryCurrencyCode } from './currency';
+import localeTerritory from './territory';
 
 var LATIN_NUMBER_FORMATS = "Formats-numberSystem-latn";
 var LATIN_NUMBER_SYMBOLS = "symbols-numberSystem-latn";
@@ -57,6 +59,10 @@ export default function loadNumbersInfo(locale, info) {
             }
         } else if (field === "currencies") {
             numbers.currencies = info[field];
+            var territory = localeTerritory(localeInfo);
+            if (territory && cldr.supplemental.currencyData) {
+                numbers.localeCurrency = territoryCurrencyCode(territory);
+            }
         }
     }
 }

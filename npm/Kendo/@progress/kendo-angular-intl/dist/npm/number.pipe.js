@@ -34,7 +34,7 @@ var NumberPipe = (function () {
         if (typeof value === 'string') {
             value = this.intlService.parseNumber(value);
         }
-        if (value !== null && value !== undefined) {
+        if (value) {
             return this.intlService.formatNumber(value, format);
         }
         return value;

@@ -136,8 +136,7 @@ var defaultData = {
                     "MMMd": "MMM d",
                     "MMMEd": "E, MMM d",
                     "MMMMd": "MMMM d",
-                    "MMMMW-count-one": "'week' W 'of' MMMM",
-                    "MMMMW-count-other": "'week' W 'of' MMMM",
+                    "MMMMW": "'week' W 'of' MMM",
                     "ms": "mm:ss",
                     "y": "y",
                     "yM": "M/y",
@@ -149,8 +148,7 @@ var defaultData = {
                     "yMMMM": "MMMM y",
                     "yQQQ": "QQQ y",
                     "yQQQQ": "QQQQ y",
-                    "yw-count-one": "'week' w 'of' y",
-                    "yw-count-other": "'week' w 'of' y"
+                    "yw": "'week' w 'of' y"
                 },
                 "appendItems": {
                     "Day": "{0} ({2}: {1})",
@@ -582,60 +580,6 @@ var defaultData = {
                         "1-alt-variant": "CE"
                     }
                 }
-            },
-            "dateFields": {
-                "era": {
-                    "wide": "era"
-                },
-                "year": {
-                    "wide": "year",
-                    "short": "yr.",
-                    "narrow": "yr."
-                },
-                "quarter": {
-                    "wide": "quarter",
-                    "short": "qtr.",
-                    "narrow": "qtr."
-                },
-                "month": {
-                    "wide": "month",
-                    "short": "mo.",
-                    "narrow": "mo."
-                },
-                "week": {
-                    "wide": "week",
-                    "short": "wk.",
-                    "narrow": "wk."
-                },
-                "day": {
-                    "wide": "day",
-                    "short": "day",
-                    "narrow": "day"
-                },
-                "weekday": {
-                    "wide": "day of the week"
-                },
-                "dayperiod": {
-                    "wide": "AM/PM"
-                },
-                "hour": {
-                    "wide": "hour",
-                    "short": "hr.",
-                    "narrow": "hr."
-                },
-                "minute": {
-                    "wide": "minute",
-                    "short": "min.",
-                    "narrow": "min."
-                },
-                "second": {
-                    "wide": "second",
-                    "short": "sec.",
-                    "narrow": "sec."
-                },
-                "zone": {
-                    "wide": "time zone"
-                }
             }
         }
     },
@@ -782,201 +726,6 @@ function localeInfo(locale) {
     throw errors.NoLocale.error(locale);
 }
 
-var LATIN_NUMBER_FORMATS = "Formats-numberSystem-latn";
-var LATIN_NUMBER_SYMBOLS = "symbols-numberSystem-latn";
-var GROUP_SEPARATOR = ",";
-var LIST_SEPARATOR = ";";
-var DECIMAL_SEPARATOR = ".";
-
-var patternRegExp = /([ #,0. ]+)/g;
-var cldrCurrencyRegExp = /¤/g;
-
-function getPatterns(pattern) {
-    patternRegExp.lastIndex = 0;
-
-    return pattern.replace(cldrCurrencyRegExp, "$").replace(patternRegExp, "n").split(";");
-}
-
-function getGroupSize(pattern) {
-    patternRegExp.lastIndex = 0;
-
-    var numberPatterns = patternRegExp.exec(pattern.split(LIST_SEPARATOR)[0])[0].split(DECIMAL_SEPARATOR);
-    var integer = numberPatterns[0];
-
-    var groupSize = integer.split(GROUP_SEPARATOR).slice(1).map(function(group) {
-        return group.length;
-    }).reverse();
-
-    return groupSize;
-}
-
-function loadCurrencyUnitPatterns(currencyInfo, currencyFormats) {
-    for (var field in currencyFormats) {
-        if (field.startsWith("unitPattern")) {
-            currencyInfo[field] = currencyFormats[field].replace("{0}", "n").replace("{1}", "$");
-        }
-    }
-}
-
-function loadNumbersInfo(locale, info) {
-    var localeInfo$$1 = cldr[locale];
-    var numbers = localeInfo$$1.numbers = localeInfo$$1.numbers || {};
-    numbers.symbols = numbers.symbols || {};
-    for (var field in info) {
-        if (field === LATIN_NUMBER_SYMBOLS) {
-            Object.assign(numbers.symbols, info[field]);
-        } else if (field.includes(LATIN_NUMBER_FORMATS)) {
-            var style = field.substr(0, field.indexOf(LATIN_NUMBER_FORMATS));
-            var pattern = info[field].standard;
-            numbers[style] = {
-                patterns: getPatterns(pattern)
-            };
-            if (style === "currency") {
-                numbers[style].groupSize = getGroupSize((info["decimal" + LATIN_NUMBER_FORMATS] || info[field]).standard);
-                loadCurrencyUnitPatterns(numbers[style], info[field]);
-            } else {
-                numbers[style].groupSize = getGroupSize(pattern);
-            }
-        } else if (field === "currencies") {
-            numbers.currencies = info[field];
-        }
-    }
-}
-
-var predefinedDatePatterns = {
-    s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-    u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'"
-};
-var datePatterns = {
-    d: [ [ "dateTimeFormats", "availableFormats", "yMd" ] ],
-    D: [ [ "dateFormats", "full" ] ],
-    m: [ [ "dateTimeFormats", "availableFormats", "MMMd" ] ],
-    M: [ [ "dateTimeFormats", "availableFormats", "MMMMd" ] ],
-    y: [ [ "dateTimeFormats", "availableFormats", "yMMM" ] ],
-    Y: [ [ "dateTimeFormats", "availableFormats", "yMMMM" ] ],
-    F: [ [ "dateFormats", "full" ], [ "timeFormats", "medium" ] ],
-    g: [ [ "dateTimeFormats", "availableFormats", "yMd" ], [ "timeFormats", "short" ] ],
-    G: [ [ "dateTimeFormats", "availableFormats", "yMd" ], [ "timeFormats", "medium" ] ],
-    t: [ [ "timeFormats", "short" ] ],
-    T: [ [ "timeFormats", "medium" ] ]
-};
-
-function toArray(obj) {
-    var result = [];
-    var names = Object.getOwnPropertyNames(obj);
-    for (var idx = 0; idx < names.length; idx++) {
-        var value = obj[names[idx]];
-        result.push(value);
-    }
-    return result;
-}
-
-function getCalendarNames(info, isObj) {
-    var result = {};
-    for (var formatType in info) {
-        var names = result[formatType] = {};
-        for (var format in info[formatType]) {
-            var formats = info[formatType][format];
-            names[format] = isObj ? formats : toArray(formats);
-        }
-    }
-    return result;
-}
-
-function getEraNames(eras) {
-    var result = {};
-    var format = result.format = {};
-    var eraNameMap = {
-        eraAbbr: "abbreviated",
-        eraNames: "wide",
-        eraNarrow: "narrow"
-    };
-
-    for (var eraFormatName in eras) {
-        var formatName = eraNameMap[eraFormatName];
-        format[formatName] = eras[eraFormatName];
-    }
-
-    return result;
-}
-
-function loadCalendarNames(locale, calendar) {
-    var localeCalendar = cldr[locale].calendar;
-    localeCalendar.days = getCalendarNames(calendar.days);
-    localeCalendar.months = getCalendarNames(calendar.months);
-    localeCalendar.quarters = getCalendarNames(calendar.quarters);
-    localeCalendar.dayPeriods = getCalendarNames(calendar.dayPeriods, true);
-
-    localeCalendar.eras = getEraNames(calendar.eras);
-}
-
-function loadCalendarDateFields(locale, fields) {
-    var localeCalendar = cldr[locale].calendar;
-    var dateFields = {};
-
-    for (var field in fields) {
-        var ref = field.split('-');
-        var fieldName = ref[0];
-        var formatType = ref[1]; if ( formatType === void 0 ) formatType = 'wide';
-        var fieldInfo = dateFields[fieldName] || {};
-        var displayName = fields[field].displayName;
-
-        if (!displayName) { continue; }
-
-        fieldInfo[formatType] = displayName;
-        dateFields[fieldName] = fieldInfo;
-    }
-
-    localeCalendar.dateFields = dateFields;
-}
-
-function getPredefinedFormat(paths, calendar) {
-    var result = [];
-
-    for (var pathIdx = 0; pathIdx < paths.length; pathIdx++) {
-        var fields = paths[ pathIdx ];
-        var pattern = calendar;
-        for (var idx = 0; idx < fields.length; idx++) {
-            pattern = pattern[fields[idx]];
-        }
-        result.push(pattern);
-    }
-
-    return result.join(" ");
-}
-
-function loadCalendarPatterns(locale, calendar) {
-    var cldrCalendar = cldr[locale].calendar;
-    var patterns = cldrCalendar.patterns = {};
-    for (var pattern in datePatterns) {
-        patterns[pattern] = getPredefinedFormat(datePatterns[pattern], calendar);
-    }
-
-    for (var pattern$1 in predefinedDatePatterns) {
-        patterns[pattern$1] = predefinedDatePatterns[pattern$1];
-    }
-
-    cldrCalendar.dateTimeFormats = calendar.dateTimeFormats;
-    cldrCalendar.timeFormats = calendar.timeFormats;
-    cldrCalendar.dateFormats = calendar.dateFormats;
-}
-
-
-function loadCalendarInfo(locale, info) {
-    var calendar = cldr[locale].calendar = cldr[locale].calendar || {};
-    for (var field in info) {
-        if (field === "timeZoneNames") {
-            calendar.gmtFormat = info[field].gmtFormat;
-            calendar.gmtZeroFormat = info[field].gmtZeroFormat;
-        } else if (field === "calendars" && info[field].gregorian) {
-            loadCalendarPatterns(locale, info[field].gregorian);
-            loadCalendarNames(locale, info[field].gregorian);
-        } else if (field === "fields") {
-            loadCalendarDateFields(locale, info.fields);
-        }
-    }
-}
-
 function territoryFromName(name) {
     var parts = name.split("-");
     var length = parts.length;
@@ -1008,99 +757,14 @@ function localeTerritory(info) {
     return territory;
 }
 
-function loadLocale(locale, info) {
-    for (var field in info) {
-        if (field === "numbers") {
-            loadNumbersInfo(locale, info[field]);
-        } else if (field === "dates") {
-            loadCalendarInfo(locale, info[field]);
-        }
-    }
-}
-
-function load() {
-    var arguments$1 = arguments;
-
-    var length = arguments.length;
-    for (var idx = 0; idx < length; idx++) {
-        var entry = arguments$1[idx];
-        if (entry.main) {
-            var locale = Object.keys(entry.main)[0];
-            var info = entry.main[locale];
-            var localeInfo$$1 = cldr[locale] = cldr[locale] || {};
-
-            localeInfo$$1.name = localeInfo$$1.name || locale;
-            localeInfo$$1.identity = localeInfo$$1.identity || info.identity;
-
-            localeTerritory(localeInfo$$1);
-            loadLocale(locale, info);
-        } else if (entry.supplemental) {
-            if (entry.supplemental.weekData) {
-                cldr.supplemental.weekData = {
-                    firstDay: entry.supplemental.weekData.firstDay
-                };
-            } else {
-                Object.assign(cldr.supplemental, entry.supplemental);
-            }
-        }
-    }
-}
-
-function dateFieldName(options, locale) {
-    if ( locale === void 0 ) locale = "en";
-
-    var info = localeInfo(locale);
-    var dateFields = info.calendar.dateFields || {};
-    var fieldNameInfo = dateFields[options.type] || {};
-
-    return fieldNameInfo[options.nameType] || fieldNameInfo['wide'];
-}
-
-function lowerArray(arr) {
-    var result = [];
-    for (var idx = 0; idx < arr.length; idx++) {
-        result.push(arr[idx].toLowerCase());
-    }
-    return result;
-}
-
-function lowerObject(obj) {
-    var result = {};
-    for (var field in obj) {
-        result[field] = obj[field].toLowerCase();
-    }
-    return result;
-}
-
-function cloneLower(obj) {
-    var result = Array.isArray(obj) ? lowerArray(obj) : lowerObject(obj);
-    return result;
-}
-
-function dateFormatNames(locale, options) {
-    var type = options.type;
-    var nameType = options.nameType;
-    var standAlone = options.standAlone;
-    var lower = options.lower;
-    var info = getLocaleInfo(locale);
-    var formatType = standAlone ? "stand-alone" : "format";
-    var lowerNameType = (lower ? "lower-" : "") + nameType;
-    var formatNames = info.calendar[type][formatType];
-    var result = formatNames[lowerNameType];
-    if (!result && lower) {
-        result = formatNames[lowerNameType] = cloneLower(formatNames[nameType]);
-    }
-    return result;
-}
-
-function parseRangeDate(value) {
+var parseRangeDate = function(value) {
     var parts = value.split('-');
     var year = parseInt(parts[0], 10);
     var month = parseInt(parts[1], 10) - 1;
     var day = parseInt(parts[2], 10);
 
     return new Date(year, month, day);
-}
+};
 
 var NoCurrency = errors.NoCurrency;
 var NoCurrencyDisplay = errors.NoCurrencyDisplay;
@@ -1251,6 +915,258 @@ function localeCurrency(locale, throwIfNoValid) {
     }
 
     return numbers.localeCurrency;
+}
+
+var LATIN_NUMBER_FORMATS = "Formats-numberSystem-latn";
+var LATIN_NUMBER_SYMBOLS = "symbols-numberSystem-latn";
+var GROUP_SEPARATOR = ",";
+var LIST_SEPARATOR = ";";
+var DECIMAL_SEPARATOR = ".";
+
+var patternRegExp = /([ #,0. ]+)/g;
+var cldrCurrencyRegExp = /¤/g;
+
+function getPatterns(pattern) {
+    patternRegExp.lastIndex = 0;
+
+    return pattern.replace(cldrCurrencyRegExp, "$").replace(patternRegExp, "n").split(";");
+}
+
+function getGroupSize(pattern) {
+    patternRegExp.lastIndex = 0;
+
+    var numberPatterns = patternRegExp.exec(pattern.split(LIST_SEPARATOR)[0])[0].split(DECIMAL_SEPARATOR);
+    var integer = numberPatterns[0];
+
+    var groupSize = integer.split(GROUP_SEPARATOR).slice(1).map(function(group) {
+        return group.length;
+    }).reverse();
+
+    return groupSize;
+}
+
+function loadCurrencyUnitPatterns(currencyInfo, currencyFormats) {
+    for (var field in currencyFormats) {
+        if (field.startsWith("unitPattern")) {
+            currencyInfo[field] = currencyFormats[field].replace("{0}", "n").replace("{1}", "$");
+        }
+    }
+}
+
+function loadNumbersInfo(locale, info) {
+    var localeInfo$$1 = cldr[locale];
+    var numbers = localeInfo$$1.numbers = localeInfo$$1.numbers || {};
+    numbers.symbols = numbers.symbols || {};
+    for (var field in info) {
+        if (field === LATIN_NUMBER_SYMBOLS) {
+            Object.assign(numbers.symbols, info[field]);
+        } else if (field.includes(LATIN_NUMBER_FORMATS)) {
+            var style = field.substr(0, field.indexOf(LATIN_NUMBER_FORMATS));
+            var pattern = info[field].standard;
+            numbers[style] = {
+                patterns: getPatterns(pattern)
+            };
+            if (style === "currency") {
+                numbers[style].groupSize = getGroupSize((info["decimal" + LATIN_NUMBER_FORMATS] || info[field]).standard);
+                loadCurrencyUnitPatterns(numbers[style], info[field]);
+            } else {
+                numbers[style].groupSize = getGroupSize(pattern);
+            }
+        } else if (field === "currencies") {
+            numbers.currencies = info[field];
+            var territory = localeTerritory(localeInfo$$1);
+            if (territory && cldr.supplemental.currencyData) {
+                numbers.localeCurrency = territoryCurrencyCode(territory);
+            }
+        }
+    }
+}
+
+var predefinedDatePatterns = {
+    s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
+    u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'"
+};
+var datePatterns = {
+    d: [ [ "dateTimeFormats", "availableFormats", "yMd" ] ],
+    D: [ [ "dateFormats", "full" ] ],
+    m: [ [ "dateTimeFormats", "availableFormats", "MMMd" ] ],
+    M: [ [ "dateTimeFormats", "availableFormats", "MMMMd" ] ],
+    y: [ [ "dateTimeFormats", "availableFormats", "yMMM" ] ],
+    Y: [ [ "dateTimeFormats", "availableFormats", "yMMMM" ] ],
+    F: [ [ "dateFormats", "full" ], [ "timeFormats", "medium" ] ],
+    g: [ [ "dateTimeFormats", "availableFormats", "yMd" ], [ "timeFormats", "short" ] ],
+    G: [ [ "dateTimeFormats", "availableFormats", "yMd" ], [ "timeFormats", "medium" ] ],
+    t: [ [ "timeFormats", "short" ] ],
+    T: [ [ "timeFormats", "medium" ] ]
+};
+
+function toArray(obj) {
+    var result = [];
+    var names = Object.getOwnPropertyNames(obj);
+    for (var idx = 0; idx < names.length; idx++) {
+        var value = obj[names[idx]];
+        result.push(value);
+    }
+    return result;
+}
+
+function getCalendarNames(info, isObj) {
+    var result = {};
+    for (var formatType in info) {
+        var names = result[formatType] = {};
+        for (var format in info[formatType]) {
+            var formats = info[formatType][format];
+            names[format] = isObj ? formats : toArray(formats);
+        }
+    }
+    return result;
+}
+
+function getEraNames(eras) {
+    var result = {};
+    var format = result.format = {};
+    var eraNameMap = {
+        eraAbbr: "abbreviated",
+        eraNames: "wide",
+        eraNarrow: "narrow"
+    };
+
+    for (var eraFormatName in eras) {
+        var formatName = eraNameMap[eraFormatName];
+        format[formatName] = eras[eraFormatName];
+    }
+
+    return result;
+}
+
+function loadCalendarNames(locale, calendar) {
+    var localeCalendar = cldr[locale].calendar;
+    localeCalendar.days = getCalendarNames(calendar.days);
+    localeCalendar.months = getCalendarNames(calendar.months);
+    localeCalendar.quarters = getCalendarNames(calendar.quarters);
+    localeCalendar.dayPeriods = getCalendarNames(calendar.dayPeriods, true);
+
+    localeCalendar.eras = getEraNames(calendar.eras);
+}
+
+function getPredefinedFormat(paths, calendar) {
+    var result = [];
+
+    for (var pathIdx = 0; pathIdx < paths.length; pathIdx++) {
+        var fields = paths[ pathIdx ];
+        var pattern = calendar;
+        for (var idx = 0; idx < fields.length; idx++) {
+            pattern = pattern[fields[idx]];
+        }
+        result.push(pattern);
+    }
+
+    return result.join(" ");
+}
+
+function loadCalendarPatterns(locale, calendar) {
+    var cldrCalendar = cldr[locale].calendar;
+    var patterns = cldrCalendar.patterns = {};
+    for (var pattern in datePatterns) {
+        patterns[pattern] = getPredefinedFormat(datePatterns[pattern], calendar);
+    }
+
+    for (var pattern$1 in predefinedDatePatterns) {
+        patterns[pattern$1] = predefinedDatePatterns[pattern$1];
+    }
+
+    cldrCalendar.dateTimeFormats = calendar.dateTimeFormats;
+    cldrCalendar.timeFormats = calendar.timeFormats;
+    cldrCalendar.dateFormats = calendar.dateFormats;
+}
+
+
+function loadCalendarInfo(locale, info) {
+    var calendar = cldr[locale].calendar = cldr[locale].calendar || {};
+    for (var field in info) {
+        if (field === "timeZoneNames") {
+            calendar.gmtFormat = info[field].gmtFormat;
+            calendar.gmtZeroFormat = info[field].gmtZeroFormat;
+        } else if (field === "calendars" && info[field].gregorian) {
+            loadCalendarPatterns(locale, info[field].gregorian);
+            loadCalendarNames(locale, info[field].gregorian);
+        }
+    }
+}
+
+function loadLocale(locale, info) {
+    for (var field in info) {
+        if (field === "numbers") {
+            loadNumbersInfo(locale, info[field]);
+        } else if (field === "dates") {
+            loadCalendarInfo(locale, info[field]);
+        }
+    }
+}
+
+function load() {
+    var arguments$1 = arguments;
+
+    var length = arguments.length;
+    for (var idx = 0; idx < length; idx++) {
+        var entry = arguments$1[idx];
+        if (entry.main) {
+            var locale = Object.keys(entry.main)[0];
+            var info = entry.main[locale];
+            var localeInfo$$1 = cldr[locale] = cldr[locale] || {};
+
+            localeInfo$$1.name = localeInfo$$1.name || locale;
+            localeInfo$$1.identity = localeInfo$$1.identity || info.identity;
+
+            localeTerritory(localeInfo$$1);
+            loadLocale(locale, info);
+        } else if (entry.supplemental) {
+            if (entry.supplemental.weekData) {
+                cldr.supplemental.weekData = {
+                    firstDay: entry.supplemental.weekData.firstDay
+                };
+            } else {
+                Object.assign(cldr.supplemental, entry.supplemental);
+            }
+        }
+    }
+}
+
+function lowerArray(arr) {
+    var result = [];
+    for (var idx = 0; idx < arr.length; idx++) {
+        result.push(arr[idx].toLowerCase());
+    }
+    return result;
+}
+
+function lowerObject(obj) {
+    var result = {};
+    for (var field in obj) {
+        result[field] = obj[field].toLowerCase();
+    }
+    return result;
+}
+
+function cloneLower(obj) {
+    var result = Array.isArray(obj) ? lowerArray(obj) : lowerObject(obj);
+    return result;
+}
+
+function dateFormatNames(locale, options) {
+    var type = options.type;
+    var nameType = options.nameType;
+    var standAlone = options.standAlone;
+    var lower = options.lower;
+    var info = getLocaleInfo(locale);
+    var formatType = standAlone ? "stand-alone" : "format";
+    var lowerNameType = (lower ? "lower-" : "") + nameType;
+    var formatNames = info.calendar[type][formatType];
+    var result = formatNames[lowerNameType];
+    if (!result && lower) {
+        result = formatNames[lowerNameType] = cloneLower(formatNames[nameType]);
+    }
+    return result;
 }
 
 var NoWeekData = errors.NoWeekData;
@@ -1822,7 +1738,7 @@ function formatNumber(number, format, locale) {
     if ( format === void 0 ) format = "n";
     if ( locale === void 0 ) locale = "en";
 
-    if (number === undefined || number === null) {
+    if (number === undefined) {
         return "";
     }
 
@@ -2153,10 +2069,6 @@ function datePattern(format, info) {
             result = format;
         }
     } else if (format) {
-        if (format.pattern) {
-            return format.pattern;
-        }
-
         var skeleton = format.skeleton;
         if (!skeleton) {
             if (format.datetime) {
@@ -2212,34 +2124,6 @@ var DATE_STRING = "[object Date]";
 function isDate(value) {
     return objectToString.call(value) === DATE_STRING;
 }
-
-var MONTH = 'month';
-var HOUR = 'hour';
-var ZONE = 'zone';
-var WEEKDAY = 'weekday';
-var QUARTER = 'quarter';
-
-var DATE_FIELD_MAP = {
-    'G': 'era',
-    'y': 'year',
-    'q': QUARTER,
-    'Q': QUARTER,
-    'M': MONTH,
-    'L': MONTH,
-    'd': 'day',
-    'E': WEEKDAY,
-    'c': WEEKDAY,
-    'e': WEEKDAY,
-    'h': HOUR,
-    'H': HOUR,
-    'm': 'minute',
-    's': 'second',
-    'a': 'dayperiod',
-    'x': ZONE,
-    'X': ZONE,
-    'z': ZONE,
-    'Z': ZONE
-};
 
 var dateFormatRegExp = /d{1,2}|E{1,6}|e{1,6}|c{3,6}|c{1}|M{1,5}|L{1,5}|y{1,4}|H{1,2}|h{1,2}|m{1,2}|a{1,5}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|x{1,5}|X{1,5}|G{1,5}|q{1,5}|Q{1,5}|"[^"]*"|'[^']*'/g;
 
@@ -2297,7 +2181,6 @@ function formatTimeZone(date, info, options) {
 
     return result;
 }
-
 function formatDayOfWeek(date, formatLength, info, standAlone) {
     var result;
     if (formatLength < 3) {
@@ -2307,6 +2190,7 @@ function formatDayOfWeek(date, formatLength, info, standAlone) {
     }
     return result;
 }
+
 
 var formatters = {};
 
@@ -2415,11 +2299,12 @@ formatters.q = function(date, formatLength, info) {
 
 formatters.Q = formatQuarter;
 
-function formatDate(date, format, locale) {
+function dateGenericFormat(date, format, locale, returnPattern) {
     if ( locale === void 0 ) locale = "en";
+    if ( returnPattern === void 0 ) returnPattern = false;
 
     if (!isDate(date)) {
-        return date;
+        return returnPattern ? format : date;
     }
 
     var info = localeInfo(locale);
@@ -2433,10 +2318,24 @@ function formatDate(date, format, locale) {
             result = match.slice(1, formatLength - 1);
         } else {
             result = formatters[match[0]](date, formatLength, info);
-        }
 
+            if (returnPattern) {
+                var length = (result || "").toString().length;
+                result = "";
+                while (length > 0) {
+                    result += match[0];
+                    length--;
+                }
+            }
+        }
         return result;
     });
+}
+
+function formatDate(date, format, locale) {
+    if ( locale === void 0 ) locale = "en";
+
+    return dateGenericFormat(date, format, locale, false);
 }
 
 function convertTimeZone(date, fromOffset, toOffset) {
@@ -3019,108 +2918,10 @@ function parseDate(value, formats, locale) {
     return date;
 }
 
-var NAME_TYPES = {
-    month: {
-        type: 'months',
-        minLength: 3,
-        standAlone: 'L'
-    },
+function dateFormatString(date, format, locale) {
+    if ( locale === void 0 ) locale = "en";
 
-    quarter: {
-        type: 'quarters',
-        minLength: 3,
-        standAlone: 'q'
-    },
-
-    weekday: {
-        type: 'days',
-        minLength: {
-            E: 0,
-            c: 3,
-            e: 3
-        },
-        standAlone: 'c'
-    },
-
-    dayperiod: {
-        type: 'dayPeriods',
-        minLength: 0
-    },
-
-    era: {
-        type: 'eras',
-        minLength: 0
-    }
-};
-
-var LITERAL = 'literal';
-var NUMBER = 'number';
-
-function addLiteral(parts, value) {
-    var lastPart = parts[parts.length - 1];
-    if (lastPart && lastPart.type === LITERAL) {
-        lastPart.pattern += value;
-    } else {
-        parts.push({
-            type: LITERAL,
-            pattern: value
-        });
-    }
-}
-
-function splitDateFormat(format, locale) {
-    if ( locale === void 0 ) locale = 'en';
-
-    var info = localeInfo(locale);
-    var pattern = datePattern(format, info);
-    var parts = [];
-    var lastIndex = dateFormatRegExp.lastIndex = 0;
-    var match = dateFormatRegExp.exec(pattern);
-
-    while (match) {
-        var value = match[0];
-
-        if (lastIndex < match.index) {
-            addLiteral(parts, pattern.substring(lastIndex, match.index));
-        }
-
-        if (value.startsWith('"') || value.startsWith("'")) {
-            addLiteral(parts, value);
-        } else {
-            var specifier = value[0];
-            var type = DATE_FIELD_MAP[specifier];
-            var part = {
-                type: type,
-                pattern: value
-            };
-
-            var names = NAME_TYPES[type];
-
-            if (names) {
-                var minLength = typeof names.minLength === NUMBER ? names.minLength : names.minLength[specifier];
-                var patternLength = value.length;
-
-                if (patternLength >= minLength) {
-                    part.names = {
-                        type: names.type,
-                        nameType: dateNameType(patternLength),
-                        standAlone: names.standAlone === specifier
-                    };
-                }
-            }
-
-            parts.push(part);
-        }
-
-        lastIndex = dateFormatRegExp.lastIndex;
-        match = dateFormatRegExp.exec(pattern);
-    }
-
-    if (lastIndex < pattern.length) {
-        addLiteral(parts, pattern.substring(lastIndex));
-    }
-
-    return parts;
+    return dateGenericFormat(date, format, locale, true);
 }
 
 var formatRegExp$2 = /\{(\d+)(:[^\}]+)?\}/g;
@@ -3149,9 +2950,8 @@ exports.formatNumber = formatNumber;
 exports.parseNumber = parseNumber;
 exports.formatDate = formatDate;
 exports.parseDate = parseDate;
-exports.splitDateFormat = splitDateFormat;
+exports.dateFormatString = dateFormatString;
 exports.load = load;
-exports.dateFieldName = dateFieldName;
 exports.dateFormatNames = dateFormatNames;
 exports.cldr = cldr;
 exports.localeInfo = localeInfo;
