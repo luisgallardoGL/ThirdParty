@@ -1,0 +1,81 @@
+﻿.trv-pages-area .trv-error-pane {
+    left: 50%;
+    position: relative;
+    float: left;
+
+    display: none;
+
+    max-width: 80%;
+}
+
+.trv-pages-area > .trv-error-pane > .centered {
+    position: relative;
+    float: left;
+    left: -50%;
+    
+    padding: 1em;
+}
+
+.trv-pages-area .trv-page-overlay {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    background-color: #fff;
+    opacity: 0.6;
+}
+
+.trv-pages-area.loading .trv-page-overlay {
+    display: block;
+}
+
+.trv-pages-area.error .trv-error-pane {
+    display: block;
+}
+
+.trv-pages-area .trv-page-container {
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    overflow: auto;
+}
+
+.trv-pages-area.printpreview .trv-page-container .trv-page-wrapper {
+    margin: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.trv-pages-area.printpreview .trv-page-container .trv-page-wrapper .trv-report-page {
+    border: 2px solid #ccc;
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.trv-pages-area.printpreview .trv-page-container .trv-page-wrapper.active .trv-report-page {
+    border: 2px solid #ccc;
+}
+
+.trv-pages-area.interactive .trv-page-container .trv-page-wrapper {
+    text-align: center;
+    position: relative;
+}
+
+.trv-pages-area.interactive .trv-page-container .trv-page-wrapper .trv-report-page {
+    background-color: #ffffff;
+    overflow: hidden;
+    position: relative;
+    padding: 1em;
+}
+
+.trv-pages-area.interactive .trv-page-container .trv-page-wrapper.active .trv-report-page {
+    border: none;
+}
