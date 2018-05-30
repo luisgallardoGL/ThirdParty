@@ -8,30 +8,34 @@ if not defined DevEnvDir (
 
 	:SET2017
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
-	goto :FetchQuestion
+	goto :CurrentBranches
 
 	:SET2015
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat"
-	goto :FetchQuestion
+	goto :CurrentBranches
 
 	:SET2013
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"
-	goto :FetchQuestion
+	goto :CurrentBranches
 )
 
-:FetchQuestion
+:CurrentBranches
 echo CURRENT BRANCHES
+pushd ThirdParty
+for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
+echo ThirdParty:  %branch%
+popd
 pushd DataProviders
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo DataProviders:  %branch%
 popd
+pushd Testing
+for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
+echo Testing:  %branch%
+popd
 pushd Common
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Common:         %branch%
-popd
-pushd Capella-API
-for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
-echo Capella-API:    %branch%
 popd
 pushd Capella-API_V2
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
@@ -42,42 +46,12 @@ for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella:        %branch%
 popd
 
-CHOICE /M "Do you want to Pull from all repos?"
-if %errorlevel% == 1 goto :Fetch
-if %errorlevel% == 2 goto :Build
+:BuildDataProviderQuestion
+CHOICE /M "Do you want to build DataProviders?"
+if %errorlevel% == 1 goto :BuildDataProvider
+if %errorlevel% == 2 goto :BuildTestingQuestion
 
-:Fetch
-pushd DataProviders
-ECHO Pulling DataProviders
-git pull
-if not %errorlevel% == 0 ( goto :Error )
-popd
-
-pushd Common
-ECHO Pulling Common
-git pull
-if not %errorlevel% == 0 ( goto :Error )
-popd
-
-pushd Capella-API
-ECHO Pulling Capella-API
-git pull
-if not %errorlevel% == 0 ( goto :Error )
-popd
-
-pushd Capella-API_V2
-ECHO Pulling Capella-API_V2
-git pull
-if not %errorlevel% == 0 ( goto :Error )
-popd
-
-pushd Capella
-ECHO Pulling Capella
-git pull
-if not %errorlevel% == 0 ( goto :Error )
-popd
-
-:Build
+:BuildDataProvider
 pushd DataProviders
 ECHO Building DataProviders...
 nuget restore DataProviders.sln -Verbosity quiet
@@ -88,6 +62,32 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+
+:BuildTestingQuestion
+CHOICE /M "Do you want to build Testing?"
+if %errorlevel% == 1 goto :BuildTesting
+if %errorlevel% == 2 goto :BuildCommonQuestion
+
+:BuildTesting
+pushd Testing
+pushd Integration
+ECHO Building Integration...
+nuget restore Integration.sln -Verbosity quiet
+msbuild Integration.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+if not %errorlevel% == 0 (
+   goto :Error
+) else (
+	ECHO Done.
+)
+popd
+popd
+
+:BuildCommonQuestion
+CHOICE /M "Do you want to build Common?"
+if %errorlevel% == 1 goto :BuildCommon
+if %errorlevel% == 2 goto :BuildCapella-API_V2Question
+
+:BuildCommon
 pushd Common
 ECHO Building Common...
 nuget restore Common.sln -Verbosity quiet
@@ -99,17 +99,12 @@ if not %errorlevel% == 0 (
 )
 popd
 
-pushd Capella-API
-ECHO Building Capella-API...
-nuget restore CapellaMobileServices.sln -Verbosity quiet
-msbuild CapellaMobileServices.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
-if not %errorlevel% == 0 (
-	goto :Error
-) else (
-	ECHO Done.
-)
-popd
+:BuildCapella-API_V2Question
+CHOICE /M "Do you want to build Capella-API_V2?"
+if %errorlevel% == 1 goto :BuildCapella-API_V2
+if %errorlevel% == 2 goto :BuildDomainQuestion
 
+:BuildCapella-API_V2
 pushd Capella-API_V2
 ECHO Building Capella-API_V2...
 nuget restore CapellaMobileServices.sln -Verbosity quiet
@@ -121,6 +116,12 @@ if not %errorlevel% == 0 (
 )
 popd
 
+:BuildDomainQuestion
+CHOICE /M "Do you want to build Domain?"
+if %errorlevel% == 1 goto :BuildDomain
+if %errorlevel% == 2 goto :BuildServiceQuestion
+
+:BuildDomain
 pushd Capella
 pushd Domain
 ECHO Building Domain...
@@ -132,6 +133,13 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+
+:BuildServiceQuestion
+CHOICE /M "Do you want to build Service?"
+if %errorlevel% == 1 goto :BuildService
+if %errorlevel% == 2 goto :BuildUIQuestion
+
+:BuildService
 pushd Services
 ECHO Building Services...
 nuget restore Services.sln -Verbosity quiet
@@ -143,6 +151,12 @@ if not %errorlevel% == 0 (
 )
 popd
 
+:BuildUIQuestion
+CHOICE /M "Do you want to build UI?"
+if %errorlevel% == 1 goto :BuildUI
+if %errorlevel% == 2 goto :BuildUIQuestion
+
+:BuildUI
 pushd UI
 ECHO Building FireflyUI...
 nuget restore UI.sln -Verbosity quiet
