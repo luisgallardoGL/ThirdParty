@@ -1,4 +1,4 @@
-rem This batch file just does the build for all current branches on all repos
+rem Builds all projects without pulling or switching branches. It gives you an option of individual project build if you don’t want to build all projects
 @ECHO OFF
 set ORIGINAL_DIR=%CD%
 pushd ..\..

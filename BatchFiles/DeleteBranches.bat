@@ -1,4 +1,4 @@
-rem this batch file delete branch on all repos based on name given
+rem Deletes same branch name on all repos from local and remote
 @ECHO OFF
 set ORIGINAL_DIR=%CD%
 pushd ..\..

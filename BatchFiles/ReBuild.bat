@@ -1,3 +1,4 @@
+rem Rebuilds all projects without pulling or switching branches. It gives you an option of individual project rebuild
 @ECHO OFF
 set ORIGINAL_DIR=%CD%
 pushd ..\..

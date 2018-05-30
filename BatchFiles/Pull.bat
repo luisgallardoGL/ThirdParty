@@ -1,3 +1,4 @@
+rem Pulls latest on current branch and gives an option to switch the branch as well
 @ECHO OFF
 set ORIGINAL_DIR=%CD%
 pushd ..\..

@@ -1,4 +1,4 @@
-rem This batch file just create branches based on name given from base branch name given
+rem Creates same branch name on all repos having an option of specifying base branch name from where you want to create a new branch
 @ECHO OFF
 set ORIGINAL_DIR=%CD%
 pushd ..\..
