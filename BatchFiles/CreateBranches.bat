@@ -23,48 +23,62 @@ if not defined DevEnvDir (
 :BaseBranchQuestion
 set /p basebranch="Enter the base branch name: "
 ECHO %basebranch%
-
+ECHO.
 pushd ThirdParty
 ECHO Switching ThirdParty
 git checkout %basebranch%
 git pull
 popd
+ECHO **********************
+ECHO.
 
 pushd DataProviders
 ECHO Switching DataProviders
 git checkout %basebranch%
 git pull
 popd
+ECHO **********************
+ECHO.
 
 pushd Testing
 ECHO Switching Testing
 git checkout %basebranch%
 git pull
 popd
+ECHO **********************
+ECHO.
 
 pushd Common
 ECHO Switching Common
 git checkout %basebranch%
 git pull
 popd
+ECHO **********************
+ECHO.
 
 pushd Capella-API_V2
 ECHO Switching Capella-API_V2
 git checkout %basebranch%
 git pull
 popd
+ECHO **********************
+ECHO.
 
 pushd Capella
 ECHO Switching Capella
 git checkout %basebranch%
 git pull
 popd
+ECHO **********************
+ECHO.
 
 pushd Capella-UI
 ECHO Switching Capella-UI
 git checkout %basebranch%
 git pull
 popd
+ECHO **********************
+ECHO.
 
 :CreateBranch
 set /p branch="Enter new branch name to create from %basebranch% : " 
@@ -206,7 +220,7 @@ if not %errorlevel% == 0 (
 
 pushd Capella-UI
 ECHO Building Capella-UI...
-nuget restore UI.sln -Verbosity quiet
+nuget restore CapellaUI.sln -Verbosity quiet
 msbuild CapellaUI.sln /m /t:build /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
    goto :Error
