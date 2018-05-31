@@ -53,6 +53,13 @@ git branch -d %branch%
 git push origin --delete %branch%
 popd
 
+pushd Capella-UI
+ECHO Switching Capella-UI
+ECHO Deleting %branch%
+git branch -d %branch%
+git push origin --delete %branch%
+popd
+
 :Error
 echo Error level given is %errorlevel%
 chdir /d %ORIGINAL_DIR% 
