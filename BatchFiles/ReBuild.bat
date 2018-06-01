@@ -26,31 +26,43 @@ pushd ThirdParty
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo ThirdParty:  %branch%
 popd
+ECHO.
 pushd DataProviders
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo DataProviders:  %branch%
 popd
+ECHO.
 pushd Testing
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Testing:  %branch%
 popd
+ECHO.
 pushd Common
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Common:         %branch%
 popd
+ECHO.
 pushd Capella-API_V2
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella-API_V2: %branch%
 popd
+ECHO.
 pushd Capella
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella:        %branch%
 popd
+ECHO.
+pushd Capella-UI
+for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
+echo Capella-UI:        %branch%
+popd
+ECHO.
 
 :BuildDataProviderQuestion
 CHOICE /M "Do you want to build DataProviders?"
 if %errorlevel% == 1 goto :BuildDataProvider
 if %errorlevel% == 2 goto :BuildTestingQuestion
+ECHO.
 
 :BuildDataProvider
 pushd DataProviders
@@ -63,6 +75,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 :BuildTestingQuestion
 CHOICE /M "Do you want to build Testing?"
@@ -82,6 +96,8 @@ if not %errorlevel% == 0 (
 )
 popd
 popd
+ECHO ***********************************************
+ECHO.
 
 :BuildCommonQuestion
 CHOICE /M "Do you want to build Common?"
@@ -99,6 +115,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 :BuildCapella-API_V2Question
 CHOICE /M "Do you want to build Capella-API_V2?"
@@ -116,6 +134,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 :BuildDomainQuestion
 CHOICE /M "Do you want to build Domain?"
@@ -134,6 +154,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 :BuildServiceQuestion
 CHOICE /M "Do you want to build Service?"
@@ -151,11 +173,13 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 :BuildUIQuestion
 CHOICE /M "Do you want to build UI?"
 if %errorlevel% == 1 goto :BuildUI
-if %errorlevel% == 2 goto :BuildUIQuestion
+if %errorlevel% == 2 goto :BuildCapellaUIQuestion
 
 :BuildUI
 pushd UI
@@ -168,6 +192,29 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 	goto :Exit
 )
+popd
+popd
+ECHO ***********************************************
+ECHO.
+
+:BuildCapellaUIQuestion
+CHOICE /M "Do you want to build Capella-UI?"
+if %errorlevel% == 1 goto :BuildCapellaUI
+if %errorlevel% == 2 goto :Exit
+
+:BuildCapellaUI
+pushd Capella-UI
+nuget restore CapellaUI.sln -Verbosity quiet
+msbuild CapellaUI.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+if not %errorlevel% == 0 (
+   goto :Error
+) else (
+	ECHO Done.
+	goto :Exit
+)
+popd
+ECHO ***********************************************
+ECHO.
 
 :Error
 echo Error level given is %errorlevel%

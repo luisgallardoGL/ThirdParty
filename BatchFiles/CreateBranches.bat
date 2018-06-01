@@ -23,53 +23,75 @@ if not defined DevEnvDir (
 :BaseBranchQuestion
 set /p basebranch="Enter the base branch name: "
 ECHO %basebranch%
-
+ECHO.
 pushd ThirdParty
 ECHO Switching ThirdParty
 git checkout %basebranch%
 git pull
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd DataProviders
 ECHO Switching DataProviders
 git checkout %basebranch%
 git pull
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Testing
 ECHO Switching Testing
 git checkout %basebranch%
 git pull
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Common
 ECHO Switching Common
 git checkout %basebranch%
 git pull
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Capella-API_V2
 ECHO Switching Capella-API_V2
 git checkout %basebranch%
 git pull
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Capella
 ECHO Switching Capella
 git checkout %basebranch%
 git pull
 popd
+ECHO ***********************************************
+ECHO.
+
+pushd Capella-UI
+ECHO Switching Capella-UI
+git checkout %basebranch%
+git pull
+popd
+ECHO ***********************************************
+ECHO.
 
 :CreateBranch
 set /p branch="Enter new branch name to create from %basebranch% : " 
 ECHO %branch%
-
+ECHO.
 pushd ThirdParty
 ECHO Switching ThirdParty
 ECHO Creating %branch% from %basebranch%
 git checkout -b %branch% %basebranch%
 git push -u origin %branch%
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd DataProviders
 ECHO Switching DataProviders
@@ -77,6 +99,8 @@ ECHO Creating %branch% from %basebranch%
 git checkout -b %branch% %basebranch%
 git push -u origin %branch%
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Testing
 ECHO Switching Testing
@@ -84,6 +108,8 @@ ECHO Creating %branch% from %basebranch%
 git checkout -b %branch% %basebranch%
 git push -u origin %branch%
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Common
 ECHO Switching Common
@@ -91,6 +117,8 @@ ECHO Creating %branch% from %basebranch%
 git checkout -b %branch% %basebranch%
 git push -u origin %branch%
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Capella-API_V2
 ECHO Switching Capella-API_V2
@@ -98,6 +126,8 @@ ECHO Creating %branch% from %basebranch%
 git checkout -b %branch% %basebranch%
 git push -u origin %branch%
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Capella
 ECHO Switching Capella
@@ -105,11 +135,22 @@ ECHO Creating %branch% from %basebranch%
 git checkout -b %branch% %basebranch%
 git push -u origin %branch%
 popd
+ECHO ***********************************************
+ECHO.
+
+pushd Capella-UI
+ECHO Switching Capella-UI
+ECHO Creating %branch% from %basebranch%
+git checkout -b %branch% %basebranch%
+git push -u origin %branch%
+popd
+ECHO ***********************************************
+ECHO.
 
 CHOICE /M "Do you want to build all repos?"
 if %errorlevel% == 1 goto :Build
 if %errorlevel% == 2 goto :Exit
-
+ECHO.
 :Build
 pushd DataProviders
 ECHO Building DataProviders...
@@ -121,6 +162,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Testing
 pushd Integration
@@ -134,6 +177,8 @@ if not %errorlevel% == 0 (
 )
 popd
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Common
 ECHO Building Common...
@@ -145,6 +190,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Capella-API_V2
 ECHO Building Capella-API_V2...
@@ -156,6 +203,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Capella
 pushd Domain
@@ -168,6 +217,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Services
 ECHO Building Services...
@@ -179,6 +230,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd UI
 ECHO Building FireflyUI...
@@ -190,6 +243,24 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 	goto :Exit
 )
+popd
+popd
+ECHO ***********************************************
+ECHO.
+
+pushd Capella-UI
+ECHO Building Capella-UI
+nuget restore CapellaUI.sln -Verbosity quiet
+msbuild CapellaUI.sln /m /t:build /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+if not %errorlevel% == 0 (
+   goto :Error
+) else (
+	ECHO Done.
+	goto :Exit
+)
+popd
+ECHO ***********************************************
+ECHO.
 
 :Error
 echo Error level given is %errorlevel%
