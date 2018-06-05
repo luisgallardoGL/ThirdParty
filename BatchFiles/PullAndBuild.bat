@@ -113,6 +113,7 @@ if %errorlevel% == 2 goto :BuildQuestion
 ECHO.
 
 :Pull
+echo %cd%
 pushd ThirdParty
 ECHO Pulling ThirdParty
 git pull
