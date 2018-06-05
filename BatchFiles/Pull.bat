@@ -34,9 +34,9 @@ for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella:   %branch%
 popd
 ECHO.
-pushd CapellaUI
+pushd Capella-UI
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
-echo CapellaUI:   %branch%
+echo Capella-UI:   %branch%
 popd
 ECHO.
 
@@ -97,8 +97,8 @@ popd
 ECHO ***********************************************
 ECHO.
 
-pushd CapellaUI
-ECHO Pulling CapellaUI
+pushd Capella-UI
+ECHO Pulling Capella-UI
 git pull
 if not %errorlevel% == 0 (goto :Error)
 popd
