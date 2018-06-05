@@ -52,9 +52,9 @@ for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella:        %branch%
 popd
 ECHO.
-pushd Capella-UI
+pushd CapellaUI
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
-echo Capella-UI:        %branch%
+echo CapellaUI:        %branch%
 popd
 ECHO.
 
@@ -103,8 +103,8 @@ git checkout %branch%
 popd
 ECHO.
 
-pushd Capella-UI
-ECHO Switching Capella-UI
+pushd CapellaUI
+ECHO Switching CapellaUI
 git checkout %branch%
 popd
 ECHO.
@@ -158,8 +158,8 @@ if not %errorlevel% == 0 ( goto :Error )
 popd
 ECHO.
 
-pushd Capella-UI
-ECHO Pulling Capella-UI
+pushd CapellaUI
+ECHO Pulling CapellaUI
 git pull
 if not %errorlevel% == 0 ( goto :Error )
 popd
@@ -262,8 +262,8 @@ popd
 ECHO ***********************************************
 ECHO.
 
-pushd Capella-UI
-ECHO Building Capella-UI...
+pushd CapellaUI
+ECHO Building CapellaUI...
 nuget restore CapellaUI.sln -Verbosity quiet
 msbuild CapellaUI.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (

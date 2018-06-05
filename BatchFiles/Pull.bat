@@ -34,11 +34,12 @@ for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella:   %branch%
 popd
 ECHO.
-pushd Capella-UI
+pushd CapellaUI
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
-echo Capella-UI:   %branch%
+echo CapellaUI:   %branch%
 popd
 ECHO.
+
 CHOICE /M "Do you want to switch branch for all repos?"
 if %errorlevel% == 1 goto :ChangeBranch
 if %errorlevel% == 2 goto :Pull
@@ -96,8 +97,8 @@ popd
 ECHO ***********************************************
 ECHO.
 
-pushd Capella-UI
-ECHO Pulling Capella-UI
+pushd CapellaUI
+ECHO Pulling CapellaUI
 git pull
 if not %errorlevel% == 0 (goto :Error)
 popd

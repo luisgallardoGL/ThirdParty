@@ -72,8 +72,8 @@ popd
 ECHO ***********************************************
 ECHO.
 
-pushd Capella-UI
-ECHO Switching Capella-UI
+pushd CapellaUI
+ECHO Switching CapellaUI
 git checkout %basebranch%
 git pull
 popd
@@ -138,8 +138,8 @@ popd
 ECHO ***********************************************
 ECHO.
 
-pushd Capella-UI
-ECHO Switching Capella-UI
+pushd CapellaUI
+ECHO Switching CapellaUI
 ECHO Creating %branch% from %basebranch%
 git checkout -b %branch% %basebranch%
 git push -u origin %branch%
@@ -248,8 +248,8 @@ popd
 ECHO ***********************************************
 ECHO.
 
-pushd Capella-UI
-ECHO Building Capella-UI
+pushd CapellaUI
+ECHO Building CapellaUI
 nuget restore CapellaUI.sln -Verbosity quiet
 msbuild CapellaUI.sln /m /t:build /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
