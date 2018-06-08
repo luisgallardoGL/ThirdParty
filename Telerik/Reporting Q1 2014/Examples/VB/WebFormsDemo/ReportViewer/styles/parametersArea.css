@@ -1,0 +1,176 @@
+﻿.trv-parameter-container .trv-parameter-title {
+    font-weight: bold;
+
+    width: 100%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.trv-parameters-area .trv-parameters-area-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    opacity: 0.6;
+}
+
+.trv-parameters-area.loading .trv-parameters-area-overlay {
+    display: block;
+}
+
+.trv-parameter-container .trv-parameter-error {
+    font-size: 8pt;
+}
+
+.trv-parameters-area .trv-parameters-area-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+.trv-parameters-area .trv-parameters-area-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3em;
+
+    display: none;
+}
+
+.trv-parameters-area.preview .trv-parameters-area-content {
+    bottom: 3em;
+}
+
+.trv-parameters-area.preview .trv-parameters-area-footer {
+    display: block;
+}
+
+.trv-parameters-area .trv-error-pane {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    
+    display: none;
+}
+
+.trv-parameters-area.error .trv-error-pane {
+    display: block;
+}
+
+.trv-parameters-area  .trv-parameters-area-preview-button {
+    position: absolute;
+    top: 0.5em;
+    left: 0.4em;
+}
+
+.trv-parameters-area-preview-button.k-state-disabled:hover {
+    background-color : transparent !important;
+}
+
+.trv-parameters-area .trv-parameter-container {
+    margin: 0.3em;
+    margin-bottom: 10px;
+    padding: 0.1em;
+}
+
+.trv-parameter-title {
+}
+
+.trv-parameter-header {
+    width: 100%;
+    position: relative;
+}
+
+.trv-parameter-error {
+    padding: 3px;
+    margin-bottom: 3px;
+}
+
+.trv-parameter-value {
+}
+
+.trv-parameter-error-message {
+    vertical-align: middle;
+}
+
+
+/** 
+            
+    Parameter Editor with Available Values - Multiselect
+            
+*/
+.trv-parameter-editor-available-values-multiselect {
+}
+
+.trv-parameter-editor-available-values-multiselect .list {
+    overflow: auto;
+}
+
+.trv-parameter-editor-available-values-multiselect .footer {
+    font-size: 8pt;
+}
+
+.trv-parameter-editor-available-values-multiselect .select-all {
+}
+
+.trv-parameter-editor-available-values-multiselect .select-none {
+}
+
+/** 
+            
+    Parameter Editor with Available Values
+            
+*/
+.trv-parameter-editor-available-values {
+}
+
+.trv-parameter-editor-available-values .footer {
+    font-size: 8pt;
+}
+
+/**
+ 
+    DateTime value editor
+       
+ */
+.trv-parameter-editor-datetime {
+    width: 100%;
+}
+
+/**
+ 
+    Text value editor
+       
+ */
+.trv-parameter-editor-text {
+    width: 100%;
+}
+
+/**
+ 
+    Number value editor
+       
+ */
+.trv-parameter-editor-number {
+    width: 100%;
+}
+
+/**
+ 
+    Multivalue, no available values
+       
+ */
+.trv-parameter-editor-multivalue textarea {
+    width: 100%; 
+    resize: none;
+}
