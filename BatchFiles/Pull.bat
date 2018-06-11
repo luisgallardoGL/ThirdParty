@@ -40,14 +40,6 @@ echo Capella-UI:   %branch%
 popd
 ECHO.
 
-CHOICE /M "Do you want to switch branch for all repos?"
-if %errorlevel% == 1 goto :ChangeBranch
-if %errorlevel% == 2 goto :Pull
-ECHO.
-:ChangeBranch
-set /p branch="Enter branch name to switch: "
-ECHO %branch%
-
 :Pull
 pushd ThirdParty
 ECHO Pulling ThirdParty
