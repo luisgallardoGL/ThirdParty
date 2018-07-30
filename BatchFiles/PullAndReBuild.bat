@@ -60,7 +60,7 @@ ECHO.
 
 CHOICE /M "Do you want to switch branch for all repos?"
 if %errorlevel% == 1 goto :ChangeBranch
-if %errorlevel% == 2 goto :Fetch
+if %errorlevel% == 2 goto :Pull
 ECHO.
 :ChangeBranch
 set /p branch="Enter Branch: "
