@@ -1,3 +1,4 @@
+rem this batch files pull all repos based on given branch or default branch and rebuilds them
 @ECHO OFF
 set ORIGINAL_DIR=%CD%
 pushd ..\..
@@ -8,76 +9,163 @@ if not defined DevEnvDir (
 
 	:SET2017
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
-	goto :FetchQuestion
+	goto :CurrentBranches
 
 	:SET2015
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat"
-	goto :FetchQuestion
+	goto :CurrentBranches
 
 	:SET2013
 	CALL "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat"
-	goto :FetchQuestion
+	goto :CurrentBranches
 )
 
-:FetchQuestion
+:CurrentBranches
 echo CURRENT BRANCHES
+pushd ThirdParty
+for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
+echo ThirdParty:  %branch%
+popd
+ECHO.
 pushd DataProviders
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo DataProviders:  %branch%
 popd
+ECHO.
+pushd Testing
+for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
+echo Testing:  %branch%
+popd
+ECHO.
 pushd Common
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Common:         %branch%
 popd
-pushd Capella-API
-for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
-echo Capella-API:    %branch%
-popd
+ECHO.
 pushd Capella-API_V2
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella-API_V2: %branch%
 popd
+ECHO.
 pushd Capella
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Capella:        %branch%
 popd
+ECHO.
+pushd Capella-UI
+for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
+echo Capella-UI:        %branch%
+popd
+ECHO.
+
+CHOICE /M "Do you want to switch branch for all repos?"
+if %errorlevel% == 1 goto :ChangeBranch
+if %errorlevel% == 2 goto :Fetch
+ECHO.
+:ChangeBranch
+set /p branch="Enter Branch: "
+ECHO %branch%
+ECHO.
+
+pushd ThirdParty
+ECHO Switching ThirdParty
+git checkout %branch%
+popd
+ECHO.
+
+pushd DataProviders
+ECHO Switching DataProviders
+git checkout %branch%
+popd
+ECHO.
+
+pushd Testing
+ECHO Switching Testing
+git checkout %branch%
+popd
+ECHO.
+
+pushd Common
+ECHO Switching Common
+git checkout %branch%
+popd
+ECHO.
+
+pushd Capella-API_V2
+ECHO Switching Capella-API_V2
+git checkout %branch%
+popd
+ECHO.
+
+pushd Capella
+ECHO Switching Capella
+git checkout %branch%
+popd
+ECHO.
+
+pushd Capella-UI
+ECHO Switching Capella-UI
+git checkout %branch%
+popd
+ECHO.
+
 
 CHOICE /M "Do you want to Pull from all repos?"
-if %errorlevel% == 1 goto :Fetch
-if %errorlevel% == 2 goto :Build
+if %errorlevel% == 1 goto :Pull
+if %errorlevel% == 2 goto :ReBuild
+ECHO.
 
-:Fetch
+:Pull
+pushd ThirdParty
+ECHO Pulling ThirdParty
+git pull
+if not %errorlevel% == 0 ( goto :Error )
+popd
+ECHO.
+
 pushd DataProviders
 ECHO Pulling DataProviders
 git pull
 if not %errorlevel% == 0 ( goto :Error )
 popd
+ECHO.
+
+pushd Testing
+ECHO Pulling Testing
+git pull
+if not %errorlevel% == 0 ( goto :Error )
+popd
+ECHO.
 
 pushd Common
 ECHO Pulling Common
 git pull
 if not %errorlevel% == 0 ( goto :Error )
 popd
-
-pushd Capella-API
-ECHO Pulling Capella-API
-git pull
-if not %errorlevel% == 0 ( goto :Error )
-popd
+ECHO.
 
 pushd Capella-API_V2
 ECHO Pulling Capella-API_V2
 git pull
 if not %errorlevel% == 0 ( goto :Error )
 popd
+ECHO.
 
 pushd Capella
 ECHO Pulling Capella
 git pull
 if not %errorlevel% == 0 ( goto :Error )
 popd
+ECHO.
 
-:Build
+pushd Capella-UI
+ECHO Pulling Capella-UI
+git pull
+if not %errorlevel% == 0 ( goto :Error )
+popd
+ECHO.
+
+:ReBuild
 pushd DataProviders
 ECHO Building DataProviders...
 nuget restore DataProviders.sln -Verbosity quiet
@@ -88,6 +176,24 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
+
+pushd Testing
+pushd Integration
+ECHO Building Integration...
+nuget restore Integration.sln -Verbosity quiet
+msbuild Integration.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+if not %errorlevel% == 0 (
+   goto :Error
+) else (
+	ECHO Done.
+)
+popd
+popd
+ECHO ***********************************************
+ECHO.
+
 pushd Common
 ECHO Building Common...
 nuget restore Common.sln -Verbosity quiet
@@ -98,17 +204,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
-
-pushd Capella-API
-ECHO Building Capella-API...
-nuget restore CapellaMobileServices.sln -Verbosity quiet
-msbuild CapellaMobileServices.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
-if not %errorlevel% == 0 (
-	goto :Error
-) else (
-	ECHO Done.
-)
-popd
+ECHO ***********************************************
+ECHO.
 
 pushd Capella-API_V2
 ECHO Building Capella-API_V2...
@@ -120,6 +217,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd Capella
 pushd Domain
@@ -132,6 +231,9 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
+
 pushd Services
 ECHO Building Services...
 nuget restore Services.sln -Verbosity quiet
@@ -142,6 +244,8 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 )
 popd
+ECHO ***********************************************
+ECHO.
 
 pushd UI
 ECHO Building FireflyUI...
@@ -153,6 +257,24 @@ if not %errorlevel% == 0 (
 	ECHO Done.
 	goto :Exit
 )
+popd
+popd
+ECHO ***********************************************
+ECHO.
+
+pushd Capella-UI
+ECHO Building Capella-UI...
+nuget restore CapellaUI.sln -Verbosity quiet
+msbuild CapellaUI.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+if not %errorlevel% == 0 (
+   goto :Error
+) else (
+	ECHO Done.
+	goto :Exit
+)
+popd
+ECHO ***********************************************
+ECHO.
 
 :Error
 echo Error level given is %errorlevel%
