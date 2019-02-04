@@ -1,6 +1,54 @@
 rem this batch files pull all repos based on given branch or default branch and rebuilds them
 @ECHO OFF
 set ORIGINAL_DIR=%CD%
+set undoChanges=0
+set switchBranch=0
+set newBranch=""
+set pullAll=0
+set noBuild=0
+set help=0
+
+:Loop
+
+IF "%1"=="" ( 
+	GOTO Continue
+	)
+IF "%1"=="-u" ( 	
+	SET undoChanges=1
+	)
+IF "%1"=="-b" (
+	SET switchBranch=1
+	SET newBranch="%2"
+	SHIFT
+	)
+IF "%1"=="-p" (
+	SET pullAll=1
+	)
+IF "%1"=="-nb" (
+	SET noBuild=1
+)
+IF "%1"=="-h" (
+	SET help=1
+)
+SHIFT
+GOTO Loop
+:Continue
+
+IF %help%==1 (
+	ECHO.
+	ECHO Usage: run from /ThirdParty/BatchFiles/
+	ECHO UndoPullAndRebuild.bat -u -p -b develop
+	ECHO All parameters are optional, without parameters script will just build all projects in order
+	ECHO -u = undo all changes 
+	ECHO -p = pull from current branch for every repo
+	ECHO -b branchName = switch branch to branchName for every repo
+	ECHO -nb = no build, in case you want to only pull and undo
+	ECHO.
+	goto :Exit
+) 
+
+ECHO NoBuild: %noBuild%, Undo: %undoChanges%, switch: %switchBranch%, newBranch: %newBranch%, pull: %pullAll%
+
 pushd ..\..
 if not defined DevEnvDir (
 	if exist "%PROGRAMFILES(X86)%\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat" goto :SET2017
@@ -28,11 +76,6 @@ for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo DataProviders:  %branch%
 popd
 ECHO.
-pushd Testing
-for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
-echo Testing:  %branch%
-popd
-ECHO.
 pushd Common
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD') do set branch=%%i
 echo Common:         %branch%
@@ -54,25 +97,15 @@ echo Capella-UI:        %branch%
 popd
 ECHO.
 
-set undochanges = 0
-CHOICE /M "Do you want to undo all branches changes for all repos?"
-if %errorlevel% == 1 (
+if %undoChanges% == 1 (
    ECHO.
    echo *THIS WILL UNDO CHANGES ON ALL BRANCHES*
-) else (
-   goto :SwitchBranch
-)
+) 
+if %undoChanges% == 0 ( goto :SwitchBranch )
 ECHO.
 
 pushd DataProviders
 ECHO Undoing DataProviders Changes..
-   git reset --hard
-   git checkout .
-popd
-ECHO.
-
-pushd Testing
-ECHO Undoing Testing Changes..
    git reset --hard
    git checkout .
 popd
@@ -108,70 +141,66 @@ ECHO.
 
 
 :SwitchBranch
-CHOICE /M "Do you want to switch branch for all repos?"
-if %errorlevel% == 1 goto :ChangeBranch
-if %errorlevel% == 2 goto :Pull
+IF %switchBranch%==1 (
+	goto :ChangeBranch
+	) 
+IF %switchBranch%==0 ( goto :Pull )
 ECHO.
 :ChangeBranch
-set /p branch="Enter Branch: "
-ECHO %branch%
+
+ECHO Switching to %newBranch%
 ECHO.
 
 
 pushd DataProviders
 ECHO Switching DataProviders
-git checkout %branch%
-popd
-ECHO.
-
-pushd Testing
-ECHO Switching Testing
-git checkout %branch%
+git fetch
+git checkout %newBranch%
 popd
 ECHO.
 
 pushd Common
 ECHO Switching Common
-git checkout %branch%
+git fetch
+git checkout %newBranch%
 popd
 ECHO.
 
 pushd Capella-API_V2
 ECHO Switching Capella-API_V2
-git checkout %branch%
+git fetch
+git checkout %newBranch%
 popd
 ECHO.
 
 pushd Capella
 ECHO Switching Capella
-git checkout %branch%
+git fetch
+git checkout %newBranch%
 popd
 ECHO.
 
 pushd Capella-UI
 ECHO Switching Capella-UI
-git checkout %branch%
+git fetch
+git checkout %newBranch%
 popd
-ECHO.
-
-
-CHOICE /M "Do you want to Pull from all repos?"
-if %errorlevel% == 1 goto :Pull
-if %errorlevel% == 2 goto :ReBuild
 ECHO.
 
 :Pull
-
-
-pushd DataProviders
-ECHO Pulling DataProviders
-git pull
-if not %errorlevel% == 0 ( goto :Error )
-popd
+IF %pullAll%==1 (
+	goto :Pull2
+	)
+IF %pullAll%==0 ( 
+	goto :ReBuild
+	)
 ECHO.
 
-pushd Testing
-ECHO Pulling Testing
+
+
+:Pull2
+pushd DataProviders
+ECHO Pulling DataProviders
 git pull
 if not %errorlevel% == 0 ( goto :Error )
 popd
@@ -205,31 +234,19 @@ if not %errorlevel% == 0 ( goto :Error )
 popd
 ECHO.
 
+IF %noBuild%==1 (
+	GOTO :Exit
+)
 :ReBuild
 pushd DataProviders
 ECHO Building DataProviders...
 nuget restore DataProviders.sln -Verbosity quiet
-msbuild DataProviders.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+msbuild DataProviders.sln /m /t:rebuild /verbosity:quiet /p:Configuration=Debug_Sandbox /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
    goto :Error
 ) else (
 	ECHO Done.
 )
-popd
-ECHO ***********************************************
-ECHO.
-
-pushd Testing
-pushd Integration
-ECHO Building Integration...
-nuget restore Integration.sln -Verbosity quiet
-msbuild Integration.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
-if not %errorlevel% == 0 (
-   goto :Error
-) else (
-	ECHO Done.
-)
-popd
 popd
 ECHO ***********************************************
 ECHO.
@@ -237,7 +254,7 @@ ECHO.
 pushd Common
 ECHO Building Common...
 nuget restore Common.sln -Verbosity quiet
-msbuild Common.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+msbuild Common.sln /m /t:rebuild /verbosity:quiet /p:Configuration=Debug_Sandbox /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
    goto :Error
 ) else (
@@ -250,7 +267,7 @@ ECHO.
 pushd Capella-API_V2
 ECHO Building Capella-API_V2...
 nuget restore CapellaMobileServices.sln -Verbosity quiet
-msbuild CapellaMobileServices.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+msbuild CapellaMobileServices.sln /m /t:rebuild /verbosity:quiet /p:Configuration=Debug_Sandbox /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
 	goto :Error
 ) else (
@@ -264,7 +281,7 @@ pushd Capella
 pushd Domain
 ECHO Building Domain...
 nuget restore Domain.sln -Verbosity quiet
-msbuild Domain.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+msbuild Domain.sln /m /t:rebuild /verbosity:quiet /p:Configuration=Debug_Sandbox /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
    goto :Error
 ) else (
@@ -277,7 +294,7 @@ ECHO.
 pushd Services
 ECHO Building Services...
 nuget restore Services.sln -Verbosity quiet
-msbuild Services.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+msbuild Services.sln /m /t:rebuild /verbosity:quiet /p:Configuration=Debug_Sandbox /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
    goto :Error
 ) else (
@@ -290,12 +307,11 @@ ECHO.
 pushd UI
 ECHO Building FireflyUI...
 nuget restore UI.sln -Verbosity quiet
-msbuild UI.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+msbuild UI.sln /m /t:rebuild /verbosity:quiet /p:Configuration=Debug_Sandbox /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
    goto :Error
 ) else (
 	ECHO Done.
-	goto :Exit
 )
 popd
 popd
@@ -305,7 +321,7 @@ ECHO.
 pushd Capella-UI
 ECHO Building Capella-UI...
 nuget restore CapellaUI.sln -Verbosity quiet
-msbuild CapellaUI.sln /m /t:rebuild /verbosity:quiet /p:WarningLevel=0 /clp:ErrorsOnly /nologo
+msbuild CapellaUI.sln /m /t:rebuild /verbosity:quiet /p:Configuration=Debug_Sandbox /p:WarningLevel=0 /clp:ErrorsOnly /nologo
 if not %errorlevel% == 0 (
    goto :Error
 ) else (
@@ -315,6 +331,7 @@ if not %errorlevel% == 0 (
 popd
 ECHO ***********************************************
 ECHO.
+
 
 :Error
 echo Error level given is %errorlevel%
